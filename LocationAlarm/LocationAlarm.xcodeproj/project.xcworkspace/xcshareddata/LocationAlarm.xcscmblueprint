@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D3041B6EA3BEEBEA1FA1B34A0D5758C4F915090D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "D3041B6EA3BEEBEA1FA1B34A0D5758C4F915090D" : 0,
+    "0A5BB7A833C91753271641E3E3BF4D29F6D37D42" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "6ED3489C-F0FE-4B26-9083-E89ECA2A3071",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "D3041B6EA3BEEBEA1FA1B34A0D5758C4F915090D" : "LocationAlarm_\/",
+    "0A5BB7A833C91753271641E3E3BF4D29F6D37D42" : "LocationAlarm\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "LocationAlarm",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "LocationAlarm\/LocationAlarm.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/cardoso-ana\/LocationAlarm.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0A5BB7A833C91753271641E3E3BF4D29F6D37D42"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/cardoso-ana\/LocationAlarm_.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D3041B6EA3BEEBEA1FA1B34A0D5758C4F915090D"
+    }
+  ]
+}
