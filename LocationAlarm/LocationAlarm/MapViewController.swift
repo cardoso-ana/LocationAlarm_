@@ -20,6 +20,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBOutlet weak var botaoDeBaixo: UIImageView!
     @IBOutlet weak var caixaDePesquisa: UITextField!
     var navigationBar: UINavigationBar!
+    var firstTime = true
     
     let map = Map()
     
@@ -29,9 +30,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(true)
-        
-        self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!), animated: true)
+        map.locationManagerInit()
+      
     }
+  
+  func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+    print("chegou no dois")
+    if firstTime == true{
+      self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!), animated: true)
+      firstTime = false
+    }
+  }
+  
     
     override func viewDidLoad()
     {
@@ -45,7 +55,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.delegate = self
         mapView.showsUserLocation = true
         
-        map.locationManagerInit()
+      
         
         botaoDeBaixo.image = UIImage(named: "botaoDeBaixoAzul")
         
