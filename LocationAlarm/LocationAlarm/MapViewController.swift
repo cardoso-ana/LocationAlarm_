@@ -18,10 +18,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var botaoDeBaixo: UIImageView!
-    @IBOutlet weak var caixaDePesquisa: UITextField!
     var navigationBar: UINavigationBar!
     var firstTime = true
-    
+    var resultSearchController:UISearchController? = nil
     let map = Map()
     
     var locationManager = CLLocationManager()
@@ -55,9 +54,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.delegate = self
         mapView.showsUserLocation = true
         
+      let locationSearchTable = storyboard!.instantiateViewControllerWithIdentifier("LocationSearchTable") as! LocationSearchTable
+      resultSearchController = UISearchController(searchResultsController: locationSearchTable)
+      resultSearchController?.searchResultsUpdater = locationSearchTable
       
+      let searchBar = resultSearchController!.searchBar
+      searchBar.sizeToFit()
+      searchBar.placeholder = "Procure seu ponto"
+      navigationItem.titleView = resultSearchController?.searchBar
+      
+      resultSearchController?.hidesNavigationBarDuringPresentation = false
+      resultSearchController?.dimsBackgroundDuringPresentation = true
+      definesPresentationContext = true
+      
+      locationSearchTable.mapView = mapView
         
-        botaoDeBaixo.image = UIImage(named: "botaoDeBaixoAzul")
+      botaoDeBaixo.image = UIImage(named: "botaoDeBaixoAzul")
         
     }
     
