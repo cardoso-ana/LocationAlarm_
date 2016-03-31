@@ -24,6 +24,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var firstTime = true
     var raioAlarme: MKCircle?
     var pinAlarm = false
+    let distanciaRaio:CLLocationDistance = 100
     var resultSearchController:UISearchController? = nil
     let map = Map()
     
@@ -124,7 +125,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         // configura/adiciona overlay (circulo/raio ao redor do annotation)
-        let distanciaRaio:CLLocationDistance = 100
+        
         raioAlarme = MKCircle(centerCoordinate: annotation.coordinate, radius: distanciaRaio)
         
 
@@ -135,7 +136,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         //TODO: Dar uma olhada nesse draggable, em um dispositivo de fato
         // Acho que não tá funcionando bacana. Depois que dá drag, não da pra botar outro
         
-        //        annotView?.draggable = true
+        annotView?.draggable = true
         
         return annotView
     }
@@ -151,6 +152,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         overlayRenderer.lineWidth = 3
         
         return overlayRenderer
+    }
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState)
+    {
+        
+        if newState == MKAnnotationViewDragState.Ending
+        {
+            let ann = view.annotation
+            self.mapView.addAnnotation(ann!)
+            
+            print("annotation dropped at: \(ann!.coordinate.latitude),\(ann!.coordinate.longitude)")
+        }
     }
     
     @IBAction func ativarAction(sender: UIButton)
