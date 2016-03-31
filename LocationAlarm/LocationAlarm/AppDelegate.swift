@@ -48,6 +48,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    func startMonitoringGeotification(geotification: Alarm)
+    {
+        print("monitoring")
+        // 1
+        if !CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion)
+        {
+            showSimpleAlertWithTitle("Error", message: "Geofencing is not supported on this device!", viewController: (window?.rootViewController)!)
+            return
+        }
+        // 2
+        if CLLocationManager.authorizationStatus() != .AuthorizedAlways
+        {
+            showSimpleAlertWithTitle("Warning", message: "Your alarm is saved but will only be activated once you grant Geotify permission to access the device location.", viewController: (window?.rootViewController)!)
+        }
+        // 3
+        geotification.alarmeRegion?.notifyOnEntry = true
+        geotification.alarmeRegion?.notifyOnExit = false
+        locationManager.startMonitoringForRegion(geotification.alarmeRegion!)
+        print(locationManager.monitoredRegions)
+    }
+    
+    func stopMonitoringGeotification(geotification: Alarm)
+    {
+        for region in locationManager.monitoredRegions
+        {
+            if let circularRegion = region as? CLCircularRegion
+            {
+                if circularRegion.identifier == geotification.identifier
+                {
+                    locationManager.stopMonitoringForRegion(circularRegion)
+                }
+            }
+        }
+    }
+    
     func handleRegionEvent(region: CLRegion)
     {
         // Show an alert if application is active
@@ -72,8 +107,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
     }
     
-    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        if region is CLCircularRegion {
+    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion)
+    {
+        print("entrou")
+        if region is CLCircularRegion
+        {
             handleRegionEvent(region)
         }
     }

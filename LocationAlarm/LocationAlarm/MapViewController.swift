@@ -13,6 +13,8 @@ import MapKit
 import CoreLocation
 
 
+// -22.97976, -43.23282 PUC
+
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
 {
     @IBOutlet weak var activeButton: UIButton!
@@ -34,13 +36,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(true)
-        //map.locationManagerInit()
+        map.locationManagerInit()
+       
+    }
+    
+    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
         if firstTime == true
         {
             self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!), animated: true)
             firstTime = false
         }
-        
     }
     
     override func viewDidLoad()
@@ -52,7 +57,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         mapView.delegate = self
-        //locationManager.delegate = self
+        locationManager.delegate = self
         mapView.showsUserLocation = true
         
         let locationSearchTable = storyboard!.instantiateViewControllerWithIdentifier("LocationSearchTable") as! LocationSearchTable
@@ -159,12 +164,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             {
                 print("desativa")
                 stopMonitoringGeotification(alarme)
+                activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
             }
         }
-        
     }
 
-    
+    //Monitoramento da região
     func startMonitoringGeotification(geotification: Alarm)
     {
         print("monitoring")
@@ -181,6 +186,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         // 3
         geotification.alarmeRegion?.notifyOnEntry = true
+        geotification.alarmeRegion?.notifyOnExit = false
         locationManager.startMonitoringForRegion(geotification.alarmeRegion!)
         print(locationManager.monitoredRegions)
     }
