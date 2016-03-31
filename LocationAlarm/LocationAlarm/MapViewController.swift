@@ -15,32 +15,33 @@ import CoreLocation
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
 {
+    @IBOutlet weak var activeButton: UIButton!
     
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var botaoDeBaixo: UIImageView!
+
     var navigationBar: UINavigationBar!
     var firstTime = true
+    var raioAlarme: MKCircle?
+    var pinAlarm = false
     var resultSearchController:UISearchController? = nil
     let map = Map()
     
     var locationManager = CLLocationManager()
     let regionRadius: CLLocationDistance = 1000
     
+    let tapGestureRecognizer = UITapGestureRecognizer()
+    
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(true)
-        map.locationManagerInit()
-      
+        //map.locationManagerInit()
+        if firstTime == true
+        {
+            self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!), animated: true)
+            firstTime = false
+        }
+        
     }
-  
-  func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
-    print("chegou no dois")
-    if firstTime == true{
-      self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!), animated: true)
-      firstTime = false
-    }
-  }
-  
     
     override func viewDidLoad()
     {
@@ -51,78 +52,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         mapView.delegate = self
-        locationManager.delegate = self
+        //locationManager.delegate = self
         mapView.showsUserLocation = true
         
-      let locationSearchTable = storyboard!.instantiateViewControllerWithIdentifier("LocationSearchTable") as! LocationSearchTable
-      resultSearchController = UISearchController(searchResultsController: locationSearchTable)
-      resultSearchController?.searchResultsUpdater = locationSearchTable
-      
-      let searchBar = resultSearchController!.searchBar
-      searchBar.sizeToFit()
-      searchBar.placeholder = "Procure seu ponto"
-      navigationItem.titleView = resultSearchController?.searchBar
-      
-      resultSearchController?.hidesNavigationBarDuringPresentation = false
-      resultSearchController?.dimsBackgroundDuringPresentation = true
-      definesPresentationContext = true
-      
-      locationSearchTable.mapView = mapView
+        let locationSearchTable = storyboard!.instantiateViewControllerWithIdentifier("LocationSearchTable") as! LocationSearchTable
+        resultSearchController = UISearchController(searchResultsController: locationSearchTable)
+        resultSearchController?.searchResultsUpdater = locationSearchTable
         
-      botaoDeBaixo.image = UIImage(named: "botaoDeBaixoAzul")
+        let searchBar = resultSearchController!.searchBar
+        searchBar.sizeToFit()
+        searchBar.placeholder = "Procure seu ponto"
+        navigationItem.titleView = resultSearchController?.searchBar
+      
+        resultSearchController?.hidesNavigationBarDuringPresentation = false
+        resultSearchController?.dimsBackgroundDuringPresentation = true
+        definesPresentationContext = true
         
+        locationSearchTable.mapView = mapView
+        activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
+    
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle
     {
         return UIStatusBarStyle.Default
-    }
-    
-    
-    //TODO: Fazer alerta para usuario mudar a permissao de localizacao no Settings
-    
-    //MARK: - vê autorizaçao de localizaçao e começa a atualizar o locationManager
-    func checkCoreLocationPermission()
-    {
-        let authorization = CLLocationManager.authorizationStatus()
-        if authorization == .AuthorizedAlways
-        {
-            locationManager.startUpdatingLocation()
-        }
-        else if authorization == .NotDetermined
-        {
-            locationManager.requestAlwaysAuthorization()
-        }
-        else
-        {
-            print(":::::: Access to user location not granted or unavailable.")
-        }
-    }
-    
-    
-    func centerMapOnLocation(location: CLLocation)
-    {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius * 2.0, regionRadius * 2.0)
-        mapView.setRegion(coordinateRegion, animated: true)
-    }
-    
-    //posiciona o mapa na localização do user
-    //    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-    //        let location = locations.last
-    //
-    //        let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
-    //        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-    //
-    //        self.mapView.setRegion(region, animated: true)
-    //    }
-    
-    //posiciona o mapa no inicio
-    func ajeitaZoom(manager: CLLocationManager, location: CLLocation) {
-        
-        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        
-        self.mapView.setRegion(region, animated: true)
     }
     
     //adiciona e remove anotacoes
@@ -136,6 +89,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.mapView.removeOverlays(self.mapView.overlays)
         self.mapView.removeAnnotations(self.mapView.annotations)
         self.mapView.addAnnotation(annotation)
+        pinAlarm = true
     }
     
     // a cada anotacao adicionada, essa funcao é chamada automaticamente
@@ -167,9 +121,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         // configura/adiciona overlay (circulo/raio ao redor do annotation)
         let distanciaRaio:CLLocationDistance = 100
-        let raioDaOra = MKCircle(centerCoordinate: annotation.coordinate, radius: distanciaRaio)
+        raioAlarme = MKCircle(centerCoordinate: annotation.coordinate, radius: distanciaRaio)
         
-        self.mapView.addOverlay(raioDaOra)
+        self.mapView.addOverlay(raioAlarme!)
         
         
         //TODO: Dar uma olhada nesse draggable, em um dispositivo de fato
@@ -191,6 +145,61 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return overlayRenderer
     }
     
+    @IBAction func ativarAction(sender: UIButton)
+    {
+        if pinAlarm
+        {
+            let alarme = Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier: "Alarme", note: "alarme")
+            if sender.titleLabel?.text == "ATIVAR"
+            {
+                startMonitoringGeotification(alarme)
+                activeButton.setTitle("DESATIVAR", forState: UIControlState.Normal)
+            }
+            else
+            {
+                print("desativa")
+                stopMonitoringGeotification(alarme)
+            }
+        }
+        
+    }
+
+    
+    func startMonitoringGeotification(geotification: Alarm)
+    {
+        print("monitoring")
+        // 1
+        if !CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion)
+        {
+            showSimpleAlertWithTitle("Error", message: "Geofencing is not supported on this device!", viewController: self)
+            return
+        }
+        // 2
+        if CLLocationManager.authorizationStatus() != .AuthorizedAlways
+        {
+            showSimpleAlertWithTitle("Warning", message: "Your alarm is saved but will only be activated once you grant Geotify permission to access the device location.", viewController: self)
+        }
+        // 3
+        geotification.alarmeRegion?.notifyOnEntry = true
+        locationManager.startMonitoringForRegion(geotification.alarmeRegion!)
+        print(locationManager.monitoredRegions)
+    }
+    
+    func stopMonitoringGeotification(geotification: Alarm)
+    {
+        for region in locationManager.monitoredRegions
+        {
+            if let circularRegion = region as? CLCircularRegion
+            {
+                if circularRegion.identifier == geotification.identifier
+                {
+                    locationManager.stopMonitoringForRegion(circularRegion)
+                }
+            }
+        }
+    }
+
+    
     // faz pesquisa de local
     //TODO: Resolver essa bagunça que está sendo a Local Search.
     // não esquecer de descer teclado pós-pesquisa
@@ -210,6 +219,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     //
     //  }
     //
+    
+    func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError) {
+        print("Monitoring failed for region with identifier: \(region!.identifier)")
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("Location Manager failed with the following error: \(error)")
+    }
     
     override func didReceiveMemoryWarning()
     {

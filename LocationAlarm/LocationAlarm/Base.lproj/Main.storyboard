@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="PaQ-dC-ZKZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="PaQ-dC-ZKZ">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Map View Controller-->
@@ -25,45 +24,38 @@
                                     <outletCollection property="gestureRecognizers" destination="1E6-FH-hxC" appends="YES" id="Y4B-Uc-ITp"/>
                                 </connections>
                             </mapView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yz3-Mv-gQS">
-                                <rect key="frame" x="0.0" y="553" width="600" height="47"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="47" id="dHV-3d-wyv"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ATIVAR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igR-tY-sl0">
-                                <rect key="frame" x="257" y="559" width="86" height="36"/>
-                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="30"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUu-mA-bf2">
+                                <rect key="frame" x="0.0" y="546" width="600" height="54"/>
+                                <color key="backgroundColor" red="0.14117647058823529" green="0.20000000000000001" blue="0.29019607843137257" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="35"/>
+                                <state key="normal" title="A">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="ativarAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tjp-sA-i7e"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="yvo-PS-Gds" firstAttribute="bottom" secondItem="yz3-Mv-gQS" secondAttribute="bottom" id="PoS-2R-4Ns"/>
+                            <constraint firstItem="yvo-PS-Gds" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Dnt-fV-key"/>
+                            <constraint firstItem="yvo-PS-Gds" firstAttribute="leading" secondItem="TUu-mA-bf2" secondAttribute="leading" id="Fh8-K4-Z4A"/>
+                            <constraint firstItem="yvo-PS-Gds" firstAttribute="trailing" secondItem="TUu-mA-bf2" secondAttribute="trailing" id="G58-aN-n5b"/>
                             <constraint firstAttribute="trailing" secondItem="yvo-PS-Gds" secondAttribute="trailing" id="WOQ-SK-WgU"/>
-                            <constraint firstItem="igR-tY-sl0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="WlE-xi-9fl"/>
-                            <constraint firstAttribute="trailing" secondItem="yz3-Mv-gQS" secondAttribute="trailing" id="cYh-RY-na8"/>
-                            <constraint firstItem="igR-tY-sl0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dNk-MN-Jwj"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yz3-Mv-gQS" secondAttribute="bottom" id="fXE-xU-R8I"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="gyl-mV-3jY"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="k5p-Im-Pcf"/>
-                            <constraint firstItem="yz3-Mv-gQS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="lOd-qy-aM2"/>
-                            <constraint firstItem="igR-tY-sl0" firstAttribute="centerY" secondItem="yz3-Mv-gQS" secondAttribute="centerY" id="nbO-qK-r3f"/>
-                            <constraint firstItem="yz3-Mv-gQS" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottomMargin" id="u1c-BI-BGu"/>
+                            <constraint firstItem="yvo-PS-Gds" firstAttribute="bottom" secondItem="TUu-mA-bf2" secondAttribute="bottom" id="kKX-dX-86T"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yvo-PS-Gds" secondAttribute="bottom" id="xOu-Xd-dK0"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="fXE-xU-R8I"/>
                                 <exclude reference="xOu-Xd-dK0"/>
-                                <exclude reference="WlE-xi-9fl"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="h0E-H5-KW6"/>
                     <connections>
-                        <outlet property="botaoDeBaixo" destination="yz3-Mv-gQS" id="F3o-SG-LLk"/>
+                        <outlet property="activeButton" destination="TUu-mA-bf2" id="OWl-vT-rkO"/>
                         <outlet property="mapView" destination="yvo-PS-Gds" id="C2I-0q-UKv"/>
                     </connections>
                 </viewController>

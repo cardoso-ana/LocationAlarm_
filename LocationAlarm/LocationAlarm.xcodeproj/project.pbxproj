@@ -13,6 +13,8 @@
 		E15E10CC1CAB434900A344BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E15E10CA1CAB434900A344BD /* LaunchScreen.storyboard */; };
 		E15E10D71CAB43E400A344BD /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10D61CAB43E400A344BD /* Map.swift */; };
 		E15E10E11CAB4E2E00A344BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E15E10DF1CAB4E2E00A344BD /* Main.storyboard */; };
+		E15E10E31CAC1E7C00A344BD /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10E21CAC1E7C00A344BD /* Alarm.swift */; };
+		E15E10E51CAC28EA00A344BD /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10E41CAC28EA00A344BD /* Alert.swift */; };
 		EF155CFF1CAB5C4800DD6437 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +27,8 @@
 		E15E10CD1CAB434900A344BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E15E10D61CAB43E400A344BD /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		E15E10E01CAB4E2E00A344BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E15E10E21CAC1E7C00A344BD /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		E15E10E41CAC28EA00A344BD /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +76,8 @@
 			isa = PBXGroup;
 			children = (
 				E15E10D61CAB43E400A344BD /* Map.swift */,
+				E15E10E21CAC1E7C00A344BD /* Alarm.swift */,
+				E15E10E41CAC28EA00A344BD /* Alert.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -126,7 +132,7 @@
 				TargetAttributes = {
 					E15E10BD1CAB434900A344BD = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 4BPZR4X6FJ;
+						DevelopmentTeam = A3556U9ESZ;
 					};
 				};
 			};
@@ -166,8 +172,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E15E10E51CAC28EA00A344BD /* Alert.swift in Sources */,
 				E15E10C41CAB434900A344BD /* MapViewController.swift in Sources */,
 				E15E10D71CAB43E400A344BD /* Map.swift in Sources */,
+				E15E10E31CAC1E7C00A344BD /* Alarm.swift in Sources */,
 				E15E10C21CAB434900A344BD /* AppDelegate.swift in Sources */,
 				EF155CFF1CAB5C4800DD6437 /* LocationSearchTable.swift in Sources */,
 			);
