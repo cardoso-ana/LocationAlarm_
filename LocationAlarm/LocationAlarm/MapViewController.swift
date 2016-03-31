@@ -8,7 +8,6 @@
 
 import UIKit
 import Foundation
-import UIKit
 import MapKit
 import CoreLocation
 
@@ -113,7 +112,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if annotView == nil
         {
             annotView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            annotView?.image = UIImage(named: "pinCustom")
+            annotView?.image = UIImage(named: "pontoCentral")
             annotView?.canShowCallout = false
         }
         else
@@ -121,12 +120,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             annotView?.annotation = annotation
         }
         
-        annotView?.centerOffset = CGPointMake(0, -annotView!.frame.size.height / 2 + 10)
+//        annotView?.centerOffset = CGPointMake(0, -annotView!.frame.size.height / 2 + 10)
         
         
         // configura/adiciona overlay (circulo/raio ao redor do annotation)
         let distanciaRaio:CLLocationDistance = 100
         raioAlarme = MKCircle(centerCoordinate: annotation.coordinate, radius: distanciaRaio)
+        
+
         
         self.mapView.addOverlay(raioAlarme!)
         
@@ -145,7 +146,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         
         let overlayRenderer : MKCircleRenderer = MKCircleRenderer(overlay: overlay)
-        overlayRenderer.fillColor = UIColor.redColor()
+        overlayRenderer.fillColor = UIColor(red: 48/256, green: 68/256, blue: 91/256, alpha: 0.4)
+        overlayRenderer.strokeColor = UIColor (red: 48/256, green: 68/256, blue: 91/256, alpha: 1)
+        overlayRenderer.lineWidth = 3
         
         return overlayRenderer
     }
@@ -206,25 +209,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
 
     
-    // faz pesquisa de local
-    //TODO: Resolver essa bagunça que está sendo a Local Search.
-    // não esquecer de descer teclado pós-pesquisa
-    
-    //  func finishSearch () {
-    //    let request = MKLocalSearchRequest()
-    //    request.naturalLanguageQuery = caixaDePesquisa.text
-    //    let theSearch = MKLocalSearch(request: request)
-    //    let theResponse:MKLocalSearchResponse
-    //    var error:NSError!
-    //    theSearch.startWithCompletionHandler(<#T##completionHandler: MKLocalSearchCompletionHandler##MKLocalSearchCompletionHandler##(MKLocalSearchResponse?, NSError?) -> Void#>)
-    //  }
-    //
-    //  func displayResults (MKLocalSearchResponse?, NSError?) -> MKMapSnapshotCompletionHandler {
-    //    //implementar esse bagulhao aqui
-    //    response
-    //
-    //  }
-    //
     
     func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError) {
         print("Monitoring failed for region with identifier: \(region!.identifier)")
