@@ -10,6 +10,7 @@ import UIKit
 import Foundation
 import MapKit
 import CoreLocation
+import MediaPlayer
 
 protocol HandleMapSearch
 {
@@ -19,8 +20,9 @@ protocol HandleMapSearch
 
 // -22.97976, -43.23282 PUC
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, MPMediaPickerControllerDelegate
 {
+    @IBOutlet weak var musicButton: UIButton!
     @IBOutlet weak var activeButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     var selectedPin:MKPlacemark? = nil
@@ -29,6 +31,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var firstTime = true
     var raioAlarme: MKCircle?
     var pinAlarm = false
+    var mediaItem: MPMediaItem?
     let distanciaRaio:CLLocationDistance = 100
     var resultSearchController:UISearchController? = nil
     let map = Map()
@@ -80,6 +83,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         locationSearchTable.mapView = mapView
         activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
+        
+        let image = UIImage(named: "music")! as UIImage
+        musicButton.setImage(image, forState: .Normal)
+        self.view.addSubview(musicButton)
     
         locationSearchTable.handleMapSearchDelegate = self
     }
@@ -234,6 +241,28 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
 
+    @IBAction func chooseMusicAction(sender: AnyObject)
+    {
+        let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
+        mediaPicker.delegate = self
+        mediaPicker.prompt = "Select any song!"
+        mediaPicker.allowsPickingMultipleItems = false
+        presentViewController(mediaPicker, animated: true, completion: {})
+
+    }
+    
+    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems  mediaItems:MPMediaItemCollection) -> Void
+    {
+        let aMediaItem = mediaItems.items[0] as MPMediaItem
+        self.mediaItem = aMediaItem;
+        print(mediaItem!.title)
+        //fillData(aMediaItem);
+        self.dismissViewControllerAnimated(true, completion: {});
+    }
+    
+    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
+        self.dismissViewControllerAnimated(true, completion: {});
+    }
     
     
     func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError) {

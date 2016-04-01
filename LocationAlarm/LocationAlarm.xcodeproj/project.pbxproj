@@ -15,6 +15,9 @@
 		E15E10E11CAB4E2E00A344BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E15E10DF1CAB4E2E00A344BD /* Main.storyboard */; };
 		E15E10E31CAC1E7C00A344BD /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10E21CAC1E7C00A344BD /* Alarm.swift */; };
 		E15E10E51CAC28EA00A344BD /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10E41CAC28EA00A344BD /* Alert.swift */; };
+		E187542B1CAF031A00DF0DEC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E187542A1CAF031A00DF0DEC /* MapKit.framework */; };
+		E187542D1CAF032400DF0DEC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E187542C1CAF032400DF0DEC /* CoreLocation.framework */; };
+		E187542F1CAF032D00DF0DEC /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E187542E1CAF032D00DF0DEC /* MediaPlayer.framework */; };
 		EF155CFF1CAB5C4800DD6437 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +32,9 @@
 		E15E10E01CAB4E2E00A344BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E15E10E21CAC1E7C00A344BD /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		E15E10E41CAC28EA00A344BD /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		E187542A1CAF031A00DF0DEC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		E187542C1CAF032400DF0DEC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E187542E1CAF032D00DF0DEC /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -37,6 +43,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E187542F1CAF032D00DF0DEC /* MediaPlayer.framework in Frameworks */,
+				E187542D1CAF032400DF0DEC /* CoreLocation.framework in Frameworks */,
+				E187542B1CAF031A00DF0DEC /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +55,9 @@
 		E15E10B51CAB434900A344BD = {
 			isa = PBXGroup;
 			children = (
+				E187542E1CAF032D00DF0DEC /* MediaPlayer.framework */,
+				E187542C1CAF032400DF0DEC /* CoreLocation.framework */,
+				E187542A1CAF031A00DF0DEC /* MapKit.framework */,
 				E15E10C01CAB434900A344BD /* LocationAlarm */,
 				E15E10BF1CAB434900A344BD /* Products */,
 			);
