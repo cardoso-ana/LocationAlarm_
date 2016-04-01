@@ -38,11 +38,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     let tapGestureRecognizer = UITapGestureRecognizer()
     
+    
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(true)
         map.locationManagerInit()
-       
     }
     
     func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
@@ -113,6 +113,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return nil
         }
         
+        
         let reuseId = "teste1"
         var annotView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
         
@@ -127,7 +128,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             annotView?.annotation = annotation
         }
         
-//        annotView?.centerOffset = CGPointMake(0, -annotView!.frame.size.height / 2 + 10)
+        //annotView?.centerOffset = CGPointMake(0, -annotView!.frame.size.height / 2 + 10)
         
         
         // configura/adiciona overlay (circulo/raio ao redor do annotation)
@@ -142,7 +143,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         //TODO: Dar uma olhada nesse draggable, em um dispositivo de fato
         // Acho que não tá funcionando bacana. Depois que dá drag, não da pra botar outro
         
-        annotView?.draggable = true
+        annotView?.draggable = false
         
         return annotView
     }
@@ -160,24 +161,23 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return overlayRenderer
     }
     
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState)
-    {
-        if newState == MKAnnotationViewDragState.Starting
-        {
-            self.mapView.removeOverlays(mapView.overlays)
-        }
-        
-        if newState == MKAnnotationViewDragState.Ending
-        {
-            let ann = view.annotation
-            //self.mapView.addAnnotation(ann!)
-            
-            raioAlarme = MKCircle(centerCoordinate: ann!.coordinate, radius: distanciaRaio)
-            self.mapView.addOverlay(raioAlarme!)
-            
-            print("annotation dropped at: \(ann!.coordinate.latitude),\(ann!.coordinate.longitude)")
-        }
-    }
+//    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState)
+//    {
+//        if newState == MKAnnotationViewDragState.Starting
+//        {
+//            self.mapView.removeOverlays(mapView.overlays)
+//        }
+//        
+//        if newState == MKAnnotationViewDragState.Ending
+//        {
+//            let ann = view.annotation
+//            //self.mapView.addAnnotation(ann!)
+//            
+//            raioAlarme = MKCircle(centerCoordinate: ann!.coordinate, radius: distanciaRaio)
+//            self.mapView.addOverlay(raioAlarme!)
+//            print("annotation dropped at: \(ann!.coordinate.latitude),\(ann!.coordinate.longitude)")
+//        }
+//    }
     
     @IBAction func ativarAction(sender: UIButton)
     {
