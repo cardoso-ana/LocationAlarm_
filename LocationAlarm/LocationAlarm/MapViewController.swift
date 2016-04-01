@@ -162,11 +162,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState)
     {
+        if newState == MKAnnotationViewDragState.Starting
+        {
+            self.mapView.removeOverlays(mapView.overlays)
+        }
         
         if newState == MKAnnotationViewDragState.Ending
         {
             let ann = view.annotation
-            self.mapView.addAnnotation(ann!)
+            //self.mapView.addAnnotation(ann!)
+            
+            raioAlarme = MKCircle(centerCoordinate: ann!.coordinate, radius: distanciaRaio)
+            self.mapView.addOverlay(raioAlarme!)
             
             print("annotation dropped at: \(ann!.coordinate.latitude),\(ann!.coordinate.longitude)")
         }
