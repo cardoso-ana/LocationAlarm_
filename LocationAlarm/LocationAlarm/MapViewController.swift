@@ -11,14 +11,19 @@ import Foundation
 import MapKit
 import CoreLocation
 
+protocol HandleMapSearch
+{
+    func dropPinZoomIn(placemark:MKPlacemark)
+}
+
 
 // -22.97976, -43.23282 PUC
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
 {
     @IBOutlet weak var activeButton: UIButton!
-    
     @IBOutlet weak var mapView: MKMapView!
+    var selectedPin:MKPlacemark? = nil
 
     var navigationBar: UINavigationBar!
     var firstTime = true
@@ -76,6 +81,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationSearchTable.mapView = mapView
         activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
     
+        locationSearchTable.handleMapSearchDelegate = self
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle
@@ -237,6 +243,25 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+}
+
+extension MapViewController: HandleMapSearch {
+    func dropPinZoomIn(placemark:MKPlacemark){
+        
+        selectedPin = placemark
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        self.mapView.removeOverlays(self.mapView.overlays)
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        self.mapView.addAnnotation(annotation)
+        
+        pinAlarm = true
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let region = MKCoordinateRegionMake(annotation.coordinate, span)
+        self.mapView.setRegion(region, animated: true)
+    }
 }
 
 

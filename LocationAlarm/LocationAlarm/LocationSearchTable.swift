@@ -16,7 +16,7 @@ class LocationSearchTable : UITableViewController
   
     var matchingItems:[MKMapItem] = []
     var mapView: MKMapView? = nil
-  
+    var handleMapSearchDelegate:HandleMapSearch? = nil
   
     //TODO: Ajeitar para estrutura de endereços brasileira
     func parseAddress(selectedItem:MKPlacemark) -> String
@@ -30,10 +30,10 @@ class LocationSearchTable : UITableViewController
         let addressLine = String(
             format:"%@%@%@%@%@%@%@",
             // street number
-            selectedItem.subThoroughfare ?? "",
+            selectedItem.thoroughfare ?? "",
             firstSpace,
             // street name
-            selectedItem.thoroughfare ?? "",
+            selectedItem.subThoroughfare ?? "",
             comma,
             // city
             selectedItem.locality ?? "",
@@ -84,5 +84,15 @@ extension LocationSearchTable
     cell.textLabel?.text = selectedItem.name
     cell.detailTextLabel?.text = parseAddress(selectedItem)
     return cell
+    }
+}
+
+extension LocationSearchTable
+{
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let selectedItem = matchingItems[indexPath.row].placemark
+        handleMapSearchDelegate?.dropPinZoomIn(selectedItem)
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }
