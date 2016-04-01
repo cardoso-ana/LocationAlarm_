@@ -32,9 +32,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let distanciaRaio:CLLocationDistance = 100
     var resultSearchController:UISearchController? = nil
     let map = Map()
-    
+    var alarmeAtivado = false
     var locationManager = CLLocationManager()
     let regionRadius: CLLocationDistance = 1000
+    
+    let movimentoDrag = UIPanGestureRecognizer()
     
     let tapGestureRecognizer = UITapGestureRecognizer()
     
@@ -52,6 +54,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             firstTime = false
         }
     }
+    
     
     override func viewDidLoad()
     {
@@ -92,6 +95,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     //adiciona e remove anotacoes
     @IBAction func addPin(sender: AnyObject)
     {
+        if alarmeAtivado == false{
         let location = sender.locationInView(self.mapView)
         let locationCoord = self.mapView.convertPoint(location, toCoordinateFromView: self.mapView)
         let annotation = MKPointAnnotation()
@@ -101,6 +105,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.mapView.removeAnnotations(self.mapView.annotations)
         self.mapView.addAnnotation(annotation)
         pinAlarm = true
+        }
     }
     
     // a cada anotacao adicionada, essa funcao é chamada automaticamente
@@ -132,9 +137,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         // configura/adiciona overlay (circulo/raio ao redor do annotation)
-        
         raioAlarme = MKCircle(centerCoordinate: annotation.coordinate, radius: distanciaRaio)
-        
 
         
         self.mapView.addOverlay(raioAlarme!)
@@ -187,12 +190,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             if sender.titleLabel?.text == "ATIVAR"
             {
                 startMonitoringGeotification(alarme)
+                alarmeAtivado = true
+                self.navigationController?.setNavigationBarHidden(true, animated: true)
                 activeButton.setTitle("DESATIVAR", forState: UIControlState.Normal)
             }
             else
             {
                 print("desativa")
                 stopMonitoringGeotification(alarme)
+                alarmeAtivado = false
+                self.navigationController?.setNavigationBarHidden(false, animated: true)
+
                 activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
             }
         }
@@ -249,6 +257,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.didReceiveMemoryWarning()
         
     }
+    
     
 }
 
