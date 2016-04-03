@@ -17,6 +17,7 @@ protocol HandleMapSearch
 }
 
 
+// Coordenadas uteis
 // -22.97976, -43.23282 PUC
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
