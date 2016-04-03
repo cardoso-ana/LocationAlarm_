@@ -23,6 +23,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 {
   @IBOutlet weak var activeButton: UIButton!
   @IBOutlet weak var mapView: MKMapView!
+  @IBOutlet weak var labelDistancia: UILabel!
+  @IBOutlet weak var imageDim: UIImageView!
+  
+  
+  
   var selectedPin:MKPlacemark? = nil
   
   var navigationBar: UINavigationBar!
@@ -58,10 +63,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
       
       let lugarDois = CLLocation(latitude: (raioAlarme?.coordinate.latitude)!, longitude: (raioAlarme?.coordinate.longitude)!)
-      let distancia = locationManager.location?.distanceFromLocation(lugarDois)
-      print("::::::: DISTANCIA É \(Int(distancia!))")
-      print("MENTIRA, É \(Int(distancia! - raioAlarme!.radius))")
-      print(raioAlarme!.radius)
+      let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
+      var distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
+      
+      if distanciaParaRegiao < 1000
+      {
+        labelDistancia.text = "\(Int(distanciaParaRegiao))m"
+      }
+      else
+      {
+        distanciaParaRegiao /= 1000
+        labelDistancia.text = "\(distanciaParaRegiao.roundToPlaces(2))km"
+      }
     }
   }
   
@@ -203,12 +216,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         startMonitoringGeotification(alarme)
         alarmeAtivado = true
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        imageDim.image = UIImage(named: "fundoDim")
         
         let lugarDois = CLLocation(latitude: (raioAlarme?.coordinate.latitude)!, longitude: (raioAlarme?.coordinate.longitude)!)
-        let distancia = locationManager.location?.distanceFromLocation(lugarDois)
-        print("::::::: DISTANCIA É \(Int(distancia!)) METROS")
-        print("MENTIRA, É \(Int(distancia! - raioAlarme!.radius)) METROS")
-        print(raioAlarme!.radius)
+        let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
+        var distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
+        
+        if distanciaParaRegiao < 1000
+        {
+          labelDistancia.text = "\(Int(distanciaParaRegiao))m"
+        }
+        else
+        {
+          distanciaParaRegiao /= 1000
+          labelDistancia.text = "\(distanciaParaRegiao.roundToPlaces(2))km"
+        }
+        
         
         activeButton.setTitle("DESATIVAR", forState: UIControlState.Normal)
       }
@@ -217,8 +240,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         print("desativa")
         stopMonitoringGeotification(alarme)
         alarmeAtivado = false
+        labelDistancia.text = ""
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        
+        imageDim.image = nil
         activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
       }
     }
@@ -296,6 +320,14 @@ extension MapViewController: HandleMapSearch {
     let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     let region = MKCoordinateRegionMake(annotation.coordinate, span)
     self.mapView.setRegion(region, animated: true)
+  }
+}
+
+extension Double {
+  /// Rounds the double to decimal places value
+  func roundToPlaces(places:Int) -> Double {
+    let divisor = pow(10.0, Double(places))
+    return round(self * divisor) / divisor
   }
 }
 
