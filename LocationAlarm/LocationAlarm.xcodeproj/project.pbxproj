@@ -8,33 +8,33 @@
 
 /* Begin PBXBuildFile section */
 		E15E10C21CAB434900A344BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10C11CAB434900A344BD /* AppDelegate.swift */; };
-		E15E10C41CAB434900A344BD /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10C31CAB434900A344BD /* MapViewController.swift */; };
 		E15E10C91CAB434900A344BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E15E10C81CAB434900A344BD /* Assets.xcassets */; };
 		E15E10CC1CAB434900A344BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E15E10CA1CAB434900A344BD /* LaunchScreen.storyboard */; };
 		E15E10D71CAB43E400A344BD /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10D61CAB43E400A344BD /* Map.swift */; };
-		E15E10E11CAB4E2E00A344BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E15E10DF1CAB4E2E00A344BD /* Main.storyboard */; };
 		E15E10E31CAC1E7C00A344BD /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10E21CAC1E7C00A344BD /* Alarm.swift */; };
 		E15E10E51CAC28EA00A344BD /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10E41CAC28EA00A344BD /* Alert.swift */; };
 		E187542B1CAF031A00DF0DEC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E187542A1CAF031A00DF0DEC /* MapKit.framework */; };
 		E187542D1CAF032400DF0DEC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E187542C1CAF032400DF0DEC /* CoreLocation.framework */; };
 		E187542F1CAF032D00DF0DEC /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E187542E1CAF032D00DF0DEC /* MediaPlayer.framework */; };
+		E18754311CB1B06900DF0DEC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18754301CB1B06900DF0DEC /* MapViewController.swift */; };
+		E18754331CB1B08700DF0DEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E18754321CB1B08700DF0DEC /* Main.storyboard */; };
 		EF155CFF1CAB5C4800DD6437 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E15E10BE1CAB434900A344BD /* LocationAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E15E10C11CAB434900A344BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E15E10C31CAB434900A344BD /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E15E10C81CAB434900A344BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E15E10CB1CAB434900A344BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E15E10CD1CAB434900A344BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E15E10D61CAB43E400A344BD /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
-		E15E10E01CAB4E2E00A344BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E15E10E21CAC1E7C00A344BD /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		E15E10E41CAC28EA00A344BD /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		E187542A1CAF031A00DF0DEC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E187542C1CAF032400DF0DEC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E187542E1CAF032D00DF0DEC /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		E18754301CB1B06900DF0DEC /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		E18754321CB1B08700DF0DEC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,7 +97,7 @@
 		E15E10D41CAB436700A344BD /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E15E10DF1CAB4E2E00A344BD /* Main.storyboard */,
+				E18754321CB1B08700DF0DEC /* Main.storyboard */,
 				E15E10CA1CAB434900A344BD /* LaunchScreen.storyboard */,
 			);
 			name = View;
@@ -106,7 +106,7 @@
 		E15E10D51CAB437700A344BD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E15E10C31CAB434900A344BD /* MapViewController.swift */,
+				E18754301CB1B06900DF0DEC /* MapViewController.swift */,
 				EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */,
 			);
 			name = Controller;
@@ -171,7 +171,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E15E10E11CAB4E2E00A344BD /* Main.storyboard in Resources */,
+				E18754331CB1B08700DF0DEC /* Main.storyboard in Resources */,
 				E15E10CC1CAB434900A344BD /* LaunchScreen.storyboard in Resources */,
 				E15E10C91CAB434900A344BD /* Assets.xcassets in Resources */,
 			);
@@ -185,7 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E15E10E51CAC28EA00A344BD /* Alert.swift in Sources */,
-				E15E10C41CAB434900A344BD /* MapViewController.swift in Sources */,
+				E18754311CB1B06900DF0DEC /* MapViewController.swift in Sources */,
 				E15E10D71CAB43E400A344BD /* Map.swift in Sources */,
 				E15E10E31CAC1E7C00A344BD /* Alarm.swift in Sources */,
 				E15E10C21CAB434900A344BD /* AppDelegate.swift in Sources */,
@@ -202,14 +202,6 @@
 				E15E10CB1CAB434900A344BD /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		E15E10DF1CAB4E2E00A344BD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E15E10E01CAB4E2E00A344BD /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
