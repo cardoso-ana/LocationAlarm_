@@ -47,42 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    
-    func startMonitoringGeotification(geotification: Alarm)
-    {
-        print("monitoring")
-        // 1
-        if !CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion)
-        {
-            showSimpleAlertWithTitle("Error", message: "Geofencing is not supported on this device!", viewController: (window?.rootViewController)!)
-            return
-        }
-        // 2
-        if CLLocationManager.authorizationStatus() != .AuthorizedAlways
-        {
-            showSimpleAlertWithTitle("Warning", message: "Your alarm is saved but will only be activated once you grant Geotify permission to access the device location.", viewController: (window?.rootViewController)!)
-        }
-        // 3
-        geotification.alarmeRegion?.notifyOnEntry = true
-        geotification.alarmeRegion?.notifyOnExit = false
-        locationManager.startMonitoringForRegion(geotification.alarmeRegion!)
-        print(locationManager.monitoredRegions)
-    }
-    
-    func stopMonitoringGeotification(geotification: Alarm)
-    {
-        for region in locationManager.monitoredRegions
-        {
-            if let circularRegion = region as? CLCircularRegion
-            {
-                if circularRegion.identifier == geotification.identifier
-                {
-                    locationManager.stopMonitoringForRegion(circularRegion)
-                }
-            }
-        }
-    }
-    
+        
     func handleRegionEvent(region: CLRegion)
     {
         // Show an alert if application is active
@@ -92,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             
             if let viewController = window?.rootViewController
             {
+                ((window?.rootViewController?.childViewControllers.first) as! MapViewController).playMedia()
                 showSimpleAlertWithTitle(nil, message: message, viewController: viewController)
             }
             
@@ -104,7 +70,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             notification.alertBody = region.identifier
             notification.soundName = "Default";
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+            print(window?.rootViewController?.childViewControllers.first)
+            ((window?.rootViewController?.childViewControllers.first) as! MapViewController).playMedia()
         }
+        
+        locationManager.stopMonitoringForRegion(region)
+        let viewController = window?.rootViewController?.childViewControllers.first as! MapViewController
+        viewController.alarmeAtivado = false
+        viewController.labelDistancia.text = ""
+        viewController.self.navigationController?.setNavigationBarHidden(false, animated: true)
+        viewController.imageDim.image = nil
+        viewController.activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
+        
     }
     
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion)
@@ -116,6 +93,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
     }
 
+    func showSimpleAlertWithTitle(title: String!, message: String, viewController: UIViewController)
+    {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let action = UIAlertAction(title: "OK", style: .Cancel, handler: alertOkHandler)
+        alert.addAction(action)
+        viewController.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
+    func alertOkHandler(alert: UIAlertAction!)
+    {
+        (window?.rootViewController!.childViewControllers.first as! MapViewController).musicPlayer.stop()
+    }
+    
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void)
+    {
+        (window?.rootViewController!.childViewControllers.first as! MapViewController).musicPlayer.stop()
+        completionHandler()
+    }
 
 }
 
