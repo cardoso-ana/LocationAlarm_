@@ -32,6 +32,8 @@
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Precisamos saber onde você está!</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -90,6 +90,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="h0E-H5-KW6"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="activeButton" destination="TUu-mA-bf2" id="OWl-vT-rkO"/>
                         <outlet property="imageDim" destination="GSC-Wt-dj8" id="qt0-Ih-kb7"/>
@@ -151,6 +152,7 @@
                             <outlet property="delegate" destination="Hq8-WK-vlt" id="v0l-MV-mfL"/>
                         </connections>
                     </tableView>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rE0-TP-SzE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

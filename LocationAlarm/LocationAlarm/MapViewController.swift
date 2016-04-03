@@ -99,6 +99,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let locationSearchTable = storyboard!.instantiateViewControllerWithIdentifier("LocationSearchTable") as! LocationSearchTable
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultSearchController?.searchResultsUpdater = locationSearchTable
+        resultSearchController?.searchBar.tintColor = UIColor.whiteColor()
     
         let searchBar = resultSearchController!.searchBar
         searchBar.sizeToFit()
@@ -119,6 +120,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.view.addSubview(musicButton)
     
     }
+  
   
     //adiciona e remove anotacoes
     @IBAction func addPin(sender: AnyObject)
