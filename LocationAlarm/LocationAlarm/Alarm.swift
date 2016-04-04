@@ -44,7 +44,7 @@ class Alarm: NSObject, NSCoding, MKAnnotation
         self.radius = radius
         self.identifier = identifier
         self.note = note
-        alarmeRegion = CLCircularRegion(center: self.coordinate, radius: self.radius, identifier: self.identifier)
+        alarmeRegion = CLCircularRegion(center: self.coordinate, radius: self.radius, identifier: self.note)
     }
     
     // MARK: NSCoding

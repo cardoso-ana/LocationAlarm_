@@ -82,6 +82,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         viewController.labelDistancia.text = ""
         viewController.self.navigationController?.setNavigationBarHidden(false, animated: true)
         viewController.imageDim.image = nil
+        viewController.sliderRaio.hidden = false
+        viewController.sliderRaio.userInteractionEnabled = true
+        viewController.musicLabel.userInteractionEnabled = true
         viewController.activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
         
     }

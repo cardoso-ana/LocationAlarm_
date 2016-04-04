@@ -40,6 +40,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var firstTime = true
     var raioAlarme: MKCircle?
     var pinAlarm = false
+    var alarme: Alarm?
     var distanciaRaio:CLLocationDistance = 500
     var resultSearchController:UISearchController? = nil
     let map = Map()
@@ -50,6 +51,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
   
     let movimentoDrag = UIPanGestureRecognizer()
     let tapGestureRecognizer = UITapGestureRecognizer()
+    let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
   
   
     override func viewDidAppear(animated: Bool)
@@ -88,11 +90,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
-        let navigationBar = UINavigationBar(frame: CGRectMake(0, 0, self.view.frame.size.width, statusBarHeight))
-        self.view.addSubview(navigationBar)
-    
-    
+
         mapView.delegate = self
         locationManager.delegate = self
         mapView.showsUserLocation = true
@@ -105,7 +103,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
         let searchBar = resultSearchController!.searchBar
         searchBar.sizeToFit()
-        searchBar.placeholder = "Procure seu ponto"
+        searchBar.placeholder = "Pesquise seu destino"
         searchBar.setValue("Cancelar", forKey: "_cancelButtonText")
         navigationItem.titleView = resultSearchController?.searchBar
         
@@ -219,13 +217,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         if pinAlarm
         {
-            let alarme = Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier:  "Você está a \(Int(raioAlarme!.radius))m do seu destino!", note: "alarme")
+            alarme = Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier:  "Alarme", note: "Você está a \(Int(raioAlarme!.radius))m do seu destino!")
             if sender.titleLabel?.text == "ATIVAR"
             {
-                startMonitoringGeotification(alarme)
+                startMonitoringGeotification(alarme!)
                 alarmeAtivado = true
                 self.navigationController?.setNavigationBarHidden(true, animated: true)
+
                 imageDim.image = UIImage(named: "fundoDim")
+                self.mapView.bringSubviewToFront(imageDim)
+                imageDim.bringSubviewToFront(labelDistancia)
         
                 let lugarDois = CLLocation(latitude: (raioAlarme?.coordinate.latitude)!, longitude: (raioAlarme?.coordinate.longitude)!)
                 let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
@@ -249,21 +250,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             {
                 sliderRaio.hidden = false
                 musicLabel.userInteractionEnabled = true
-                desativa(alarme)
+                stopMonitoringGeotification(alarme!)
+                alarmeAtivado = false
+                labelDistancia.text = ""
+                self.navigationController?.setNavigationBarHidden(false, animated: true)
+                imageDim.image = nil
+                
+                activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
             }
         }
     }
     
-    func desativa(alarme: Alarm)
-    {
-        print("desativa")
-        stopMonitoringGeotification(alarme)
-        alarmeAtivado = false
-        labelDistancia.text = ""
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        imageDim.image = nil
-        activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
-    }
   
     //Monitoramento da região
     func startMonitoringGeotification(geotification: Alarm)
@@ -332,11 +329,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func chooseMusicAction(sender: UITapGestureRecognizer)
     {
+        self.prefersStatusBarHidden()
+        
         let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
         mediaPicker.delegate = self
         mediaPicker.allowsPickingMultipleItems = false
-        presentViewController(mediaPicker, animated: true, completion: {})
-        mediaPicker.navigationItem.title = "Escolha uma música:"
+        mediaPicker.prefersStatusBarHidden()
+        
+        presentViewController(mediaPicker, animated: true, completion: {UIApplication.sharedApplication().statusBarStyle = .Default})
+        
         
     }
     
@@ -347,11 +348,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         print(mediaItem!.title)
         musicLabel.text = "\(mediaItem!.artist!) - \(mediaItem!.title!)"
         musicLabel.textColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
-        self.dismissViewControllerAnimated(true, completion: {});
+        self.dismissViewControllerAnimated(true, completion: {UIApplication.sharedApplication().statusBarStyle = .LightContent});
     }
     
-    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
-        self.dismissViewControllerAnimated(true, completion: {});
+    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController)
+    {
+        self.dismissViewControllerAnimated(true, completion: {UIApplication.sharedApplication().statusBarStyle = .LightContent});
     }
   
     func playMedia()
