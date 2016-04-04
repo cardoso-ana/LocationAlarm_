@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -51,8 +52,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="50" maxValue="5000" translatesAutoresizingMaskIntoConstraints="NO" id="pr5-wT-uGm">
-                                <rect key="frame" x="18" y="469" width="483" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="500" minValue="50" maxValue="10000" translatesAutoresizingMaskIntoConstraints="NO" id="pr5-wT-uGm">
+                                <rect key="frame" x="18" y="469" width="488" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="466" id="836-k7-HlT"/>
                                 </constraints>
@@ -61,30 +62,41 @@
                                         <exclude reference="836-k7-HlT"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="sliderRaioChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="aMR-B7-4qW"/>
+                                </connections>
                             </slider>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f26-bS-gv3">
                                 <rect key="frame" x="0.0" y="508" width="600" height="38"/>
                                 <subviews>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Escolha uma música" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfu-CE-J0z">
-                                        <rect key="frame" x="8" y="9" width="584" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="43" y="9" width="549" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="music" translatesAutoresizingMaskIntoConstraints="NO" id="L0c-Nl-7jV">
+                                        <rect key="frame" x="8" y="7" width="25" height="25"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="sfu-CE-J0z" firstAttribute="leading" secondItem="L0c-Nl-7jV" secondAttribute="trailing" constant="10" id="922-oi-R9o"/>
+                                    <constraint firstItem="L0c-Nl-7jV" firstAttribute="centerY" secondItem="f26-bS-gv3" secondAttribute="centerY" constant="1" id="B5P-EX-b6o"/>
                                     <constraint firstItem="sfu-CE-J0z" firstAttribute="centerY" secondItem="f26-bS-gv3" secondAttribute="centerY" id="Fp0-nD-3KA"/>
+                                    <constraint firstItem="L0c-Nl-7jV" firstAttribute="top" secondItem="f26-bS-gv3" secondAttribute="top" constant="7" id="M5E-pm-P4T"/>
                                     <constraint firstAttribute="trailing" secondItem="sfu-CE-J0z" secondAttribute="trailing" constant="8" id="YYX-5W-qB5"/>
-                                    <constraint firstItem="sfu-CE-J0z" firstAttribute="leading" secondItem="f26-bS-gv3" secondAttribute="leading" constant="8" id="eVK-r7-xCu"/>
+                                    <constraint firstItem="sfu-CE-J0z" firstAttribute="leading" secondItem="f26-bS-gv3" secondAttribute="leading" constant="43" id="eVK-r7-xCu"/>
                                     <constraint firstItem="sfu-CE-J0z" firstAttribute="bottom" secondItem="f26-bS-gv3" secondAttribute="bottomMargin" id="feT-lr-zeg"/>
-                                    <constraint firstItem="sfu-CE-J0z" firstAttribute="centerX" secondItem="f26-bS-gv3" secondAttribute="centerX" id="g1Y-0m-eRU"/>
+                                    <constraint firstItem="sfu-CE-J0z" firstAttribute="centerX" secondItem="f26-bS-gv3" secondAttribute="centerX" constant="17.5" id="g1Y-0m-eRU"/>
+                                    <constraint firstItem="L0c-Nl-7jV" firstAttribute="leading" secondItem="f26-bS-gv3" secondAttribute="leading" constant="8" id="l9v-Hz-scc"/>
+                                    <constraint firstItem="L0c-Nl-7jV" firstAttribute="width" secondItem="f26-bS-gv3" secondAttribute="height" multiplier="15:19" constant="-5" id="mPN-lG-Uxc"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5000m" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVc-PB-CmX">
-                                <rect key="frame" x="507" y="469" width="73" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.25km" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVc-PB-CmX">
+                                <rect key="frame" x="512" y="469" width="68" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.10588235294117647" green="0.14509803921568629" blue="0.22352941176470589" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -99,7 +111,7 @@
                             <constraint firstItem="GSC-Wt-dj8" firstAttribute="leading" secondItem="TUu-mA-bf2" secondAttribute="leading" id="JnZ-1x-5Dk"/>
                             <constraint firstItem="3oc-FI-U0l" firstAttribute="centerX" secondItem="TUu-mA-bf2" secondAttribute="centerX" id="OYc-Ah-Qmx"/>
                             <constraint firstItem="pr5-wT-uGm" firstAttribute="top" secondItem="yVc-PB-CmX" secondAttribute="top" id="PHj-q1-kzd"/>
-                            <constraint firstItem="yVc-PB-CmX" firstAttribute="leading" secondItem="yvo-PS-Gds" secondAttribute="trailing" constant="-93" id="VjJ-p1-ehI"/>
+                            <constraint firstItem="yVc-PB-CmX" firstAttribute="leading" secondItem="yvo-PS-Gds" secondAttribute="trailing" constant="-88" id="VjJ-p1-ehI"/>
                             <constraint firstAttribute="trailing" secondItem="yvo-PS-Gds" secondAttribute="trailing" id="WOQ-SK-WgU"/>
                             <constraint firstItem="3oc-FI-U0l" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="YUy-bt-uyO"/>
                             <constraint firstItem="f26-bS-gv3" firstAttribute="width" secondItem="yvo-PS-Gds" secondAttribute="width" id="aLh-GZ-wjU"/>
@@ -130,6 +142,8 @@
                         <outlet property="labelDistancia" destination="3oc-FI-U0l" id="rN9-NV-EZf"/>
                         <outlet property="mapView" destination="yvo-PS-Gds" id="C2I-0q-UKv"/>
                         <outlet property="musicLabel" destination="sfu-CE-J0z" id="pSR-4t-Ofm"/>
+                        <outlet property="radiusLabel" destination="yVc-PB-CmX" id="ede-dV-PaN"/>
+                        <outlet property="sliderRaio" destination="pr5-wT-uGm" id="mLb-Wt-r9l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -212,4 +226,7 @@
             <point key="canvasLocation" x="245" y="337"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="music" width="300" height="300"/>
+    </resources>
 </document>

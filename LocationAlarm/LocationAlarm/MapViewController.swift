@@ -28,10 +28,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var labelDistancia: UILabel!
     @IBOutlet weak var imageDim: UIImageView!
+    @IBOutlet weak var radiusLabel: UILabel!
+    @IBOutlet weak var sliderRaio: UISlider!
+    var step: Float = 10
     var mediaItem: MPMediaItem?
     var musicPlayer = MPMusicPlayerController.applicationMusicPlayer()
-  
-  
   
     var selectedPin:MKPlacemark? = nil
   
@@ -39,7 +40,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var firstTime = true
     var raioAlarme: MKCircle?
     var pinAlarm = false
-    let distanciaRaio:CLLocationDistance = 100
+    var distanciaRaio:CLLocationDistance = 500
     var resultSearchController:UISearchController? = nil
     let map = Map()
     var alarmeAtivado = false
@@ -48,7 +49,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
   
     let movimentoDrag = UIPanGestureRecognizer()
     let tapGestureRecognizer = UITapGestureRecognizer()
-  
   
   
     override func viewDidAppear(animated: Bool)
@@ -297,11 +297,40 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
+    @IBAction func sliderRaioChanged(sender: UISlider)
+    {
+        if sender.value < 1000
+        {
+            step = 10
+            let roundedValue = round(sender.value / step) * step
+            sender.value = roundedValue
+            radiusLabel.text = "\(Int(sender.value))m"
+        }
+        else
+        {
+            step = 50
+            let roundedValue = round(sender.value / step) * step
+            sender.value = roundedValue
+            radiusLabel.text = "\((sender.value) / 1000)km"
+            
+        }
+        
+        distanciaRaio = Double(sender.value)
+        if pinAlarm
+        {
+            self.mapView.removeOverlays(self.mapView.overlays)
+            raioAlarme = MKCircle(centerCoordinate: (self.mapView.annotations.first?.coordinate)!, radius: distanciaRaio)
+            self.mapView.addOverlay(raioAlarme!)
+            
+        }
+    }
+    
+    
     func chooseMusicAction(sender: UITapGestureRecognizer)
     {
         let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
         mediaPicker.delegate = self
-        mediaPicker.prompt = "Select any song!"
+        mediaPicker.prompt = "Escolha uma música:"
         mediaPicker.allowsPickingMultipleItems = false
         presentViewController(mediaPicker, animated: true, completion: {})
         
@@ -312,7 +341,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let aMediaItem = mediaItems.items[0] as MPMediaItem
         self.mediaItem = aMediaItem;
         print(mediaItem!.title)
-        //fillData(aMediaItem);
+        musicLabel.text = "\(mediaItem!.artist!) - \(mediaItem!.title!)"
+        musicLabel.textColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
         self.dismissViewControllerAnimated(true, completion: {});
     }
     
