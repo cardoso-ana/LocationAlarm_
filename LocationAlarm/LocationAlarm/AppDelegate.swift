@@ -73,7 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             notification.alertBody = region.identifier
             notification.soundName = "Default";
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
-            print(window?.rootViewController?.childViewControllers.first)
             ((window?.rootViewController?.childViewControllers.first) as! MapViewController).playMedia()
         }
         

@@ -352,12 +352,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
   
     func playMedia()
     {
-        let array = [mediaItem!]
-        let collection = MPMediaItemCollection(items: array)
+        if (mediaItem != nil)
+        {
+            let array = [mediaItem!]
+            let collection = MPMediaItemCollection(items: array)
         
-        musicPlayer.setQueueWithItemCollection(collection)
-        musicPlayer.play();
-        
+            musicPlayer.setQueueWithItemCollection(collection)
+            musicPlayer.play();
+        }
     }
   
   

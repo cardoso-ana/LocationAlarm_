@@ -30,7 +30,7 @@
                                 <rect key="frame" x="0.0" y="546" width="600" height="54"/>
                                 <color key="backgroundColor" red="0.14117647058823529" green="0.20000000000000001" blue="0.29019607843137257" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="35"/>
-                                <state key="normal" title="A">
+                                <state key="normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -93,7 +93,7 @@
                                     <constraint firstItem="L0c-Nl-7jV" firstAttribute="width" secondItem="f26-bS-gv3" secondAttribute="height" multiplier="15:19" constant="-5" id="mPN-lG-Uxc"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.25km" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVc-PB-CmX">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500m" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVc-PB-CmX">
                                 <rect key="frame" x="512" y="469" width="68" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.10588235294117647" green="0.14509803921568629" blue="0.22352941176470589" alpha="1" colorSpace="calibratedRGB"/>
