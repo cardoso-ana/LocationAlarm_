@@ -51,37 +51,70 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6G-Pr-Xzg">
-                                <rect key="frame" x="541" y="501" width="39" height="37"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="50" maxValue="5000" translatesAutoresizingMaskIntoConstraints="NO" id="pr5-wT-uGm">
+                                <rect key="frame" x="18" y="469" width="483" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="4ls-YY-xgq"/>
-                                    <constraint firstAttribute="width" constant="39" id="Uqg-Ld-vav"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="39" id="y3u-z3-Rtx"/>
+                                    <constraint firstAttribute="width" constant="466" id="836-k7-HlT"/>
                                 </constraints>
-                                <state key="normal" image="music"/>
-                                <connections>
-                                    <action selector="chooseMusicAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hsf-er-whs"/>
-                                </connections>
-                            </button>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="836-k7-HlT"/>
+                                    </mask>
+                                </variation>
+                            </slider>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f26-bS-gv3">
+                                <rect key="frame" x="0.0" y="508" width="600" height="38"/>
+                                <subviews>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Escolha uma música" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfu-CE-J0z">
+                                        <rect key="frame" x="8" y="9" width="584" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="sfu-CE-J0z" firstAttribute="centerY" secondItem="f26-bS-gv3" secondAttribute="centerY" id="Fp0-nD-3KA"/>
+                                    <constraint firstAttribute="trailing" secondItem="sfu-CE-J0z" secondAttribute="trailing" constant="8" id="YYX-5W-qB5"/>
+                                    <constraint firstItem="sfu-CE-J0z" firstAttribute="leading" secondItem="f26-bS-gv3" secondAttribute="leading" constant="8" id="eVK-r7-xCu"/>
+                                    <constraint firstItem="sfu-CE-J0z" firstAttribute="bottom" secondItem="f26-bS-gv3" secondAttribute="bottomMargin" id="feT-lr-zeg"/>
+                                    <constraint firstItem="sfu-CE-J0z" firstAttribute="centerX" secondItem="f26-bS-gv3" secondAttribute="centerX" id="g1Y-0m-eRU"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5000m" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVc-PB-CmX">
+                                <rect key="frame" x="507" y="469" width="73" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="yVc-PB-CmX" firstAttribute="leading" secondItem="pr5-wT-uGm" secondAttribute="trailing" constant="8" id="0cn-fH-sRI"/>
                             <constraint firstItem="3oc-FI-U0l" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="51" id="1EN-Au-kIc"/>
                             <constraint firstItem="GSC-Wt-dj8" firstAttribute="trailing" secondItem="TUu-mA-bf2" secondAttribute="trailing" id="ByL-jA-cw1"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Dnt-fV-key"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="leading" secondItem="TUu-mA-bf2" secondAttribute="leading" id="Fh8-K4-Z4A"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="trailing" secondItem="TUu-mA-bf2" secondAttribute="trailing" id="G58-aN-n5b"/>
                             <constraint firstItem="GSC-Wt-dj8" firstAttribute="leading" secondItem="TUu-mA-bf2" secondAttribute="leading" id="JnZ-1x-5Dk"/>
-                            <constraint firstItem="TUu-mA-bf2" firstAttribute="top" secondItem="s6G-Pr-Xzg" secondAttribute="bottom" constant="8" symbolic="YES" id="MUk-GH-X6t"/>
                             <constraint firstItem="3oc-FI-U0l" firstAttribute="centerX" secondItem="TUu-mA-bf2" secondAttribute="centerX" id="OYc-Ah-Qmx"/>
+                            <constraint firstItem="pr5-wT-uGm" firstAttribute="top" secondItem="yVc-PB-CmX" secondAttribute="top" id="PHj-q1-kzd"/>
+                            <constraint firstItem="yVc-PB-CmX" firstAttribute="leading" secondItem="yvo-PS-Gds" secondAttribute="trailing" constant="-93" id="VjJ-p1-ehI"/>
                             <constraint firstAttribute="trailing" secondItem="yvo-PS-Gds" secondAttribute="trailing" id="WOQ-SK-WgU"/>
                             <constraint firstItem="3oc-FI-U0l" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="YUy-bt-uyO"/>
+                            <constraint firstItem="f26-bS-gv3" firstAttribute="width" secondItem="yvo-PS-Gds" secondAttribute="width" id="aLh-GZ-wjU"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="gyl-mV-3jY"/>
                             <constraint firstItem="GSC-Wt-dj8" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ijH-b8-Z9u"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="k5p-Im-Pcf"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="bottom" secondItem="TUu-mA-bf2" secondAttribute="bottom" id="kKX-dX-86T"/>
-                            <constraint firstItem="s6G-Pr-Xzg" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="ow4-ig-2hv"/>
+                            <constraint firstItem="pr5-wT-uGm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="m6R-s8-XaJ"/>
+                            <constraint firstItem="f26-bS-gv3" firstAttribute="leading" secondItem="TUu-mA-bf2" secondAttribute="leading" id="odg-by-WIm"/>
+                            <constraint firstItem="yVc-PB-CmX" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="tY0-Uq-fOG"/>
+                            <constraint firstItem="pr5-wT-uGm" firstAttribute="bottom" secondItem="yVc-PB-CmX" secondAttribute="bottom" id="vcE-KC-a59"/>
+                            <constraint firstItem="f26-bS-gv3" firstAttribute="trailing" secondItem="TUu-mA-bf2" secondAttribute="trailing" id="wuw-eH-wBs"/>
+                            <constraint firstItem="TUu-mA-bf2" firstAttribute="top" secondItem="f26-bS-gv3" secondAttribute="bottom" id="x6D-ew-Z3W"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yvo-PS-Gds" secondAttribute="bottom" id="xOu-Xd-dK0"/>
+                            <constraint firstItem="f26-bS-gv3" firstAttribute="top" secondItem="pr5-wT-uGm" secondAttribute="bottom" constant="9" id="yuS-Qs-dJy"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -96,7 +129,7 @@
                         <outlet property="imageDim" destination="GSC-Wt-dj8" id="qt0-Ih-kb7"/>
                         <outlet property="labelDistancia" destination="3oc-FI-U0l" id="rN9-NV-EZf"/>
                         <outlet property="mapView" destination="yvo-PS-Gds" id="C2I-0q-UKv"/>
-                        <outlet property="musicButton" destination="s6G-Pr-Xzg" id="r6u-Yu-vI1"/>
+                        <outlet property="musicLabel" destination="sfu-CE-J0z" id="pSR-4t-Ofm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -179,7 +212,4 @@
             <point key="canvasLocation" x="245" y="337"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="music" width="300" height="300"/>
-    </resources>
 </document>

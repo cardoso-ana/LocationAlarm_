@@ -23,7 +23,7 @@ protocol HandleMapSearch
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, MPMediaPickerControllerDelegate
 {
-    @IBOutlet weak var musicButton: UIButton!
+    @IBOutlet weak var musicLabel: UILabel!
     @IBOutlet weak var activeButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var labelDistancia: UILabel!
@@ -100,10 +100,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultSearchController?.searchResultsUpdater = locationSearchTable
         resultSearchController?.searchBar.tintColor = UIColor.whiteColor()
+        
     
         let searchBar = resultSearchController!.searchBar
         searchBar.sizeToFit()
         searchBar.placeholder = "Procure seu ponto"
+        searchBar.setValue("Cancelar", forKey: "_cancelButtonText")
         navigationItem.titleView = resultSearchController?.searchBar
         
         resultSearchController?.hidesNavigationBarDuringPresentation = false
@@ -114,10 +116,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
     
         locationSearchTable.handleMapSearchDelegate = self
-    
-        let image = UIImage(named: "music")! as UIImage
-        musicButton.setImage(image, forState: .Normal)
-        self.view.addSubview(musicButton)
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(MapViewController.chooseMusicAction(_:)))
+        musicLabel.addGestureRecognizer(tapGesture)
     
     }
   
@@ -296,7 +297,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    @IBAction func chooseMusicAction(sender: AnyObject)
+    func chooseMusicAction(sender: UITapGestureRecognizer)
     {
         let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
         mediaPicker.delegate = self
