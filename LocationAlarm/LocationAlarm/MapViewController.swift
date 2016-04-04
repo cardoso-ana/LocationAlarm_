@@ -240,11 +240,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     labelDistancia.text = "\(distanciaParaRegiao.roundToPlaces(2))km"
                 }
         
-        
+                sliderRaio.hidden = true
+                musicLabel.userInteractionEnabled = false
                 activeButton.setTitle("DESATIVAR", forState: UIControlState.Normal)
             }
             else
             {
+                sliderRaio.hidden = false
+                musicLabel.userInteractionEnabled = true
                 desativa(alarme)
             }
         }

@@ -100,6 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let action = UIAlertAction(title: "OK", style: .Cancel, handler: alertOkHandler)
         alert.addAction(action)
+        
         viewController.presentViewController(alert, animated: true, completion: nil)
     }
     
