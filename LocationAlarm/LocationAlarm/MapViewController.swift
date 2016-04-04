@@ -45,7 +45,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let map = Map()
     var alarmeAtivado = false
     var locationManager = CLLocationManager()
-    let regionRadius: CLLocationDistance = 1000
+    //let regionRadius: CLLocationDistance = 1000
+    var locationCoord: CLLocationCoordinate2D?
   
     let movimentoDrag = UIPanGestureRecognizer()
     let tapGestureRecognizer = UITapGestureRecognizer()
@@ -129,9 +130,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if alarmeAtivado == false
         {
             let location = sender.locationInView(self.mapView)
-            let locationCoord = self.mapView.convertPoint(location, toCoordinateFromView: self.mapView)
+            locationCoord = self.mapView.convertPoint(location, toCoordinateFromView: self.mapView)
             let annotation = MKPointAnnotation()
-            annotation.coordinate = locationCoord
+            annotation.coordinate = locationCoord!
       
             self.mapView.removeOverlays(self.mapView.overlays)
             self.mapView.removeAnnotations(self.mapView.annotations)
@@ -304,14 +305,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         if sender.value < 1000
         {
-            step = 10
+            step = 50
             let roundedValue = round(sender.value / step) * step
             sender.value = roundedValue
             radiusLabel.text = "\(Int(sender.value))m"
         }
         else
         {
-            step = 50
+            step = 100
             let roundedValue = round(sender.value / step) * step
             sender.value = roundedValue
             radiusLabel.text = "\((sender.value) / 1000)km"
@@ -322,7 +323,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if pinAlarm
         {
             self.mapView.removeOverlays(self.mapView.overlays)
-            raioAlarme = MKCircle(centerCoordinate: (self.mapView.annotations.first?.coordinate)!, radius: distanciaRaio)
+            raioAlarme = MKCircle(centerCoordinate: locationCoord!, radius: distanciaRaio)
             self.mapView.addOverlay(raioAlarme!)
             
         }
@@ -333,9 +334,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
         mediaPicker.delegate = self
-        mediaPicker.prompt = "Escolha uma música:"
         mediaPicker.allowsPickingMultipleItems = false
         presentViewController(mediaPicker, animated: true, completion: {})
+        mediaPicker.navigationItem.title = "Escolha uma música:"
         
     }
     
