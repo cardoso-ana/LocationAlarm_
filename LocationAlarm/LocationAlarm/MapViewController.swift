@@ -23,6 +23,8 @@ protocol HandleMapSearch
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, MPMediaPickerControllerDelegate
 {
+    @IBOutlet weak var viewSlider: UIView!
+    @IBOutlet weak var userLocationButton: UIButton!
     @IBOutlet weak var musicLabel: UILabel!
     @IBOutlet weak var activeButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
@@ -60,33 +62,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         map.locationManagerInit()
     }
   
-    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
-        if firstTime == true
-        {
-            self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!),    animated: true)
-            firstTime = false
-        }
-    
-        if alarmeAtivado == true
-        {
-      
-            let lugarDois = CLLocation(latitude: (raioAlarme?.coordinate.latitude)!, longitude: (raioAlarme?.coordinate.longitude)!)
-            let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
-            var distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
-      
-            if distanciaParaRegiao < 1000
-            {
-                labelDistancia.text = "\(Int(distanciaParaRegiao))m"
-            }
-            else
-            {
-                distanciaParaRegiao /= 1000
-                labelDistancia.text = "\(distanciaParaRegiao.roundToPlaces(2))km"
-            }
-        }
-    }
-  
-  
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -120,7 +95,39 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         musicLabel.addGestureRecognizer(tapGesture)
     
     }
+    
+    
+    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation)
+    {
+        if firstTime == true
+        {
+            self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!),    animated: true)
+            firstTime = false
+        }
+        
+        if alarmeAtivado == true
+        {
+            
+            let lugarDois = CLLocation(latitude: (raioAlarme?.coordinate.latitude)!, longitude: (raioAlarme?.coordinate.longitude)!)
+            let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
+            var distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
+            
+            if distanciaParaRegiao < 1000
+            {
+                labelDistancia.text = "\(Int(distanciaParaRegiao))m"
+            }
+            else
+            {
+                distanciaParaRegiao /= 1000
+                labelDistancia.text = "\(distanciaParaRegiao.roundToPlaces(2))km"
+            }
+        }
+    }
   
+    @IBAction func setRegionToUserLocation(sender: AnyObject)
+    {
+        self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!),    animated: true)
+    }
   
     //adiciona e remove anotacoes
     @IBAction func addPin(sender: AnyObject)
@@ -243,12 +250,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 }
         
                 sliderRaio.hidden = true
+                viewSlider.hidden = true
                 musicLabel.userInteractionEnabled = false
                 activeButton.setTitle("DESATIVAR", forState: UIControlState.Normal)
+                activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
             }
             else
             {
                 sliderRaio.hidden = false
+                viewSlider.hidden = false
                 musicLabel.userInteractionEnabled = true
                 stopMonitoringGeotification(alarme!)
                 alarmeAtivado = false
@@ -257,6 +267,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 imageDim.image = nil
                 
                 activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
+                activeButton.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
             }
         }
     }
