@@ -55,7 +55,9 @@ extension LocationSearchTable : UISearchResultsUpdating
         let searchBarText = searchController.searchBar.text else { return }
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = searchBarText
-        request.region = mapView.region
+        //request.region = mapView.region
+        request.region = MKCoordinateRegionMakeWithDistance(mapView.userLocation.location!.coordinate,
+                                                            120701, 120701);
         let search = MKLocalSearch(request: request)
         search.startWithCompletionHandler
             { response, _ in
