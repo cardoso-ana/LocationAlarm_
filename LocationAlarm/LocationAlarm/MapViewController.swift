@@ -23,9 +23,12 @@ protocol HandleMapSearch
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, MPMediaPickerControllerDelegate
 {
-    @IBOutlet weak var viewSlider: UIView!
+    
+    @IBOutlet weak var viewS: UIView!
+    var viewSlider: UIVisualEffectView? = nil
     @IBOutlet weak var userLocationButton: UIButton!
     @IBOutlet weak var musicLabel: UILabel!
+    @IBOutlet weak var musicView: UIView!
     @IBOutlet weak var activeButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var labelDistancia: UILabel!
@@ -90,7 +93,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
     
         locationSearchTable.handleMapSearchDelegate = self
-
+        
+        let blur = UIBlurEffect(style: .Light)
+        viewSlider = UIVisualEffectView(effect: blur)
+        viewSlider!.frame = viewS.bounds
+        self.viewS.insertSubview(viewSlider!, atIndex: 0)
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(MapViewController.chooseMusicAction(_:)))
         musicLabel.addGestureRecognizer(tapGesture)
     
@@ -253,7 +261,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 }
         
                 sliderRaio.hidden = true
-                viewSlider.hidden = true
+                viewSlider!.hidden = true
                 musicLabel.userInteractionEnabled = false
                 activeButton.setTitle("DESATIVAR", forState: UIControlState.Normal)
                 activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
@@ -263,7 +271,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             else
             {
                 sliderRaio.hidden = false
-                viewSlider.hidden = false
+                viewSlider!.hidden = false
+                musicLabel.text = "Selecione uma música"
                 musicLabel.userInteractionEnabled = true
                 stopMonitoringGeotification(alarme!)
                 alarmeAtivado = false
