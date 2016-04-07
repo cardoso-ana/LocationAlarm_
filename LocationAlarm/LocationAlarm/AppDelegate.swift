@@ -86,6 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         viewController.sliderRaio.userInteractionEnabled = true
         viewController.musicLabel.userInteractionEnabled = true
         viewController.activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
+        viewController.activeButton.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
         
     }
     

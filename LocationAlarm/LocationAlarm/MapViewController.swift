@@ -103,6 +103,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         {
             self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!),    animated: true)
             firstTime = false
+            
         }
         
         if alarmeAtivado == true
@@ -176,8 +177,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
         // configura/adiciona overlay (circulo/raio ao redor do annotation)
         raioAlarme = MKCircle(centerCoordinate: annotation.coordinate, radius: distanciaRaio)
-    
-    
         self.mapView.addOverlay(raioAlarme!)
     
     
@@ -227,6 +226,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             alarme = Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier:  "Alarme", note: "Você está a \(Int(raioAlarme!.radius))m do seu destino!")
             if sender.titleLabel?.text == "ATIVAR"
             {
+                if musicLabel.text == "Selecione uma música"{
+                 musicLabel.text = "Nenhuma música selecionada"
+                }
+                
                 startMonitoringGeotification(alarme!)
                 alarmeAtivado = true
                 self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -254,6 +257,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 musicLabel.userInteractionEnabled = false
                 activeButton.setTitle("DESATIVAR", forState: UIControlState.Normal)
                 activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
+                
+                
             }
             else
             {
@@ -297,16 +302,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
   
     func stopMonitoringGeotification(geotification: Alarm)
     {
-        for region in locationManager.monitoredRegions
-        {
-            if let circularRegion = region as? CLCircularRegion
-            {
-                if circularRegion.identifier == geotification.identifier
-                {
-                    locationManager.stopMonitoringForRegion(circularRegion)
-                }
-            }
-        }
+        print("parou")
+        locationManager.stopMonitoringForRegion(geotification.alarmeRegion!)
     }
     
     @IBAction func sliderRaioChanged(sender: UISlider)
@@ -407,6 +404,7 @@ extension MapViewController: HandleMapSearch
     
     let annotation = MKPointAnnotation()
     annotation.coordinate = placemark.coordinate
+    locationCoord = annotation.coordinate
     self.mapView.removeOverlays(self.mapView.overlays)
     self.mapView.removeAnnotations(self.mapView.annotations)
     self.mapView.addAnnotation(annotation)
