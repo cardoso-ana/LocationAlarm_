@@ -86,6 +86,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         viewController.sliderRaio.userInteractionEnabled = true
         viewController.viewSlider!.hidden = false
         viewController.musicLabel.userInteractionEnabled = true
+        
+        if viewController.musicLabel.text == "Nenhuma música selecionada"
+        {
+            viewController.musicLabel.text = "Selecione uma música"
+        }
+        
         viewController.activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
         viewController.activeButton.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
         

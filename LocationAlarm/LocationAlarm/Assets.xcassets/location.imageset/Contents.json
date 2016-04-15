@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "location.png",
+      "filename" : "Define Location Filled-100.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "location@2x.png",
       "scale" : "2x"
     },
     {

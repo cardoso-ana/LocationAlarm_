@@ -68,7 +68,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        
+        let barView = UIView(frame: CGRectMake(-20, 0, self.mapView.frame.size.width, statusBarHeight))
+        barView.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
+        self.navigationController?.view.addSubview(barView)
+        
         mapView.delegate = self
         locationManager.delegate = self
         mapView.showsUserLocation = true
@@ -76,7 +80,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let locationSearchTable = storyboard!.instantiateViewControllerWithIdentifier("LocationSearchTable") as! LocationSearchTable
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultSearchController?.searchResultsUpdater = locationSearchTable
-        resultSearchController?.searchBar.tintColor = UIColor.whiteColor()
+        resultSearchController?.searchBar.tintColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
         
     
         let searchBar = resultSearchController!.searchBar
@@ -94,6 +98,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
         locationSearchTable.handleMapSearchDelegate = self
         
+        
         let blur = UIBlurEffect(style: .Light)
         viewSlider = UIVisualEffectView(effect: blur)
         viewSlider!.frame = viewS.bounds
@@ -101,7 +106,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(MapViewController.chooseMusicAction(_:)))
         musicLabel.addGestureRecognizer(tapGesture)
+        
     
+        UIDevice.currentDevice().setValue(UIInterfaceOrientation.Portrait.rawValue, forKey: "orientation")
     }
     
     
@@ -207,6 +214,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         overlayRenderer.lineWidth = 3
     
         return overlayRenderer
+    }
+
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation)
+    {
+        navigationController
     }
   
   //    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState)
