@@ -35,6 +35,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBOutlet weak var imageDim: UIImageView!
     @IBOutlet weak var radiusLabel: UILabel!
     @IBOutlet weak var sliderRaio: UISlider!
+    @IBOutlet weak var navBar: UIView!
     var step: Float = 10
     var mediaItem: MPMediaItem?
     var musicPlayer = MPMusicPlayerController.applicationMusicPlayer()
@@ -69,9 +70,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         super.viewDidLoad()
         
-        let barView = UIView(frame: CGRectMake(-20, 0, self.mapView.frame.size.width, statusBarHeight))
-        barView.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
-        self.navigationController?.view.addSubview(barView)
+//        let barView = UIView(frame: CGRectMake(-20, 0, self.mapView.frame.size.width, statusBarHeight))
+//        barView.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
+//        self.navigationController?.view.addSubview(barView)
         
         mapView.delegate = self
         locationManager.delegate = self
@@ -277,7 +278,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 musicLabel.userInteractionEnabled = false
                 activeButton.setTitle("DESATIVAR", forState: UIControlState.Normal)
                 activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
-                
+                //navBar.hidden = true
                 
             }
             else
@@ -291,6 +292,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 labelDistancia.text = ""
                 self.navigationController?.setNavigationBarHidden(false, animated: true)
                 imageDim.image = nil
+                //navBar.hidden = false
                 
                 activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
                 activeButton.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)

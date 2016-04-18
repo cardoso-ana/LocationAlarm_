@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
         UIApplication.sharedApplication().cancelAllLocalNotifications()
         
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        UIApplication.sharedApplication().statusBarStyle = .Default
         
         return true
     }
@@ -86,6 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         viewController.sliderRaio.userInteractionEnabled = true
         viewController.viewSlider!.hidden = false
         viewController.musicLabel.userInteractionEnabled = true
+        //viewController.navBar.hidden = false
         
         if viewController.musicLabel.text == "Nenhuma música selecionada"
         {
