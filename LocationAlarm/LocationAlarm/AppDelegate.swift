@@ -127,6 +127,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         (window?.rootViewController!.childViewControllers.first as! MapViewController).musicPlayer.stop()
         completionHandler()
     }
+  
+  func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+    
+    
+    //TODO:LANCAR ALARME A PARTIR DO QA
+    
+    var LinkViewController = (window?.rootViewController!.childViewControllers.first as! MapViewController)
+    
+    
+    print("entrou por aqui")
+    
+  }
 
+
+  
 }
 
