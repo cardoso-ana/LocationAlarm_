@@ -135,7 +135,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     var LinkViewController = (window?.rootViewController!.childViewControllers.first as! MapViewController)
     
+    LinkViewController.activateByQuickAction(shortcutItem.type)
     
+    print(shortcutItem)
+
     print("entrou por aqui")
     
   }

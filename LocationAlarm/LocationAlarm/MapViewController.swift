@@ -159,11 +159,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
   func setsNameToAlarm(alarme:Alarm){
     
     let location = CLLocation(latitude: alarme.coordinate.latitude, longitude: alarme.coordinate.longitude)
-    
+    //pega o endereço
     
     CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
       
-      var endereco = "Alarme recente"
+      var endereco = "Recent Alarm"
       if placemarks!.count > 0 {
         
         let pm = placemarks![0]
@@ -182,6 +182,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
       else {
         print("Problem with the data received from geocoder")
       }
+        
+        //QUICK ACTIONSSSS
       
       let allQAIcons = UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.Time)
       let QAItem = UIApplicationShortcutItem(type: "alarmeRecenteQA", localizedTitle: endereco, localizedSubtitle: self.radiusLabel.text, icon: allQAIcons, userInfo: nil)
@@ -196,6 +198,62 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     })
     
   }
+    
+    /*
+ 
+ 
+     
+ */
+    
+    //MARK: Ativando alarme por quick action
+    
+    func activateByQuickAction(quickActionType: String){
+        
+        pinAlarm = true
+        
+        //TODO: puxar infos da plist.
+        alarme = Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier:  "Alarme", note: "Você está a \(Int(raioAlarme!.radius))m do seu destino!")
+        
+        if self.activeButton.titleLabel?.text == "ATIVAR"
+        {
+            if musicLabel.text == "Selecione uma música"{
+                musicLabel.text = "Nenhuma música selecionada"
+            }
+            
+            startMonitoringGeotification(alarme!)
+            alarmeAtivado = true
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            
+            imageDim.image = UIImage(named: "fundoDim")
+            self.mapView.bringSubviewToFront(imageDim)
+            imageDim.bringSubviewToFront(labelDistancia)
+            
+            //TODO: mudar aqui tambem, pra info do plist
+            //TODO: verificar se ja tem location do usuario
+            
+            let lugarDois = CLLocation(latitude: (raioAlarme?.coordinate.latitude)!, longitude: (raioAlarme?.coordinate.longitude)!)
+            let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
+            var distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
+            
+            if distanciaParaRegiao < 1000
+            {
+                labelDistancia.text = "\(Int(distanciaParaRegiao))m"
+            }
+            else
+            {
+                distanciaParaRegiao /= 1000
+                labelDistancia.text = "\(distanciaParaRegiao.roundToPlaces(2))km"
+            }
+            
+            sliderRaio.hidden = true
+            viewSlider!.hidden = true
+            musicLabel.userInteractionEnabled = false
+            activeButton.setTitle("DESATIVAR", forState: UIControlState.Normal)
+            activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
+            
+        }
+        
+    }
   
   @IBAction func setRegionToUserLocation(sender: AnyObject)
   {
@@ -295,6 +353,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
   //            print("annotation dropped at: \(ann!.coordinate.latitude),\(ann!.coordinate.longitude)")
   //        }
   //    }
+    
+    
+    //MARK: Função de ativar/desativar alarme
   
   @IBAction func ativarAction(sender: UIButton)
   {
@@ -460,6 +521,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
   
   func playMedia()
   {
+    
     if (mediaItem != nil)
     {
       let array = [mediaItem!]
