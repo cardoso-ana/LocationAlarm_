@@ -99,8 +99,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         let searchBar = resultSearchController!.searchBar
         searchBar.sizeToFit()
-        searchBar.placeholder = "Pesquise seu destino"
-        searchBar.setValue("Cancelar", forKey: "_cancelButtonText")
+        searchBar.placeholder = "Search for a location"
+        searchBar.setValue("Cancel", forKey: "_cancelButtonText")
         navigationItem.titleView = resultSearchController?.searchBar
         
         resultSearchController?.hidesNavigationBarDuringPresentation = false
@@ -108,7 +108,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         definesPresentationContext = true
         
         locationSearchTable.mapView = mapView
-        activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
+        activeButton.setTitle("ACTIVATE", forState: UIControlState.Normal)
         
         locationSearchTable.handleMapSearchDelegate = self
         
@@ -156,49 +156,49 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
-//    func setsNameToAlarm(alarme:Alarm)
-//    {
-//        
-//        let location = CLLocation(latitude: alarme.coordinate.latitude, longitude: alarme.coordinate.longitude)
-//        //pega o endereço
-//        
-//        CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
-//            
-//            var endereco = "Recent Alarm"
-//            if placemarks!.count > 0 {
-//                
-//                let pm = placemarks![0]
-//                
-//                if let rua = pm.thoroughfare{
-//                    endereco = ("\(rua)")
-//                    if let numero = pm.subThoroughfare{
-//                        endereco = ("\(rua), \(numero)")
-//                    }
-//                    print("endereco = \(endereco)")
-//                    
-//                    
-//                }
-//            }
-//                
-//            else {
-//                print("Problem with the data received from geocoder")
-//            }
-//            
-//            //QUICK ACTIONSSSS
-//            
-//            let allQAIcons = UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.Time)
-//            let QAItem = UIApplicationShortcutItem(type: "alarmeRecenteQA", localizedTitle: endereco, localizedSubtitle: self.radiusLabel.text, icon: allQAIcons, userInfo: nil)
-//            
-//            UIApplication.sharedApplication().shortcutItems?.insert(QAItem, atIndex: 0)
-//            
-//            if UIApplication.sharedApplication().shortcutItems?.count == 5 {
-//                UIApplication.sharedApplication().shortcutItems?.removeAtIndex(4)
-//            }
-//            
-//            
-//        })
-//        
-//    }
+    //    func setsNameToAlarm(alarme:Alarm)
+    //    {
+    //
+    //        let location = CLLocation(latitude: alarme.coordinate.latitude, longitude: alarme.coordinate.longitude)
+    //        //pega o endereço
+    //
+    //        CLGeocoder().reverseGeocodeLocation(location, completionHandler: { (placemarks, error) -> Void in
+    //
+    //            var endereco = "Recent Alarm"
+    //            if placemarks!.count > 0 {
+    //
+    //                let pm = placemarks![0]
+    //
+    //                if let rua = pm.thoroughfare{
+    //                    endereco = ("\(rua)")
+    //                    if let numero = pm.subThoroughfare{
+    //                        endereco = ("\(rua), \(numero)")
+    //                    }
+    //                    print("endereco = \(endereco)")
+    //
+    //
+    //                }
+    //            }
+    //
+    //            else {
+    //                print("Problem with the data received from geocoder")
+    //            }
+    //
+    //            //QUICK ACTIONSSSS
+    //
+    //            let allQAIcons = UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.Time)
+    //            let QAItem = UIApplicationShortcutItem(type: "alarmeRecenteQA", localizedTitle: endereco, localizedSubtitle: self.radiusLabel.text, icon: allQAIcons, userInfo: nil)
+    //
+    //            UIApplication.sharedApplication().shortcutItems?.insert(QAItem, atIndex: 0)
+    //
+    //            if UIApplication.sharedApplication().shortcutItems?.count == 5 {
+    //                UIApplication.sharedApplication().shortcutItems?.removeAtIndex(4)
+    //            }
+    //
+    //
+    //        })
+    //
+    //    }
     
     /*
      
@@ -213,19 +213,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         pinAlarm = true
         
         //TODO: puxar infos da plist.
-        alarme.insert(Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier:  "Alarme", note: "Você está a \(Int(raioAlarme!.radius))m do seu destino!"), atIndex: 0)
-        print(alarme)
+        
+        
+        alarme.insert(Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier:  "Alarme", note: "You are \(Int(raioAlarme!.radius))m from your destination!"), atIndex: 0)
+        print("::: Identifier do alarme da Quick Action: \(alarme.first?.identifier)")
         
         if alarme.count == 5
         {
             alarme.removeAtIndex(4)
         }
-
         
-        if self.activeButton.titleLabel?.text == "ATIVAR"
+        
+        if self.activeButton.titleLabel?.text == "ACTIVATE"
         {
-            if musicLabel.text == "Selecione uma música"{
-                musicLabel.text = "Nenhuma música selecionada"
+            if musicLabel.text == "Choose a song"{
+                musicLabel.text = "No song chosen"
             }
             
             startMonitoringGeotification(alarme.first!)
@@ -256,7 +258,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             sliderRaio.hidden = true
             viewSlider!.hidden = true
             musicLabel.userInteractionEnabled = false
-            activeButton.setTitle("DESATIVAR", forState: UIControlState.Normal)
+            activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
             activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
             
         }
@@ -369,19 +371,32 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         if pinAlarm
         {
-            alarme.insert(Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier:  "Alarme", note: "Você está a \(Int(raioAlarme!.radius))m do seu destino!"), atIndex: 0)
-            print(alarme)
+            
             
             if alarme.count == 5
             {
                 alarme.removeAtIndex(4)
             }
             
-            if sender.titleLabel?.text == "ATIVAR"
+            if sender.titleLabel?.text == "ACTIVATE"
             {
-                if musicLabel.text == "Selecione uma música"{
-                    musicLabel.text = "Nenhuma música selecionada"
+                if musicLabel.text == "Choose a song"{
+                    musicLabel.text = "No song chosen"
                 }
+                
+                var uniqueIdentifier = ""
+                
+                for _ in 0...6{
+                    
+                    let randomCharNumb = Int(arc4random_uniform(9))
+                    uniqueIdentifier += String(randomCharNumb)
+                    
+                }
+                
+                print(":::::::::UNIQUE IDENTIFIER::::::: \(uniqueIdentifier)")
+                
+                alarme.insert(Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier:  uniqueIdentifier, note: "You are \(Int(raioAlarme!.radius))m from your destination!"), atIndex: 0)
+                print(":::Identifier desse alarme: \(alarme.first?.identifier)")
                 
                 startMonitoringGeotification(alarme.first!)
                 alarmeAtivado = true
@@ -408,7 +423,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 sliderRaio.hidden = true
                 viewSlider!.hidden = true
                 musicLabel.userInteractionEnabled = false
-                activeButton.setTitle("DESATIVAR", forState: UIControlState.Normal)
+                activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
                 activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
                 //navBar.hidden = true
                 
@@ -423,16 +438,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 //setsNameToAlarm(self.alarme!)
                 
                 
-//                if recentAlarmList.count == 5{
-//                    recentAlarmList.removeAtIndex(4)
-//                }
+                //                if recentAlarmList.count == 5{
+                //                    recentAlarmList.removeAtIndex(4)
+                //                }
                 
             }
             else
             {
                 sliderRaio.hidden = false
                 viewSlider!.hidden = false
-                musicLabel.text = "Selecione uma música"
+                musicLabel.text = "Choose a song"
                 musicLabel.userInteractionEnabled = true
                 stopMonitoringGeotification(alarme.first!)
                 alarmeAtivado = false
@@ -441,7 +456,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 imageDim.image = nil
                 //navBar.hidden = false
                 
-                activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
+                activeButton.setTitle("ACTIVATE", forState: UIControlState.Normal)
                 activeButton.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
             }
         }
@@ -451,7 +466,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     //Monitoramento da região
     func startMonitoringGeotification(geotification: Alarm)
     {
-        print("monitoring")
+        print("::: Começou a monitorar a região")
         // 1
         if !CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion)
         {
@@ -467,12 +482,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         geotification.alarmeRegion?.notifyOnEntry = true
         geotification.alarmeRegion?.notifyOnExit = false
         locationManager.startMonitoringForRegion(geotification.alarmeRegion!)
-        print(locationManager.monitoredRegions)
+        print("Regiões que estão sendo monitoradas: \(locationManager.monitoredRegions)")
     }
     
     func stopMonitoringGeotification(geotification: Alarm)
     {
-        print("parou")
+        print("::: Parou de monitorar a região")
         locationManager.stopMonitoringForRegion(geotification.alarmeRegion!)
     }
     
@@ -523,7 +538,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         let aMediaItem = mediaItems.items[0] as MPMediaItem
         self.mediaItem = aMediaItem;
-        print(mediaItem!.title)
+        print("mediaItem.title = \(mediaItem!.title)")
         musicLabel.text = "\(mediaItem!.artist!) - \(mediaItem!.title!)"
         musicLabel.textColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
         self.dismissViewControllerAnimated(true, completion: {UIApplication.sharedApplication().statusBarStyle = .LightContent});

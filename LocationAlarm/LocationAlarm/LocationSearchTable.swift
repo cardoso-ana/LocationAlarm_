@@ -19,8 +19,7 @@ class LocationSearchTable : UITableViewController
     var handleMapSearchDelegate:HandleMapSearch? = nil
   
     //TODO: Ajeitar para estrutura de endereços brasileira
-    func parseAddress(selectedItem:MKPlacemark) -> String
-    {
+    func parseAddress(selectedItem:MKPlacemark) -> String {
         // put a space between "4" and "Melrose Place"
         let firstSpace = (selectedItem.subThoroughfare != nil && selectedItem.thoroughfare != nil) ? " " : ""
         // put a comma between street and city/state
@@ -30,17 +29,17 @@ class LocationSearchTable : UITableViewController
         let addressLine = String(
             format:"%@%@%@%@%@%@%@",
             // street number
-            selectedItem.thoroughfare ?? "",
+            selectedItem.subThoroughfare ?? "",
             firstSpace,
             // street name
-            selectedItem.subThoroughfare ?? "",
+            selectedItem.thoroughfare ?? "",
             comma,
             // city
             selectedItem.locality ?? "",
             secondSpace,
             // state
-            selectedItem.administrativeArea ?? "")
-    
+            selectedItem.administrativeArea ?? ""
+        )
         return addressLine
     }
   

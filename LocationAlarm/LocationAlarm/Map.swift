@@ -28,7 +28,7 @@ class Map
         let authorization = CLLocationManager.authorizationStatus()
         if authorization == .AuthorizedAlways
         {
-            print("comecou o autorizado")
+            print(":::: Recebeu autorização para CoreLocation")
             locationManager.startUpdatingLocation()
         }
         else if authorization == .NotDetermined

@@ -80,10 +80,10 @@ class Alarm: NSObject, NSCoding, MKAnnotation
                 }
                 
                 let allQAIcons = UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.Time)
-                let QAItem = UIApplicationShortcutItem(type: "alarmeRecenteQA", localizedTitle: self.endereco!, localizedSubtitle: String(Int(self.radius)), icon: allQAIcons, userInfo: nil)
+                let QAItem = UIApplicationShortcutItem(type: self.identifier, localizedTitle: self.endereco!, localizedSubtitle: "\(String(Int(self.radius)))m", icon: allQAIcons, userInfo: nil)
                 
                 UIApplication.sharedApplication().shortcutItems?.insert(QAItem, atIndex: 0)
-                print(UIApplication.sharedApplication().shortcutItems)
+                print("::::Primeiro item do quick action: \(UIApplication.sharedApplication().shortcutItems?.first)")
                 
                 if UIApplication.sharedApplication().shortcutItems?.count >= 4
                 {
