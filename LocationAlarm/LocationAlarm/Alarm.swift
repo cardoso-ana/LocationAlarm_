@@ -25,9 +25,12 @@ class Alarm: NSObject, NSCoding, MKAnnotation
     var identifier: String
     var note: String
     var alarmeRegion: CLCircularRegion?
+    var endereco : String?
     
-    var title: String? {
-        if note.isEmpty {
+    var title: String?
+    {
+        if note.isEmpty
+        {
             return "No Note"
         }
         return note
@@ -44,12 +47,59 @@ class Alarm: NSObject, NSCoding, MKAnnotation
         self.radius = radius
         self.identifier = identifier
         self.note = note
+        self.endereco = "Alarme recente"
         alarmeRegion = CLCircularRegion(center: self.coordinate, radius: self.radius, identifier: self.note)
+        
+        super.init()
+        
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        getEndereco(location)
+        
     }
     
+    func getEndereco (location: CLLocation)
+    {
+        CLGeocoder().reverseGeocodeLocation(location, completionHandler:
+            { (placemarks, error) -> Void in
+                
+                if placemarks!.count > 0
+                {
+                    let pm = placemarks![0]
+                    
+                    if let rua = pm.thoroughfare
+                    {
+                        self.endereco = ("\(rua)")
+                        if let numero = pm.subThoroughfare
+                        {
+                            self.endereco = ("\(rua), \(numero)")
+                        }
+                        print("endereco = \(self.endereco)")
+                    }
+                }
+                    
+                else
+                {
+                    print("Problem with the data received from geocoder")
+                }
+        })
+        
+        
+        let allQAIcons = UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.Time)
+        let QAItem = UIApplicationShortcutItem(type: "alarmeRecenteQA", localizedTitle: endereco!, localizedSubtitle: String(Int(radius)), icon: allQAIcons, userInfo: nil)
+        
+        UIApplication.sharedApplication().shortcutItems?.insert(QAItem, atIndex: 0)
+        print(UIApplication.sharedApplication().shortcutItems)
+        
+        if UIApplication.sharedApplication().shortcutItems?.count >= 4
+        {
+            UIApplication.sharedApplication().shortcutItems?.removeAtIndex(4)
+        }
+}
+
     // MARK: NSCoding
     
-    required init?(coder decoder: NSCoder) {
+    required init?(coder decoder: NSCoder)
+    {
         let latitude = decoder.decodeDoubleForKey(kGeotificationLatitudeKey)
         let longitude = decoder.decodeDoubleForKey(kGeotificationLongitudeKey)
         coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -58,7 +108,8 @@ class Alarm: NSObject, NSCoding, MKAnnotation
         note = decoder.decodeObjectForKey(kGeotificationNoteKey) as! String
     }
     
-    func encodeWithCoder(coder: NSCoder) {
+    func encodeWithCoder(coder: NSCoder)
+    {
         coder.encodeDouble(coordinate.latitude, forKey: kGeotificationLatitudeKey)
         coder.encodeDouble(coordinate.longitude, forKey: kGeotificationLongitudeKey)
         coder.encodeDouble(radius, forKey: kGeotificationRadiusKey)
