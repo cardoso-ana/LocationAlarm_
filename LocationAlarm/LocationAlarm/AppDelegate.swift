@@ -133,7 +133,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     //TODO:LANCAR ALARME A PARTIR DO QA
     
-    //var LinkViewController = (window?.rootViewController!.childViewControllers.first as! MapViewController)
+    var LinkViewController = (window?.rootViewController!.childViewControllers.first as! MapViewController)
     
     LinkViewController.activateByQuickAction(shortcutItem.type)
     
