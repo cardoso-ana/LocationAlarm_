@@ -25,6 +25,7 @@ class Alarm: NSObject, NSCoding, MKAnnotation
     var identifier: String
     var note: String
     var alarmeRegion: CLCircularRegion?
+    var endereco: String?
     
     var title: String? {
         if note.isEmpty {
@@ -44,7 +45,52 @@ class Alarm: NSObject, NSCoding, MKAnnotation
         self.radius = radius
         self.identifier = identifier
         self.note = note
+        self.endereco = "Alarme recente"
         alarmeRegion = CLCircularRegion(center: self.coordinate, radius: self.radius, identifier: self.note)
+        
+        super.init()
+        
+        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        getEndereco(location)
+    }
+    
+    func getEndereco (location: CLLocation)
+    {
+        CLGeocoder().reverseGeocodeLocation(location, completionHandler:
+            { (placemarks, error) -> Void in
+                
+                if placemarks!.count > 0
+                {
+                    let pm = placemarks![0]
+                    
+                    if let rua = pm.thoroughfare
+                    {
+                        self.endereco = ("\(rua)")
+                        if let numero = pm.subThoroughfare
+                        {
+                            self.endereco = ("\(rua), \(numero)")
+                        }
+                        print("endereco = \(self.endereco)")
+                    }
+                }
+                    
+                else
+                {
+                    print("Problem with the data received from geocoder")
+                }
+                
+                let allQAIcons = UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.Time)
+                let QAItem = UIApplicationShortcutItem(type: "alarmeRecenteQA", localizedTitle: self.endereco!, localizedSubtitle: String(Int(self.radius)), icon: allQAIcons, userInfo: nil)
+                
+                UIApplication.sharedApplication().shortcutItems?.insert(QAItem, atIndex: 0)
+                print(UIApplication.sharedApplication().shortcutItems)
+                
+                if UIApplication.sharedApplication().shortcutItems?.count >= 4
+                {
+                    UIApplication.sharedApplication().shortcutItems?.removeAtIndex(4)
+                }
+        })
+        
     }
     
     // MARK: NSCoding
