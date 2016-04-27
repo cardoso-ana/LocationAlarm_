@@ -39,8 +39,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
   var step: Float = 10
   var mediaItem: MPMediaItem?
   var musicPlayer = MPMusicPlayerController.applicationMusicPlayer()
-  
+  var quickActionCheck = false
   var selectedPin:MKPlacemark? = nil
+  
+  var currentAlarmQA:Alarm!
+
   
   var navigationBar: UINavigationBar!
   var firstTime = true
@@ -83,6 +86,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
   {
     super.viewDidLoad()
     
+/* PARA PARAR DE MONITORAR TODAS AS REGIOES:
+     
+    for coisinha in locationManager.monitoredRegions {
+    locationManager.stopMonitoringForRegion(coisinha)
+    }
+     
+ */
     //MARK: Pega alarmes salvos do User Defaults
     
     let defaults = NSUserDefaults.standardUserDefaults()
@@ -218,31 +228,40 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
   
   func activateByQuickAction(quickActionType: String){
     
+    quickActionCheck = true
     pinAlarm = true
     
-    var currentAlarm = alarme.first
-    //TODO: puxar infos da plist.
+    currentAlarmQA = alarme.first
     
     for item in alarme{
       
       if item.identifier == quickActionType{
-        currentAlarm = item
+        currentAlarmQA = item
         break
       }
       
     }
     
-    //alarme.insert(Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier:  "Alarme", note: "You are \(Int(raioAlarme!.radius))m from your destination!"), atIndex: 0)
-    print("::: Identifier do alarme da Quick Action: \(currentAlarm?.identifier)")
+    let annotation = MKPointAnnotation()
+    annotation.coordinate = (currentAlarmQA?.coordinate)!
+    distanciaRaio = (currentAlarmQA?.radius)!
     
+    self.mapView.removeOverlays(self.mapView.overlays)
+    self.mapView.removeAnnotations(self.mapView.annotations)
+    self.mapView.addAnnotation(annotation)
     
-    self.activeButton.titleLabel?.text = "DEACTIVATE"
+    print("::: Identifier do alarme da Quick Action: \(currentAlarmQA?.identifier)")
     
     if musicLabel.text == "Choose a song"{
       musicLabel.text = "No song chosen"
     }
     
-    startMonitoringGeotification(currentAlarm!)
+
+    currentAlarmQA?.alarmeRegion = CLCircularRegion(center: currentAlarmQA!.coordinate, radius: currentAlarmQA!.radius, identifier: currentAlarmQA!.note)
+    
+    //print("_____TESTE__ currentAlarmQA?.alarmeRegion = \(currentAlarmQA?.alarmeRegion)")
+    
+    startMonitoringGeotification(currentAlarmQA!)
     alarmeAtivado = true
     self.navigationController?.setNavigationBarHidden(true, animated: true)
     
@@ -250,13 +269,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     self.mapView.bringSubviewToFront(imageDim)
     imageDim.bringSubviewToFront(labelDistancia)
     
-    //TODO: mudar aqui tambem, pra info do plist
     
-    let lugarDois = CLLocation(latitude: (currentAlarm!.coordinate.latitude), longitude: (currentAlarm!.coordinate.longitude))
     
-    //TODO: verificar se ja tem location do usuario
+    let lugarDois = CLLocation(latitude: (currentAlarmQA!.coordinate.latitude), longitude: (currentAlarmQA!.coordinate.longitude))
+    
+    
+    //TODO: Nessa linha de baixo, o bug da falta de localização do usuário quando o app tava fechado no background e abriu pela QA
     let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
-    var distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
+    var distanciaParaRegiao = distanciaParaCentro! - currentAlarmQA!.radius
     
     if distanciaParaRegiao < 1000
     {
@@ -274,6 +294,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
     activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
     
+    let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+    let region = MKCoordinateRegionMake(annotation.coordinate, span)
+    self.mapView.setRegion(region, animated: true)
+    
     
   }
   
@@ -287,6 +311,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
   {
     if alarmeAtivado == false
     {
+      quickActionCheck = false
       let location = sender.locationInView(self.mapView)
       locationCoord = self.mapView.convertPoint(location, toCoordinateFromView: self.mapView)
       let annotation = MKPointAnnotation()
@@ -413,7 +438,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         print(":::Identifier desse alarme: \(alarme.first?.identifier)")
         
-        startMonitoringGeotification(alarme.first!)
+        startMonitoringGeotification(alarmeAtual)
         alarmeAtivado = true
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
@@ -460,11 +485,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
       }
       else
       {
+        
         sliderRaio.hidden = false
         viewSlider!.hidden = false
         musicLabel.text = "Choose a song"
         musicLabel.userInteractionEnabled = true
-        stopMonitoringGeotification(alarme.first!)
+        
+        if quickActionCheck == false{
+          stopMonitoringGeotification(alarme.first!)
+        } else{
+          stopMonitoringGeotification(currentAlarmQA)
+        }
+        
         alarmeAtivado = false
         labelDistancia.text = ""
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -494,10 +526,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
       showSimpleAlertWithTitle("Warning", message: "Your alarm is saved but will only be activated once you grant Geotify permission to access the device location.", viewController: self)
     }
     // 3
+    print("\n::::::: QTD MONITORED REGIONS : \(locationManager.monitoredRegions.count)")
+    if locationManager.monitoredRegions.count != 0{
+    for monitoredRegion in locationManager.monitoredRegions{
+    locationManager.stopMonitoringForRegion(monitoredRegion)
+    }
+    }
+    //print("_____TESTE__ geotification.alarmeRegion = \(geotification.alarmeRegion)")
     geotification.alarmeRegion?.notifyOnEntry = true
     geotification.alarmeRegion?.notifyOnExit = false
+    
     locationManager.startMonitoringForRegion(geotification.alarmeRegion!)
-    print("Regiões que estão sendo monitoradas: \(locationManager.monitoredRegions)")
+    print("\n\nRegiões que estão sendo monitoradas: \(locationManager.monitoredRegions)\n\n")
   }
   
   func stopMonitoringGeotification(geotification: Alarm)

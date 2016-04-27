@@ -130,6 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
   
   func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
     
+    print("______Chegou a entrar no performActionForShortcutItem")
     
     //TODO:LANCAR ALARME A PARTIR DO QA
     
@@ -139,7 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     print(shortcutItem)
 
-    print("entrou por aqui")
+    print("______Terminou o performActionForShortcutItem")
     
   }
 
