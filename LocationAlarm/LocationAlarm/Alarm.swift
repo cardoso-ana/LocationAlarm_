@@ -78,6 +78,7 @@ class Alarm: NSObject, NSCoding, MKAnnotation
                 {
                     print("Problem with the data received from geocoder")
                 }
+              
                 
                 let allQAIcons = UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.Time)
                 let QAItem = UIApplicationShortcutItem(type: self.identifier, localizedTitle: self.endereco!, localizedSubtitle: "\(String(Int(self.radius)))m", icon: allQAIcons, userInfo: nil)
@@ -102,6 +103,7 @@ class Alarm: NSObject, NSCoding, MKAnnotation
         radius = decoder.decodeDoubleForKey(kGeotificationRadiusKey)
         identifier = decoder.decodeObjectForKey(kGeotificationIdentifierKey) as! String
         note = decoder.decodeObjectForKey(kGeotificationNoteKey) as! String
+      
     }
     
     func encodeWithCoder(coder: NSCoder) {

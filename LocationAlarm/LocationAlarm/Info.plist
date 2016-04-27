@@ -33,7 +33,7 @@
 		<string>armv7</string>
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Precisamos saber onde você está!</string>
+	<string>We need to know where you are!</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>UISupportedInterfaceOrientations</key>
