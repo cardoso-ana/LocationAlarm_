@@ -232,7 +232,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     pinAlarm = true
     
     currentAlarmQA = alarme.first
-    //TODO: puxar infos da plist.
     
     for item in alarme{
       
@@ -270,11 +269,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     self.mapView.bringSubviewToFront(imageDim)
     imageDim.bringSubviewToFront(labelDistancia)
     
-    //TODO: mudar aqui tambem, pra info do plist
+    
     
     let lugarDois = CLLocation(latitude: (currentAlarmQA!.coordinate.latitude), longitude: (currentAlarmQA!.coordinate.longitude))
     
-    //TODO: verificar se ja tem location do usuario
+    
+    //TODO: Nessa linha de baixo, o bug da falta de localização do usuário quando o app tava fechado no background e abriu pela QA
     let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
     var distanciaParaRegiao = distanciaParaCentro! - currentAlarmQA!.radius
     
