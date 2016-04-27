@@ -27,8 +27,10 @@ class Alarm: NSObject, NSCoding, MKAnnotation
     var alarmeRegion: CLCircularRegion?
     var endereco: String?
     
-    var title: String? {
-        if note.isEmpty {
+    var title: String?
+    {
+        if note.isEmpty
+        {
             return "No Note"
         }
         return note
