@@ -218,6 +218,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
   
   func activateByQuickAction(quickActionType: String){
     
+    
     pinAlarm = true
     
     var currentAlarm = alarme.first
@@ -232,15 +233,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
       
     }
     
-    //alarme.insert(Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier:  "Alarme", note: "You are \(Int(raioAlarme!.radius))m from your destination!"), atIndex: 0)
+    let annotation = MKPointAnnotation()
+    annotation.coordinate = (currentAlarm?.coordinate)!
+    distanciaRaio = (currentAlarm?.radius)!
+    
+    self.mapView.removeOverlays(self.mapView.overlays)
+    self.mapView.removeAnnotations(self.mapView.annotations)
+    self.mapView.addAnnotation(annotation)
+    
     print("::: Identifier do alarme da Quick Action: \(currentAlarm?.identifier)")
-    
-    
-    self.activeButton.titleLabel?.text = "DEACTIVATE"
     
     if musicLabel.text == "Choose a song"{
       musicLabel.text = "No song chosen"
     }
+    
+
+    //currentAlarm?.alarmeRegion = CLCircularRegion(center: currentAlarm!.coordinate, radius: currentAlarm!.radius, identifier: currentAlarm!.note)
     
     startMonitoringGeotification(currentAlarm!)
     alarmeAtivado = true
@@ -273,6 +281,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     musicLabel.userInteractionEnabled = false
     activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
     activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
+    
+    let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+    let region = MKCoordinateRegionMake(annotation.coordinate, span)
+    self.mapView.setRegion(region, animated: true)
     
     
   }
@@ -496,6 +508,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // 3
     geotification.alarmeRegion?.notifyOnEntry = true
     geotification.alarmeRegion?.notifyOnExit = false
+    
+    geotification.alarmeRegion = CLCircularRegion(center: geotification.coordinate, radius: geotification.radius, identifier: geotification.note)
+
+    
     locationManager.startMonitoringForRegion(geotification.alarmeRegion!)
     print("Regiões que estão sendo monitoradas: \(locationManager.monitoredRegions)")
   }
