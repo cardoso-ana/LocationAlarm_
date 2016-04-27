@@ -40,7 +40,18 @@ class Map
             print(":::::: Access to user location not granted or unavailable.")
         }
     }
-
+    
+    //    //posiciona o mapa na localização do user
+    //    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    //        let location = locations.last
+    //
+    //        let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
+    //        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+    //
+    //        self.mapView.setRegion(region, animated: true)
+    //    }
+    
+    //posiciona o mapa no inicio
     
     func userLocation(manager: CLLocationManager, location: CLLocation) -> MKCoordinateRegion
     {
@@ -50,5 +61,6 @@ class Map
         
         return region
     }
- 
+    
+    
 }

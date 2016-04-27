@@ -88,9 +88,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         viewController.musicLabel.userInteractionEnabled = true
         //viewController.navBar.hidden = false
         
-        if viewController.musicLabel.text == "No song chosen"
+        if viewController.musicLabel.text == "Nenhuma música selecionada"
         {
-            viewController.musicLabel.text = "Choose a song"
+            viewController.musicLabel.text = "Selecione uma música"
         }
         
         viewController.activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
@@ -106,7 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             handleRegionEvent(region)
         }
     }
-    
+
     func showSimpleAlertWithTitle(title: String!, message: String, viewController: UIViewController)
     {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
@@ -127,17 +127,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         (window?.rootViewController!.childViewControllers.first as! MapViewController).musicPlayer.stop()
         completionHandler()
     }
+  
+  func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
     
-    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void)
-    {
-        let LinkViewController = (window?.rootViewController!.childViewControllers.first as! MapViewController)
-        
-        LinkViewController.activateByQuickAction(shortcutItem.type)
-        
-        print(shortcutItem)
-        
-        print("entrou por aqui")
-        
-    }
+    
+    //TODO:LANCAR ALARME A PARTIR DO QA
+    
+    let LinkViewController = (window?.rootViewController!.childViewControllers.first as! MapViewController)
+    
+    LinkViewController.activateByQuickAction(shortcutItem.type)
+    
+    print(shortcutItem)
+
+    print("entrou por aqui")
+    
+  }
+
+
+  
 }
 

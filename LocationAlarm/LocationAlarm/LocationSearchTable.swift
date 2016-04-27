@@ -13,14 +13,13 @@ import MapKit
 
 class LocationSearchTable : UITableViewController
 {
-    
+  
     var matchingItems:[MKMapItem] = []
     var mapView: MKMapView? = nil
     var handleMapSearchDelegate:HandleMapSearch? = nil
-    
+  
     //TODO: Ajeitar para estrutura de endereços brasileira
-    func parseAddress(selectedItem:MKPlacemark) -> String
-    {
+    func parseAddress(selectedItem:MKPlacemark) -> String {
         // put a space between "4" and "Melrose Place"
         let firstSpace = (selectedItem.subThoroughfare != nil && selectedItem.thoroughfare != nil) ? " " : ""
         // put a comma between street and city/state
@@ -43,16 +42,16 @@ class LocationSearchTable : UITableViewController
         )
         return addressLine
     }
-    
+  
 }
 
 extension LocationSearchTable : UISearchResultsUpdating
 {
-    
+ 
     func updateSearchResultsForSearchController(searchController: UISearchController)
     {
         guard let mapView = mapView,
-            let searchBarText = searchController.searchBar.text else { return }
+        let searchBarText = searchController.searchBar.text else { return }
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = searchBarText
         //request.region = mapView.region
@@ -63,29 +62,29 @@ extension LocationSearchTable : UISearchResultsUpdating
             { response, _ in
                 guard let response = response else
                 {return}
-                
+      
                 self.matchingItems = response.mapItems
                 self.tableView.reloadData()
-        }
+            }
         
     }
-    
+  
 }
 
 extension LocationSearchTable
 {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return matchingItems.count
+    return matchingItems.count
     }
-    
+  
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell")!
-        let selectedItem = matchingItems[indexPath.row].placemark
-        cell.textLabel?.text = selectedItem.name
-        cell.detailTextLabel?.text = parseAddress(selectedItem)
-        return cell
+    let cell = tableView.dequeueReusableCellWithIdentifier("cell")!
+    let selectedItem = matchingItems[indexPath.row].placemark
+    cell.textLabel?.text = selectedItem.name
+    cell.detailTextLabel?.text = parseAddress(selectedItem)
+    return cell
     }
 }
 
