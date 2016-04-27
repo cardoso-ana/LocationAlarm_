@@ -27,8 +27,10 @@ class Alarm: NSObject, NSCoding, MKAnnotation
     var alarmeRegion: CLCircularRegion?
     var endereco: String?
     
-    var title: String? {
-        if note.isEmpty {
+    var title: String?
+    {
+        if note.isEmpty
+        {
             return "No Note"
         }
         return note
@@ -78,7 +80,7 @@ class Alarm: NSObject, NSCoding, MKAnnotation
                 {
                     print("Problem with the data received from geocoder")
                 }
-              
+                
                 
                 let allQAIcons = UIApplicationShortcutIcon(type: UIApplicationShortcutIconType.Time)
                 let QAItem = UIApplicationShortcutItem(type: self.identifier, localizedTitle: self.endereco!, localizedSubtitle: "\(String(Int(self.radius)))m", icon: allQAIcons, userInfo: nil)
@@ -91,22 +93,22 @@ class Alarm: NSObject, NSCoding, MKAnnotation
                     UIApplication.sharedApplication().shortcutItems?.removeAtIndex(4)
                 }
         })
-        
     }
     
     // MARK: NSCoding
-    
-    required init?(coder decoder: NSCoder) {
+    required init?(coder decoder: NSCoder)
+    {
         let latitude = decoder.decodeDoubleForKey(kGeotificationLatitudeKey)
         let longitude = decoder.decodeDoubleForKey(kGeotificationLongitudeKey)
         coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         radius = decoder.decodeDoubleForKey(kGeotificationRadiusKey)
         identifier = decoder.decodeObjectForKey(kGeotificationIdentifierKey) as! String
         note = decoder.decodeObjectForKey(kGeotificationNoteKey) as! String
-      
+        
     }
     
-    func encodeWithCoder(coder: NSCoder) {
+    func encodeWithCoder(coder: NSCoder)
+    {
         coder.encodeDouble(coordinate.latitude, forKey: kGeotificationLatitudeKey)
         coder.encodeDouble(coordinate.longitude, forKey: kGeotificationLongitudeKey)
         coder.encodeDouble(radius, forKey: kGeotificationRadiusKey)
