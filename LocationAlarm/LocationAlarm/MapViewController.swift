@@ -131,6 +131,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             firstTime = false
         }
         
+        if didEnterFromQA == true{
+            
+            activateByQuickAction(tipoCoisado)
+            didEnterFromQA = false
+            
+        }
+        
         if alarmeAtivado == true
         {
             
