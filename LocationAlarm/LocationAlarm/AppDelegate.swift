@@ -9,6 +9,8 @@
 import UIKit
 import CoreLocation
 
+var didEnterFromQA = false
+var tipoCoisado = ""
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
@@ -19,6 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
+        
+        /* ----- esse trecho carrega o alarme da base */
+        //MARK: Pega alarmes salvos do User Defaults
+
+        /* ------                                   */
+        
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         
@@ -27,6 +35,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         UIApplication.sharedApplication().statusBarStyle = .Default
         
+        print("vai entrar no if\n")
+        //Check for ShortCutItem
+        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem
+        {
+            
+            didEnterFromQA = true
+            tipoCoisado = shortcutItem.type
+            
+            print("entrou no if\n\n\n")
+            print(shortcutItem)
+            
+            return false
+        }
+ 
         return true
     }
     
@@ -131,12 +153,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         print("______Chegou a entrar no performActionForShortcutItem")
         
-        let LinkViewController = (window?.rootViewController!.childViewControllers.first as! MapViewController)
-        
-        LinkViewController.activateByQuickAction(shortcutItem.type)
-        
-        print(shortcutItem)
-        
+        if let LinkViewController = (window?.rootViewController!.childViewControllers.first as? MapViewController) {
+            LinkViewController.activateByQuickAction(shortcutItem.type)
+        }
+                
         print("______Terminou o performActionForShortcutItem")
         
     }
