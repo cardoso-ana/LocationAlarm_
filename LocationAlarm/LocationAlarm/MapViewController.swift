@@ -65,13 +65,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
   {
     super.viewDidAppear(true)
     map.locationManagerInit()
-    
   }
   
   override func viewDidLoad()
   {
     super.viewDidLoad()
-    
     
     /* PARA PARAR DE MONITORAR TODAS AS REGIOES:
      
@@ -81,13 +79,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
      }
      */
     
-
-    
+    //MARK: Pega alarmes salvos do User Defaults
     let defaults = NSUserDefaults.standardUserDefaults()
     
     if let savedAlarms = defaults.objectForKey("alarmes") as? NSData
     {
-        alarme = NSKeyedUnarchiver.unarchiveObjectWithData(savedAlarms) as! [Alarm]
+      alarme = NSKeyedUnarchiver.unarchiveObjectWithData(savedAlarms) as! [Alarm]
     }
     
     mapView.delegate = self
@@ -124,7 +121,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     UIDevice.currentDevice().setValue(UIInterfaceOrientation.Portrait.rawValue, forKey: "orientation")
   }
-    
   
   
   func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation)
@@ -133,13 +129,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
       self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!),    animated: true)
       firstTime = false
-    }
-    
-    if didEnterFromQA == true{
-        
-        activateByQuickAction(tipoCoisado)
-        didEnterFromQA = false
-        
     }
     
     if alarmeAtivado == true
