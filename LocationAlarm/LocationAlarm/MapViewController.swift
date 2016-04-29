@@ -40,6 +40,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var quickActionCheck = false
     var selectedPin:MKPlacemark? = nil
     
+  @IBOutlet weak var simulateButton: UIButton!
     var currentAlarmQA: Alarm!
     
     var navigationBar: UINavigationBar!
@@ -86,7 +87,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         {
             alarme = NSKeyedUnarchiver.unarchiveObjectWithData(savedAlarms) as! [Alarm]
         }
-        
+      
+        simulateButton.hidden = true
         mapView.delegate = self
         locationManager.delegate = self
         mapView.showsUserLocation = true
@@ -161,7 +163,31 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!),    animated: true)
     }
+  
+  //MARK: WWDC Arrival Simulator
+  
+  
+  @IBAction func simulateArrival(sender: AnyObject) {
     
+    showSimpleAlertWithTitle("", message: "You are already \(Int(raioAlarme!.radius))m away from your destination!", viewController: self)
+    
+    playMedia()
+    
+    alarmeAtivado = false
+    simulateButton.hidden = true
+    sliderRaio.hidden = false
+    viewSlider!.hidden = false
+    musicLabel.text = "Choose a song"
+    musicLabel.userInteractionEnabled = true
+    labelDistancia.text = ""
+    self.navigationController?.setNavigationBarHidden(false, animated: true)
+    imageDim.image = nil
+    
+    activeButton.setTitle("ACTIVATE", forState: UIControlState.Normal)
+    activeButton.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
+
+    
+  }
     //adiciona e remove anotacoes
     @IBAction func addPin(sender: AnyObject)
     {
@@ -245,6 +271,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 let lugarDois = CLLocation(latitude: (raioAlarme?.coordinate.latitude)!, longitude: (raioAlarme?.coordinate.longitude)!)
                 let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
                 var distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
+              simulateButton.hidden = false
                 
                 if distanciaParaRegiao > 0
                 {
@@ -296,7 +323,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 }
                 else
                 {
-                    showSimpleAlertWithTitle("", message: "You are already \(Int(raioAlarme!.radius))m away from the destination!", viewController: self)
+                    showSimpleAlertWithTitle("", message: "You are already \(Int(raioAlarme!.radius))m away from your destination!", viewController: self)
                 }
                 
             }
@@ -312,7 +339,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 }
                 
                 alarmeAtivado = false
-                
+                simulateButton.hidden = true
                 sliderRaio.hidden = false
                 viewSlider!.hidden = false
                 musicLabel.text = "Choose a song"
@@ -374,9 +401,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         let lugarDois = CLLocation(latitude: (currentAlarmQA!.coordinate.latitude), longitude: (currentAlarmQA!.coordinate.longitude))
-        
-        
-        //TODO: Nessa linha de baixo, o bug da falta de localização do usuário quando o app tava fechado no background e abriu pela QA
+      
         let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
         var distanciaParaRegiao = distanciaParaCentro! - currentAlarmQA!.radius
         
