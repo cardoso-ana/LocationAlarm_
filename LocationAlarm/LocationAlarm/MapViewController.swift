@@ -241,54 +241,63 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             if sender.titleLabel?.text == "ACTIVATE"
             {
-                if musicLabel.text == "Choose a song"
-                {
-                    musicLabel.text = "No song chosen"
-                }
-                
-                let uniqueIdentifier = NSUUID().UUIDString
-                
-                print(":::::::::UNIQUE IDENTIFIER::::::: \(uniqueIdentifier)")
-                
-                let alarmeAtual = Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier:  uniqueIdentifier, note: "You are \(Int(raioAlarme!.radius))m from your destination!")
-                
-                alarme.insert(alarmeAtual, atIndex: 0)
-                
-                //MARK: Adiciona alarme atual ao NSUserDefaults
-                
-                let savedData = NSKeyedArchiver.archivedDataWithRootObject(alarme)
-                let defaults = NSUserDefaults.standardUserDefaults()
-                defaults.setObject(savedData, forKey: "alarmes")
-                
-                print(":::Identifier desse alarme: \(alarme.first?.identifier)")
-                
-                startMonitoringGeotification(alarmeAtual)
-                alarmeAtivado = true
                 
                 let lugarDois = CLLocation(latitude: (raioAlarme?.coordinate.latitude)!, longitude: (raioAlarme?.coordinate.longitude)!)
                 let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
                 var distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
                 
-                if distanciaParaRegiao < 1000
+                if distanciaParaRegiao > 0
                 {
-                    labelDistancia.text = "\(Int(distanciaParaRegiao))m"
+                
+                    if musicLabel.text == "Choose a song"
+                    {
+                        musicLabel.text = "No song chosen"
+                    }
+                    
+                    let uniqueIdentifier = NSUUID().UUIDString
+                    
+                    print(":::::::::UNIQUE IDENTIFIER::::::: \(uniqueIdentifier)")
+                    
+                    let alarmeAtual = Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier:  uniqueIdentifier, note: "You are \(Int(raioAlarme!.radius))m from your destination!")
+                    
+                    alarme.insert(alarmeAtual, atIndex: 0)
+                    
+                    //MARK: Adiciona alarme atual ao NSUserDefaults
+                    
+                    let savedData = NSKeyedArchiver.archivedDataWithRootObject(alarme)
+                    let defaults = NSUserDefaults.standardUserDefaults()
+                    defaults.setObject(savedData, forKey: "alarmes")
+                    
+                    print(":::Identifier desse alarme: \(alarme.first?.identifier)")
+                    
+                    startMonitoringGeotification(alarmeAtual)
+                    alarmeAtivado = true
+                    
+                    if distanciaParaRegiao < 1000
+                    {
+                        labelDistancia.text = "\(Int(distanciaParaRegiao))m"
+                    }
+                    else
+                    {
+                        distanciaParaRegiao /= 1000
+                        labelDistancia.text = "\(distanciaParaRegiao.roundToPlaces(2))km"
+                    }
+                    
+                    self.navigationController?.setNavigationBarHidden(true, animated: true)
+                    
+                    imageDim.image = UIImage(named: "fundoDim")
+                    self.mapView.bringSubviewToFront(imageDim)
+                    imageDim.bringSubviewToFront(labelDistancia)
+                    sliderRaio.hidden = true
+                    viewSlider!.hidden = true
+                    musicLabel.userInteractionEnabled = false
+                    activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
+                    activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
                 }
                 else
                 {
-                    distanciaParaRegiao /= 1000
-                    labelDistancia.text = "\(distanciaParaRegiao.roundToPlaces(2))km"
+                    showSimpleAlertWithTitle("", message: "You are already \(Int(raioAlarme!.radius))m away from the destination!", viewController: self)
                 }
-                
-                self.navigationController?.setNavigationBarHidden(true, animated: true)
-                
-                imageDim.image = UIImage(named: "fundoDim")
-                self.mapView.bringSubviewToFront(imageDim)
-                imageDim.bringSubviewToFront(labelDistancia)
-                sliderRaio.hidden = true
-                viewSlider!.hidden = true
-                musicLabel.userInteractionEnabled = false
-                activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
-                activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
                 
             }
             else
