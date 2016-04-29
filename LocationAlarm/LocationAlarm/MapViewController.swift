@@ -173,6 +173,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     playMedia()
     
+    
+    //
+    
     alarmeAtivado = false
     simulateButton.hidden = true
     sliderRaio.hidden = false
@@ -316,7 +319,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     self.mapView.bringSubviewToFront(imageDim)
                     imageDim.bringSubviewToFront(labelDistancia)
                     sliderRaio.hidden = true
-                    viewSlider!.hidden = true
+                    viewSlider!.hidden = false
                     musicLabel.userInteractionEnabled = false
                     activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
                     activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
@@ -416,7 +419,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
         sliderRaio.hidden = true
-        viewSlider!.hidden = true
+        viewSlider!.hidden = false
         musicLabel.userInteractionEnabled = false
         activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
         activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
