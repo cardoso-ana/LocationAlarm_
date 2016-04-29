@@ -103,9 +103,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         viewController.viewSlider!.hidden = false
         viewController.musicLabel.userInteractionEnabled = true
         
-        if viewController.musicLabel.text == "Nenhuma música selecionada"
+        if viewController.musicLabel.text == "No song chosen"
         {
-            viewController.musicLabel.text = "Selecione uma música"
+            viewController.musicLabel.text = "Choose a song"
         }
         
         viewController.activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)

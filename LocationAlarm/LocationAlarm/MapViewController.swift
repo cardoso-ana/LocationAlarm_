@@ -163,34 +163,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!),    animated: true)
     }
-  
-  //MARK: WWDC Arrival Simulator
-  
-  
-  @IBAction func simulateArrival(sender: AnyObject) {
-    
-    showSimpleAlertWithTitle("", message: "You are already \(Int(raioAlarme!.radius))m away from your destination!", viewController: self)
-    
-    playMedia()
-    
-    
-    //
-    
-    alarmeAtivado = false
-    simulateButton.hidden = true
-    sliderRaio.hidden = false
-    viewSlider!.hidden = false
-    musicLabel.text = "Choose a song"
-    musicLabel.userInteractionEnabled = true
-    labelDistancia.text = ""
-    self.navigationController?.setNavigationBarHidden(false, animated: true)
-    imageDim.image = nil
-    
-    activeButton.setTitle("ACTIVATE", forState: UIControlState.Normal)
-    activeButton.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
 
-    
-  }
     //adiciona e remove anotacoes
     @IBAction func addPin(sender: AnyObject)
     {
@@ -274,7 +247,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 let lugarDois = CLLocation(latitude: (raioAlarme?.coordinate.latitude)!, longitude: (raioAlarme?.coordinate.longitude)!)
                 let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
                 var distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
-              simulateButton.hidden = false
+             
                 
                 if distanciaParaRegiao > 0
                 {
@@ -315,6 +288,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     
                     self.navigationController?.setNavigationBarHidden(true, animated: true)
                     
+                    simulateButton.hidden = false
                     imageDim.image = UIImage(named: "fundoDim")
                     self.mapView.bringSubviewToFront(imageDim)
                     imageDim.bringSubviewToFront(labelDistancia)
@@ -390,43 +364,51 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             musicLabel.text = "No song chosen"
         }
         
-        currentAlarmQA?.alarmeRegion = CLCircularRegion(center: currentAlarmQA!.coordinate, radius: currentAlarmQA!.radius, identifier: currentAlarmQA!.note)
-        
-        //print("_____TESTE__ currentAlarmQA?.alarmeRegion = \(currentAlarmQA?.alarmeRegion)")
-        
-        startMonitoringGeotification(currentAlarmQA!)
-        alarmeAtivado = true
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        
-        imageDim.image = UIImage(named: "fundoDim")
-        self.mapView.bringSubviewToFront(imageDim)
-        imageDim.bringSubviewToFront(labelDistancia)
-        
-        
         let lugarDois = CLLocation(latitude: (currentAlarmQA!.coordinate.latitude), longitude: (currentAlarmQA!.coordinate.longitude))
-      
+        
         let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
         var distanciaParaRegiao = distanciaParaCentro! - currentAlarmQA!.radius
         
-        if distanciaParaRegiao < 1000
+        if distanciaParaRegiao > 0
         {
-            labelDistancia.text = "\(Int(distanciaParaRegiao))m"
+            
+            currentAlarmQA?.alarmeRegion = CLCircularRegion(center: currentAlarmQA!.coordinate, radius: currentAlarmQA!.radius, identifier: currentAlarmQA!.note)
+            
+            //print("_____TESTE__ currentAlarmQA?.alarmeRegion = \(currentAlarmQA?.alarmeRegion)")
+            
+            startMonitoringGeotification(currentAlarmQA!)
+            alarmeAtivado = true
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            
+            imageDim.image = UIImage(named: "fundoDim")
+            self.mapView.bringSubviewToFront(imageDim)
+            imageDim.bringSubviewToFront(labelDistancia)
+            
+            if distanciaParaRegiao < 1000
+            {
+                labelDistancia.text = "\(Int(distanciaParaRegiao))m"
+            }
+            else
+            {
+                distanciaParaRegiao /= 1000
+                labelDistancia.text = "\(distanciaParaRegiao.roundToPlaces(2))km"
+            }
+            
+            simulateButton.hidden = false
+            sliderRaio.hidden = true
+            viewSlider!.hidden = false
+            musicLabel.userInteractionEnabled = false
+            activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
+            activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
+            
+            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            let region = MKCoordinateRegionMake(annotation.coordinate, span)
+            self.mapView.setRegion(region, animated: true)
         }
         else
         {
-            distanciaParaRegiao /= 1000
-            labelDistancia.text = "\(distanciaParaRegiao.roundToPlaces(2))km"
+            showSimpleAlertWithTitle("", message: "You are already \(Int(currentAlarmQA.radius))m away from your destination!", viewController: self)
         }
-        
-        sliderRaio.hidden = true
-        viewSlider!.hidden = false
-        musicLabel.userInteractionEnabled = false
-        activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
-        activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
-        
-        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        let region = MKCoordinateRegionMake(annotation.coordinate, span)
-        self.mapView.setRegion(region, animated: true)
     }
     
     
@@ -536,6 +518,39 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
+    
+    //MARK: WWDC Arrival Simulator
+    @IBAction func simulateArrival(sender: AnyObject)
+    {
+        let alert = UIAlertController(title: title, message: "You are \(Int(raioAlarme!.radius))m from your destination!", preferredStyle: .Alert)
+        let action = UIAlertAction(title: "OK", style: .Cancel, handler: alertOkHandler)
+        alert.addAction(action)
+        playMedia()
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+        alarmeAtivado = false
+        simulateButton.hidden = true
+        sliderRaio.hidden = false
+        viewSlider!.hidden = false
+        musicLabel.userInteractionEnabled = true
+        labelDistancia.text = ""
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        imageDim.image = nil
+        
+        if self.musicLabel.text == "No song chosen"
+        {
+            self.musicLabel.text = "Choose a song"
+        }
+        
+        activeButton.setTitle("ACTIVATE", forState: UIControlState.Normal)
+        activeButton.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
+    }
+    
+    func alertOkHandler(alert: UIAlertAction!)
+    {
+        self.musicPlayer.stop()
+    }
     
     func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError)
     {
