@@ -495,8 +495,24 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         let aMediaItem = mediaItems.items[0] as MPMediaItem
         self.mediaItem = aMediaItem;
-        print("mediaItem.title = \(mediaItem!.title)")
-        musicLabel.text = "\(mediaItem!.artist!) - \(mediaItem!.title!)"
+        if mediaItem?.title != nil && mediaItem?.artist != nil
+        {
+            musicLabel.text = "\(mediaItem!.artist!) - \(mediaItem!.title!)"
+            print("mediaItem.title = \(mediaItem!.title)")
+        }
+        else
+        {
+            if mediaItem?.artist == nil
+            {
+                musicLabel.text = "\(mediaItem!.title!)"
+            }
+            
+            if mediaItem?.title == nil
+            {
+                musicLabel.text = "Unknown"
+            }
+        }
+        
         musicLabel.textColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
         self.dismissViewControllerAnimated(true, completion: {UIApplication.sharedApplication().statusBarStyle = .LightContent});
     }
