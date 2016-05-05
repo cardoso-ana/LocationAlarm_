@@ -166,17 +166,6 @@
                                     <constraint firstAttribute="height" constant="25" id="xH3-q7-ppj"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1O-Ta-hE3">
-                                <rect key="frame" x="369" y="463" width="231" height="33"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="231" id="ght-52-epn"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <state key="normal" title="Simulate arrival for WWDC"/>
-                                <connections>
-                                    <action selector="simulateArrival:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k28-xe-YUW"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -197,13 +186,11 @@
                             <constraint firstItem="FfW-a3-Cr7" firstAttribute="leading" secondItem="GSC-Wt-dj8" secondAttribute="leading" id="hr6-Pm-cJp"/>
                             <constraint firstItem="FfW-a3-Cr7" firstAttribute="trailing" secondItem="GSC-Wt-dj8" secondAttribute="trailing" id="igx-Gw-jWB"/>
                             <constraint firstItem="GSC-Wt-dj8" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-64" id="ijH-b8-Z9u"/>
-                            <constraint firstItem="W1O-Ta-hE3" firstAttribute="trailing" secondItem="ek0-BC-yNo" secondAttribute="trailing" id="jSi-NP-FF7"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="k5p-Im-Pcf"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="bottom" secondItem="TUu-mA-bf2" secondAttribute="bottom" id="kKX-dX-86T"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="GSC-Wt-dj8" secondAttribute="bottom" constant="395" id="lag-YN-mSr"/>
                             <constraint firstItem="FfW-a3-Cr7" firstAttribute="top" secondItem="yvo-PS-Gds" secondAttribute="top" id="oOl-kv-wwK"/>
                             <constraint firstItem="f26-bS-gv3" firstAttribute="leading" secondItem="TUu-mA-bf2" secondAttribute="leading" id="odg-by-WIm"/>
-                            <constraint firstItem="W1O-Ta-hE3" firstAttribute="centerY" secondItem="ek0-BC-yNo" secondAttribute="centerY" id="qoz-1Q-hzO"/>
                             <constraint firstItem="ek0-BC-yNo" firstAttribute="leading" secondItem="yvo-PS-Gds" secondAttribute="trailing" constant="-600" id="sFA-w9-cww"/>
                             <constraint firstItem="f26-bS-gv3" firstAttribute="trailing" secondItem="TUu-mA-bf2" secondAttribute="trailing" id="wuw-eH-wBs"/>
                             <constraint firstItem="TUu-mA-bf2" firstAttribute="top" secondItem="f26-bS-gv3" secondAttribute="bottom" id="x6D-ew-Z3W"/>
@@ -229,7 +216,6 @@
                         <outlet property="musicView" destination="f26-bS-gv3" id="uQ5-Ow-iJE"/>
                         <outlet property="navBar" destination="FfW-a3-Cr7" id="Y1V-9D-xKh"/>
                         <outlet property="radiusLabel" destination="yVc-PB-CmX" id="ede-dV-PaN"/>
-                        <outlet property="simulateButton" destination="W1O-Ta-hE3" id="yMU-kp-JZu"/>
                         <outlet property="sliderRaio" destination="pr5-wT-uGm" id="mLb-Wt-r9l"/>
                         <outlet property="userLocationButton" destination="Yt1-Ig-xDi" id="BpW-k3-azo"/>
                         <outlet property="viewS" destination="ek0-BC-yNo" id="ZMK-PW-wxx"/>

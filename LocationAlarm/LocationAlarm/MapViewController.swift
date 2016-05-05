@@ -39,8 +39,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var musicPlayer = MPMusicPlayerController.applicationMusicPlayer()
     var quickActionCheck = false
     var selectedPin:MKPlacemark? = nil
-    
-  @IBOutlet weak var simulateButton: UIButton!
     var currentAlarmQA: Alarm!
     
     var navigationBar: UINavigationBar!
@@ -74,11 +72,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         /* PARA PARAR DE MONITORAR TODAS AS REGIOES:
          
-        for coisinha in locationManager.monitoredRegions
-        {
-            locationManager.stopMonitoringForRegion(coisinha)
-        }
-        */
+         for coisinha in locationManager.monitoredRegions
+         {
+         locationManager.stopMonitoringForRegion(coisinha)
+         }
+         */
         
         //MARK: Pega alarmes salvos do User Defaults
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -87,8 +85,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         {
             alarme = NSKeyedUnarchiver.unarchiveObjectWithData(savedAlarms) as! [Alarm]
         }
-      
-        simulateButton.hidden = true
+        
         mapView.delegate = self
         locationManager.delegate = self
         mapView.showsUserLocation = true
@@ -161,9 +158,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBAction func setRegionToUserLocation(sender: AnyObject)
     {
-        self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!),    animated: true)
+        if locationManager.location != nil{
+            
+                self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!),    animated: true)
+            
+                mapView.setUserTrackingMode(MKUserTrackingMode.FollowWithHeading, animated: true)
+        }
+        
     }
+    
 
+    
     //adiciona e remove anotacoes
     @IBAction func addPin(sender: AnyObject)
     {
@@ -247,11 +252,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 let lugarDois = CLLocation(latitude: (raioAlarme?.coordinate.latitude)!, longitude: (raioAlarme?.coordinate.longitude)!)
                 let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
                 var distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
-             
+                
                 
                 if distanciaParaRegiao > 0
                 {
-                
+                    
                     if musicLabel.text == "Choose a song"
                     {
                         musicLabel.text = "No song chosen"
@@ -288,7 +293,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     
                     self.navigationController?.setNavigationBarHidden(true, animated: true)
                     
-                    simulateButton.hidden = false
                     imageDim.image = UIImage(named: "fundoDim")
                     self.mapView.bringSubviewToFront(imageDim)
                     imageDim.bringSubviewToFront(labelDistancia)
@@ -316,7 +320,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 }
                 
                 alarmeAtivado = false
-                simulateButton.hidden = true
                 sliderRaio.hidden = false
                 viewSlider!.hidden = false
                 musicLabel.text = "Choose a song"
@@ -394,7 +397,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 labelDistancia.text = "\(distanciaParaRegiao.roundToPlaces(2))km"
             }
             
-            simulateButton.hidden = false
             sliderRaio.hidden = true
             viewSlider!.hidden = false
             musicLabel.userInteractionEnabled = false
@@ -481,14 +483,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func chooseMusicAction(sender: UITapGestureRecognizer)
     {
-//        self.prefersStatusBarHidden()
-//        
-//        let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
-//        mediaPicker.delegate = self
-//        mediaPicker.allowsPickingMultipleItems = false
-//        mediaPicker.prefersStatusBarHidden()
-//        
-//        presentViewController(mediaPicker, animated: true, completion: {UIApplication.sharedApplication().statusBarStyle = .Default})
+        //        self.prefersStatusBarHidden()
+        //
+        //        let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
+        //        mediaPicker.delegate = self
+        //        mediaPicker.allowsPickingMultipleItems = false
+        //        mediaPicker.prefersStatusBarHidden()
+        //
+        //        presentViewController(mediaPicker, animated: true, completion: {UIApplication.sharedApplication().statusBarStyle = .Default})
         
         performSegueWithIdentifier("goToChooseSong", sender: self)
         
@@ -538,39 +540,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    
-    //MARK: WWDC Arrival Simulator
-    @IBAction func simulateArrival(sender: AnyObject)
-    {
-        let alert = UIAlertController(title: title, message: "You are \(Int(raioAlarme!.radius))m from your destination!", preferredStyle: .Alert)
-        let action = UIAlertAction(title: "OK", style: .Cancel, handler: alertOkHandler)
-        alert.addAction(action)
-        playMedia()
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-        
-        alarmeAtivado = false
-        simulateButton.hidden = true
-        sliderRaio.hidden = false
-        viewSlider!.hidden = false
-        musicLabel.userInteractionEnabled = true
-        labelDistancia.text = ""
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        imageDim.image = nil
-        
-        if self.musicLabel.text == "No song chosen"
-        {
-            self.musicLabel.text = "Choose a song"
-        }
-        
-        activeButton.setTitle("ACTIVATE", forState: UIControlState.Normal)
-        activeButton.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
-    }
-    
-    func alertOkHandler(alert: UIAlertAction!)
-    {
-        self.musicPlayer.stop()
-    }
     
     func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError)
     {
