@@ -19,6 +19,8 @@
 		E18754311CB1B06900DF0DEC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18754301CB1B06900DF0DEC /* MapViewController.swift */; };
 		E18754331CB1B08700DF0DEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E18754321CB1B08700DF0DEC /* Main.storyboard */; };
 		EF155CFF1CAB5C4800DD6437 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */; };
+		EF59956A1CDBD11B00B5F471 /* ChooseSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5995691CDBD11B00B5F471 /* ChooseSongViewController.swift */; };
+		EF59956C1CDBD17400B5F471 /* ChooseSongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59956B1CDBD17400B5F471 /* ChooseSongTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		E18754301CB1B06900DF0DEC /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E18754321CB1B08700DF0DEC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
+		EF5995691CDBD11B00B5F471 /* ChooseSongViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseSongViewController.swift; sourceTree = "<group>"; };
+		EF59956B1CDBD17400B5F471 /* ChooseSongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseSongTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +111,9 @@
 			isa = PBXGroup;
 			children = (
 				E18754301CB1B06900DF0DEC /* MapViewController.swift */,
+				EF5995691CDBD11B00B5F471 /* ChooseSongViewController.swift */,
 				EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */,
+				EF59956B1CDBD17400B5F471 /* ChooseSongTableViewCell.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -187,8 +193,10 @@
 				E15E10E51CAC28EA00A344BD /* Alert.swift in Sources */,
 				E18754311CB1B06900DF0DEC /* MapViewController.swift in Sources */,
 				E15E10D71CAB43E400A344BD /* Map.swift in Sources */,
+				EF59956C1CDBD17400B5F471 /* ChooseSongTableViewCell.swift in Sources */,
 				E15E10E31CAC1E7C00A344BD /* Alarm.swift in Sources */,
 				E15E10C21CAB434900A344BD /* AppDelegate.swift in Sources */,
+				EF59956A1CDBD11B00B5F471 /* ChooseSongViewController.swift in Sources */,
 				EF155CFF1CAB5C4800DD6437 /* LocationSearchTable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -481,14 +481,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func chooseMusicAction(sender: UITapGestureRecognizer)
     {
-        self.prefersStatusBarHidden()
+//        self.prefersStatusBarHidden()
+//        
+//        let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
+//        mediaPicker.delegate = self
+//        mediaPicker.allowsPickingMultipleItems = false
+//        mediaPicker.prefersStatusBarHidden()
+//        
+//        presentViewController(mediaPicker, animated: true, completion: {UIApplication.sharedApplication().statusBarStyle = .Default})
         
-        let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
-        mediaPicker.delegate = self
-        mediaPicker.allowsPickingMultipleItems = false
-        mediaPicker.prefersStatusBarHidden()
+        performSegueWithIdentifier("goToChooseSong", sender: self)
         
-        presentViewController(mediaPicker, animated: true, completion: {UIApplication.sharedApplication().statusBarStyle = .Default})
+        
     }
     
     func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems  mediaItems:MPMediaItemCollection) -> Void
