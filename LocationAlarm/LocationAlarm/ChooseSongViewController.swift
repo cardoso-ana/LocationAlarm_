@@ -7,11 +7,95 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ChooseSongViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    override func viewDidLoad() {
+    let model = Model.sharedInstance()
+    
+    ///The directories where sound files are located.
+    let rootSoundDirectories: [String] = ["/Library/Ringtones", "/System/Library/Audio/UISounds"]
+    
+    ///Array to hold directories when we find them.
+    var directories: [String] = []
+    
+    ///Tuple to hold directories and an array of file names within.
+    var soundFiles: [NSURL] = []
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
+        for directory in rootSoundDirectories
+        {
+            directories.append(directory)
+        
+        }
+        getDirectories()
+        loadSoundFiles()
+
+    }
+    
+    // URLs: All of the contents of the directory (files and sub-directories).
+    func getDirectories()
+    {
+        let fileManager: NSFileManager = NSFileManager()
+        for directory in rootSoundDirectories
+        {
+            let directoryURL: NSURL = NSURL(fileURLWithPath: "\(directory)", isDirectory: true)
+            
+            do {
+                if let URLs: [NSURL] = try fileManager.contentsOfDirectoryAtURL(directoryURL, includingPropertiesForKeys: [NSURLIsDirectoryKey], options: NSDirectoryEnumerationOptions()) {
+                    var urlIsaDirectory: ObjCBool = ObjCBool(false)
+                    for url in URLs {
+                        if fileManager.fileExistsAtPath(url.path!, isDirectory: &urlIsaDirectory)
+                        {
+                            if urlIsaDirectory
+                            {
+                                let directory: String = "\(url.relativePath!)"
+                                //let files: [String] = []
+                                //let newSoundFile: (directory: String, files: [String]) = (directory, files)
+                                directories.append("\(directory)")
+                                //soundFiles.append(newSoundFile)
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                debugPrint("\(error)")
+            }
+        }
+    }
+    
+    func loadSoundFiles()
+    {
+        for i in 0...directories.count-1
+        {
+            let fileManager: NSFileManager = NSFileManager()
+            let directoryURL: NSURL = NSURL(fileURLWithPath: directories[i], isDirectory: true)
+            
+            do {
+                if let URLs: [NSURL] = try fileManager.contentsOfDirectoryAtURL(directoryURL, includingPropertiesForKeys: [NSURLIsDirectoryKey], options: NSDirectoryEnumerationOptions())
+                {
+                    var urlIsaDirectory: ObjCBool = ObjCBool(false)
+                    for url in URLs
+                    {
+                        if fileManager.fileExistsAtPath(url.path!, isDirectory: &urlIsaDirectory)
+                        {
+                            if !urlIsaDirectory
+                            {
+                                soundFiles.append(url.filePathURL!)
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                debugPrint("\(error)")
+            }
+        }
     }
     
     override func viewWillAppear(animated: Bool)
@@ -20,25 +104,43 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
     }
     
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        print(soundFiles.indices)
+        return soundFiles.count
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCellWithIdentifier("songCell", forIndexPath:  indexPath) as! ChooseSongTableViewCell
-        cell.songName.text = "teste"
+        
+        //let directory: String = soundFiles[indexPath.section].directory
+        let fileName: String = String(soundFiles[indexPath.row].lastPathComponent!)
+        let filePath = soundFiles[indexPath.row]
+        print(filePath)
+        
+        cell.songName.text = "\(fileName)"
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        //Play the sound
+        let filePath = soundFiles[indexPath.row]
+        do {
+            model.audioPlayer = try AVAudioPlayer(contentsOfURL: filePath)
+            model.audioPlayer.play()
+        } catch {
+            debugPrint("\(error)")
+        }
+    }
+
 
     /*
     // MARK: - Navigation

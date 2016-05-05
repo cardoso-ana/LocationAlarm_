@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E10200031CDBE0FB0078E0F6 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10200021CDBE0FA0078E0F6 /* Model.swift */; };
 		E15E10C21CAB434900A344BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10C11CAB434900A344BD /* AppDelegate.swift */; };
 		E15E10C91CAB434900A344BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E15E10C81CAB434900A344BD /* Assets.xcassets */; };
 		E15E10CC1CAB434900A344BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E15E10CA1CAB434900A344BD /* LaunchScreen.storyboard */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E10200021CDBE0FA0078E0F6 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		E15E10BE1CAB434900A344BD /* LocationAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E15E10C11CAB434900A344BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E15E10C81CAB434900A344BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				E15E10D61CAB43E400A344BD /* Map.swift */,
+				E10200021CDBE0FA0078E0F6 /* Model.swift */,
 				E15E10E21CAC1E7C00A344BD /* Alarm.swift */,
 				E15E10E41CAC28EA00A344BD /* Alert.swift */,
 			);
@@ -111,8 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				E18754301CB1B06900DF0DEC /* MapViewController.swift */,
-				EF5995691CDBD11B00B5F471 /* ChooseSongViewController.swift */,
 				EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */,
+				EF5995691CDBD11B00B5F471 /* ChooseSongViewController.swift */,
 				EF59956B1CDBD17400B5F471 /* ChooseSongTableViewCell.swift */,
 			);
 			name = Controller;
@@ -190,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E10200031CDBE0FB0078E0F6 /* Model.swift in Sources */,
 				E15E10E51CAC28EA00A344BD /* Alert.swift in Sources */,
 				E18754311CB1B06900DF0DEC /* MapViewController.swift in Sources */,
 				E15E10D71CAB43E400A344BD /* Map.swift in Sources */,
