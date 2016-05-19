@@ -14,7 +14,7 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
     let model = Model.sharedInstance()
     
     ///The directories where sound files are located.
-    let rootSoundDirectories: [String] = ["/Library/Ringtones", "/System/Library/Audio/UISounds"]
+    let rootSoundDirectories: [String] = ["/Library/Ringtones", "/System/Library/Audio/UISounds/New"]
     
     ///Array to hold directories when we find them.
     var directories: [String] = []
@@ -125,7 +125,9 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
         let filePath = soundFiles[indexPath.row]
         print(filePath)
         
-        cell.songName.text = "\(fileName)"
+        var labelText = fileName.substringToIndex(fileName.endIndex.advancedBy(-4))
+        labelText = labelText.stringByReplacingOccurrencesOfString("_", withString: " ", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        cell.songName.text = "\(labelText)"
         return cell
     }
     

@@ -41,7 +41,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var selectedPin:MKPlacemark? = nil
     var currentAlarmQA: Alarm!
     
-    var navigationBar: UINavigationBar!
     var firstTime = true
     var raioAlarme: MKCircle?
     var pinAlarm = false
@@ -56,8 +55,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let movimentoDrag = UIPanGestureRecognizer()
     let tapGestureRecognizer = UITapGestureRecognizer()
     let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
-    
-    var recentAlarmList:[Alarm] = []
     
     
     override func viewDidAppear(animated: Bool)
