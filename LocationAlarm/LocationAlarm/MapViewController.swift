@@ -115,8 +115,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         viewSlider!.frame = viewS.bounds
         self.viewS.insertSubview(viewSlider!, atIndex: 0)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(MapViewController.chooseMusicAction(_:)))
-        musicLabel.addGestureRecognizer(tapGesture)
         
         UIDevice.currentDevice().setValue(UIInterfaceOrientation.Portrait.rawValue, forKey: "orientation")
     }
@@ -481,21 +479,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
-    func chooseMusicAction(sender: UITapGestureRecognizer)
-    {
-        //        self.prefersStatusBarHidden()
-        //
-        //        let mediaPicker = MPMediaPickerController(mediaTypes: .Music)
-        //        mediaPicker.delegate = self
-        //        mediaPicker.allowsPickingMultipleItems = false
-        //        mediaPicker.prefersStatusBarHidden()
-        //
-        //        presentViewController(mediaPicker, animated: true, completion: {UIApplication.sharedApplication().statusBarStyle = .Default})
+    
+    
+    @IBAction func chooseSoundAction(sender: AnyObject) {
         
         performSegueWithIdentifier("goToChooseSong", sender: self)
-        
+
         
     }
+    
+    
+    
     
     func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems  mediaItems:MPMediaItemCollection) -> Void
     {
