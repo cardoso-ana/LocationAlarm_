@@ -28,6 +28,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBOutlet weak var measureUnitButton: UIButton!
     @IBOutlet weak var soundChooserButton: UIButton!
     
+    @IBOutlet weak var tutorialLabel: UILabel!
     
     @IBOutlet weak var activeButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
@@ -121,6 +122,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         soundChooserButton.hidden = true
         measureUnitButton.hidden = true
         
+        // Mini tutorial escrito
+        self.radiusLabel.hidden = true
+        self.sliderRaio.hidden = true
+        
         
         UIDevice.currentDevice().setValue(UIInterfaceOrientation.Portrait.rawValue, forKey: "orientation")
     }
@@ -171,6 +176,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    func setaDisplaySemTutorial() {
+        
+        self.tutorialLabel.hidden = true
+        self.sliderRaio.hidden = false
+        self.radiusLabel.hidden = false
+    }
     
     
     //adiciona e remove anotacoes
@@ -178,6 +189,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         if alarmeAtivado == false
         {
+            setaDisplaySemTutorial()
             quickActionCheck = false
             let location = sender.locationInView(self.mapView)
             locationCoord = self.mapView.convertPoint(location, toCoordinateFromView: self.mapView)
@@ -342,6 +354,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.mapView.removeOverlays(self.mapView.overlays)
         self.mapView.removeAnnotations(self.mapView.annotations)
         self.mapView.addAnnotation(annotation)
+        
         
         print("::: Identifier do alarme da Quick Action: \(currentAlarmQA?.identifier)")
         
@@ -583,7 +596,7 @@ extension MapViewController: HandleMapSearch
         self.mapView.addAnnotation(annotation)
         
         pinAlarm = true
-        
+        setaDisplaySemTutorial()
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let region = MKCoordinateRegionMake(annotation.coordinate, span)
         self.mapView.setRegion(region, animated: true)

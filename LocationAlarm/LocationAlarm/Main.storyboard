@@ -135,15 +135,23 @@
                                     <action selector="setRegionToUserLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ac8-55-3db"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap on the map to set an alarm!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="60a-tO-1eZ">
+                                <rect key="frame" x="9" y="513" width="583" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="O7L-FA-kvn" firstAttribute="height" secondItem="72D-Ni-DTh" secondAttribute="height" id="0rk-vP-RoI"/>
                             <constraint firstItem="3oc-FI-U0l" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="1EN-Au-kIc"/>
                             <constraint firstItem="ek0-BC-yNo" firstAttribute="trailing" secondItem="TUu-mA-bf2" secondAttribute="trailing" id="8Lt-9Q-8Jc"/>
+                            <constraint firstItem="60a-tO-1eZ" firstAttribute="leading" secondItem="IaF-wf-88N" secondAttribute="leading" id="986-VI-fOT"/>
                             <constraint firstItem="Yt1-Ig-xDi" firstAttribute="centerY" secondItem="72D-Ni-DTh" secondAttribute="centerY" id="BDM-tH-KTe"/>
                             <constraint firstItem="GSC-Wt-dj8" firstAttribute="trailing" secondItem="TUu-mA-bf2" secondAttribute="trailing" id="ByL-jA-cw1"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Dnt-fV-key"/>
+                            <constraint firstItem="60a-tO-1eZ" firstAttribute="centerY" secondItem="ek0-BC-yNo" secondAttribute="centerY" id="Efv-fG-PZF"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="leading" secondItem="TUu-mA-bf2" secondAttribute="leading" id="Fh8-K4-Z4A"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="trailing" secondItem="TUu-mA-bf2" secondAttribute="trailing" id="G58-aN-n5b"/>
                             <constraint firstItem="GSC-Wt-dj8" firstAttribute="leading" secondItem="TUu-mA-bf2" secondAttribute="leading" id="JnZ-1x-5Dk"/>
@@ -157,6 +165,7 @@
                             <constraint firstItem="3oc-FI-U0l" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-16" id="YUy-bt-uyO"/>
                             <constraint firstItem="O7L-FA-kvn" firstAttribute="width" secondItem="72D-Ni-DTh" secondAttribute="width" id="cHr-6L-nHB"/>
                             <constraint firstItem="Yt1-Ig-xDi" firstAttribute="trailing" secondItem="pr5-wT-uGm" secondAttribute="trailing" id="eme-pJ-J1s"/>
+                            <constraint firstItem="60a-tO-1eZ" firstAttribute="trailing" secondItem="Yt1-Ig-xDi" secondAttribute="trailing" id="eqz-Lr-AnH"/>
                             <constraint firstItem="IaF-wf-88N" firstAttribute="leading" secondItem="72D-Ni-DTh" secondAttribute="leading" id="feI-3V-Iol"/>
                             <constraint firstItem="TUu-mA-bf2" firstAttribute="top" secondItem="ek0-BC-yNo" secondAttribute="bottom" id="gR3-Or-HPR"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="gyl-mV-3jY"/>
@@ -197,6 +206,7 @@
                         <outlet property="settingsButton" destination="72D-Ni-DTh" id="5P7-uh-GjF"/>
                         <outlet property="sliderRaio" destination="pr5-wT-uGm" id="mLb-Wt-r9l"/>
                         <outlet property="soundChooserButton" destination="O7L-FA-kvn" id="fXk-P1-u8S"/>
+                        <outlet property="tutorialLabel" destination="60a-tO-1eZ" id="TYX-xJ-77f"/>
                         <outlet property="userLocationButton" destination="Yt1-Ig-xDi" id="BpW-k3-azo"/>
                         <outlet property="viewS" destination="ek0-BC-yNo" id="ZMK-PW-wxx"/>
                         <segue destination="MS2-GQ-hY5" kind="show" identifier="goToChooseSong" id="62S-yL-L0z"/>
