@@ -26,17 +26,6 @@
                                     <outletCollection property="gestureRecognizers" destination="1E6-FH-hxC" appends="YES" id="Y4B-Uc-ITp"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUu-mA-bf2">
-                                <rect key="frame" x="0.0" y="546" width="600" height="54"/>
-                                <color key="backgroundColor" red="0.14117647058823529" green="0.20000000000000001" blue="0.29019607843137257" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="35"/>
-                                <state key="normal">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="ativarAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tjp-sA-i7e"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GSC-Wt-dj8">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="205"/>
                                 <constraints>
@@ -123,6 +112,17 @@
                                 </variation>
                                 <connections>
                                     <action selector="setRegionToUserLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ac8-55-3db"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUu-mA-bf2">
+                                <rect key="frame" x="0.0" y="546" width="600" height="54"/>
+                                <color key="backgroundColor" red="0.14117647058823529" green="0.20000000000000001" blue="0.29019607843137257" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="35"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="ativarAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tjp-sA-i7e"/>
                                 </connections>
                             </button>
                         </subviews>

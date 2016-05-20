@@ -24,8 +24,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet weak var viewS: UIView!
     @IBOutlet weak var userLocationButton: UIButton!
-    @IBOutlet weak var musicLabel: UILabel!
-    @IBOutlet weak var musicView: UIView!
     @IBOutlet weak var activeButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var labelDistancia: UILabel!
@@ -33,6 +31,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBOutlet weak var radiusLabel: UILabel!
     @IBOutlet weak var sliderRaio: UISlider!
     @IBOutlet weak var navBar: UIView!
+    
     var viewSlider: UIVisualEffectView? = nil
     var step: Float = 10
     var mediaItem: MPMediaItem?
@@ -51,8 +50,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var alarmeAtivado = false
     var locationManager = CLLocationManager()
     var locationCoord: CLLocationCoordinate2D?
-    
-    let movimentoDrag = UIPanGestureRecognizer()
+
     let tapGestureRecognizer = UITapGestureRecognizer()
     let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
     
@@ -241,7 +239,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 alarme.removeAtIndex(4)
             }
             
-            if sender.titleLabel?.text == "ACTIVATE"
+            if !alarmeAtivado
             {
                 
                 let lugarDois = CLLocation(latitude: (raioAlarme?.coordinate.latitude)!, longitude: (raioAlarme?.coordinate.longitude)!)
@@ -251,12 +249,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
                 if distanciaParaRegiao > 0
                 {
-                    
-                    if musicLabel.text == "Choose a song"
-                    {
-                        musicLabel.text = "No song chosen"
-                    }
-                    
+ 
                     let uniqueIdentifier = NSUUID().UUIDString
                     
                     print(":::::::::UNIQUE IDENTIFIER::::::: \(uniqueIdentifier)")
@@ -288,14 +281,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     
                     self.navigationController?.setNavigationBarHidden(true, animated: true)
                     
-                    imageDim.image = UIImage(named: "fundoDim")
-                    self.mapView.bringSubviewToFront(imageDim)
-                    imageDim.bringSubviewToFront(labelDistancia)
-                    sliderRaio.hidden = true
-                    viewSlider!.hidden = false
-                    musicLabel.userInteractionEnabled = false
-                    activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
-                    activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
+                    changeDisplayActivated()
                 }
                 else
                 {
@@ -315,16 +301,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 }
                 
                 alarmeAtivado = false
-                sliderRaio.hidden = false
-                viewSlider!.hidden = false
-                musicLabel.text = "Choose a song"
-                musicLabel.userInteractionEnabled = true
-                labelDistancia.text = ""
-                self.navigationController?.setNavigationBarHidden(false, animated: true)
-                imageDim.image = nil
-                
-                activeButton.setTitle("ACTIVATE", forState: UIControlState.Normal)
-                activeButton.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
+                changeDisplayDeactivated()
             }
         }
     }
@@ -357,11 +334,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         print("::: Identifier do alarme da Quick Action: \(currentAlarmQA?.identifier)")
         
-        if musicLabel.text == "Choose a song"
-        {
-            musicLabel.text = "No song chosen"
-        }
-        
         let lugarDois = CLLocation(latitude: (currentAlarmQA!.coordinate.latitude), longitude: (currentAlarmQA!.coordinate.longitude))
         
         let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
@@ -376,11 +348,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             startMonitoringGeotification(currentAlarmQA!)
             alarmeAtivado = true
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
-            
-            imageDim.image = UIImage(named: "fundoDim")
-            self.mapView.bringSubviewToFront(imageDim)
-            imageDim.bringSubviewToFront(labelDistancia)
+            changeDisplayActivated()
             
             if distanciaParaRegiao < 1000
             {
@@ -391,12 +359,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 distanciaParaRegiao /= 1000
                 labelDistancia.text = "\(distanciaParaRegiao.roundToPlaces(2))km"
             }
-            
-            sliderRaio.hidden = true
-            viewSlider!.hidden = false
-            musicLabel.userInteractionEnabled = false
-            activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
-            activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
             
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
             let region = MKCoordinateRegionMake(annotation.coordinate, span)
@@ -475,49 +437,68 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
+    func changeDisplayActivated()
+    {
+        imageDim.image = UIImage(named: "fundoDim")
+        self.mapView.bringSubviewToFront(imageDim)
+        imageDim.bringSubviewToFront(labelDistancia)
+        sliderRaio.hidden = true
+        viewSlider!.hidden = false
+        
+        activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
+        activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
+    }
     
+    func changeDisplayDeactivated()
+    {
+        sliderRaio.hidden = false
+        viewSlider!.hidden = false
+        labelDistancia.text = ""
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        imageDim.image = nil
+        
+        activeButton.setTitle("ACTIVATE", forState: UIControlState.Normal)
+        activeButton.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
+    }
     
-    
-    @IBAction func chooseSoundAction(sender: AnyObject) {
+    @IBAction func chooseSoundAction(sender: AnyObject)
+    {
         
         performSegueWithIdentifier("goToChooseSong", sender: self)
 
-        
     }
     
     
-    
-    
-    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems  mediaItems:MPMediaItemCollection) -> Void
-    {
-        let aMediaItem = mediaItems.items[0] as MPMediaItem
-        self.mediaItem = aMediaItem;
-        if mediaItem?.title != nil && mediaItem?.artist != nil
-        {
-            musicLabel.text = "\(mediaItem!.artist!) - \(mediaItem!.title!)"
-            print("mediaItem.title = \(mediaItem!.title)")
-        }
-        else
-        {
-            if mediaItem?.artist == nil
-            {
-                musicLabel.text = "\(mediaItem!.title!)"
-            }
-            
-            if mediaItem?.title == nil
-            {
-                musicLabel.text = "Unknown"
-            }
-        }
-        
-        musicLabel.textColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
-        self.dismissViewControllerAnimated(true, completion: {UIApplication.sharedApplication().statusBarStyle = .LightContent});
-    }
-    
-    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController)
-    {
-        self.dismissViewControllerAnimated(true, completion: {UIApplication.sharedApplication().statusBarStyle = .LightContent});
-    }
+//    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems  mediaItems:MPMediaItemCollection) -> Void
+//    {
+//        let aMediaItem = mediaItems.items[0] as MPMediaItem
+//        self.mediaItem = aMediaItem;
+//        if mediaItem?.title != nil && mediaItem?.artist != nil
+//        {
+//            musicLabel.text = "\(mediaItem!.artist!) - \(mediaItem!.title!)"
+//            print("mediaItem.title = \(mediaItem!.title)")
+//        }
+//        else
+//        {
+//            if mediaItem?.artist == nil
+//            {
+//                musicLabel.text = "\(mediaItem!.title!)"
+//            }
+//            
+//            if mediaItem?.title == nil
+//            {
+//                musicLabel.text = "Unknown"
+//            }
+//        }
+//        
+//        musicLabel.textColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
+//        self.dismissViewControllerAnimated(true, completion: {UIApplication.sharedApplication().statusBarStyle = .LightContent});
+//    }
+//    
+//    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController)
+//    {
+//        self.dismissViewControllerAnimated(true, completion: {UIApplication.sharedApplication().statusBarStyle = .LightContent});
+//    }
     
     func playMedia()
     {

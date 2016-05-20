@@ -89,27 +89,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             notification.alertBody = region.identifier
             notification.soundName = "Default";
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
-            ((window?.rootViewController?.childViewControllers.first) as! MapViewController).playMedia()
         }
         
         locationManager.stopMonitoringForRegion(region)
         let viewController = window?.rootViewController?.childViewControllers.first as! MapViewController
-        viewController.alarmeAtivado = false
-        viewController.labelDistancia.text = ""
-        viewController.self.navigationController?.setNavigationBarHidden(false, animated: true)
-        viewController.imageDim.image = nil
-        viewController.sliderRaio.hidden = false
-        viewController.sliderRaio.userInteractionEnabled = true
-        viewController.viewSlider!.hidden = false
-        viewController.musicLabel.userInteractionEnabled = true
-        
-        if viewController.musicLabel.text == "No song chosen"
-        {
-            viewController.musicLabel.text = "Choose a song"
-        }
-        
-        viewController.activeButton.setTitle("ATIVAR", forState: UIControlState.Normal)
-        viewController.activeButton.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
+        viewController.changeDisplayDeactivated()
         
     }
     
