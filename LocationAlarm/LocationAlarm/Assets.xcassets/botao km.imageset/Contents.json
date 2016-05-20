@@ -2,12 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "location.png",
+      "filename" : "botao km.pdf",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "location@2x.png",
       "scale" : "2x"
     },
     {

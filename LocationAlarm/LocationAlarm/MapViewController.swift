@@ -24,6 +24,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet weak var viewS: UIView!
     @IBOutlet weak var userLocationButton: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var measureUnitButton: UIButton!
+    @IBOutlet weak var soundChooserButton: UIButton!
+    
+    
     @IBOutlet weak var activeButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var labelDistancia: UILabel!
@@ -50,9 +55,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var alarmeAtivado = false
     var locationManager = CLLocationManager()
     var locationCoord: CLLocationCoordinate2D?
-
+    
     let tapGestureRecognizer = UITapGestureRecognizer()
     let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
+    
+    
     
     
     override func viewDidAppear(animated: Bool)
@@ -110,6 +117,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         viewSlider!.frame = viewS.bounds
         self.viewS.insertSubview(viewSlider!, atIndex: 0)
         
+        //Esconde botoes de som e conversao de unidade de medidas
+        soundChooserButton.hidden = true
+        measureUnitButton.hidden = true
+        
         
         UIDevice.currentDevice().setValue(UIInterfaceOrientation.Portrait.rawValue, forKey: "orientation")
     }
@@ -153,14 +164,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         if locationManager.location != nil{
             
-                self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!),    animated: true)
+            self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!),    animated: true)
             
-                mapView.setUserTrackingMode(MKUserTrackingMode.FollowWithHeading, animated: true)
+            mapView.setUserTrackingMode(MKUserTrackingMode.FollowWithHeading, animated: true)
         }
         
     }
     
-
+    
     
     //adiciona e remove anotacoes
     @IBAction func addPin(sender: AnyObject)
@@ -249,7 +260,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
                 if distanciaParaRegiao > 0
                 {
- 
+                    
                     let uniqueIdentifier = NSUUID().UUIDString
                     
                     print(":::::::::UNIQUE IDENTIFIER::::::: \(uniqueIdentifier)")
@@ -461,44 +472,72 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         activeButton.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
     }
     
-    @IBAction func chooseSoundAction(sender: AnyObject)
+    @IBAction func chooseSoundAction(sender: AnyObject) //tem que mudar o nome dessa action
     {
+        soundChooserButton.hidden = false
+        measureUnitButton.hidden = false
         
-        performSegueWithIdentifier("goToChooseSong", sender: self)
-
+        UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseInOut, animations: {
+            
+            if self.soundChooserButton.center.x == self.measureUnitButton.center.x{
+                
+                self.soundChooserButton.center.x += 50
+                self.measureUnitButton.center.x += 100
+                
+            } else{
+                
+                self.soundChooserButton.center.x -= 50
+                self.measureUnitButton.center.x -= 100
+                
+            }
+            
+            }, completion: { _ in
+            
+                if self.soundChooserButton.center.x == self.measureUnitButton.center.x {
+                    self.soundChooserButton.hidden = true
+                    self.measureUnitButton.hidden = true
+                }
+            })
     }
     
     
-//    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems  mediaItems:MPMediaItemCollection) -> Void
-//    {
-//        let aMediaItem = mediaItems.items[0] as MPMediaItem
-//        self.mediaItem = aMediaItem;
-//        if mediaItem?.title != nil && mediaItem?.artist != nil
-//        {
-//            musicLabel.text = "\(mediaItem!.artist!) - \(mediaItem!.title!)"
-//            print("mediaItem.title = \(mediaItem!.title)")
-//        }
-//        else
-//        {
-//            if mediaItem?.artist == nil
-//            {
-//                musicLabel.text = "\(mediaItem!.title!)"
-//            }
-//            
-//            if mediaItem?.title == nil
-//            {
-//                musicLabel.text = "Unknown"
-//            }
-//        }
-//        
-//        musicLabel.textColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
-//        self.dismissViewControllerAnimated(true, completion: {UIApplication.sharedApplication().statusBarStyle = .LightContent});
-//    }
-//    
-//    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController)
-//    {
-//        self.dismissViewControllerAnimated(true, completion: {UIApplication.sharedApplication().statusBarStyle = .LightContent});
-//    }
+    @IBAction func chooseSound(sender: AnyObject) {
+        
+        performSegueWithIdentifier("goToChooseSong", sender: self)
+        
+    }
+    
+    
+    //    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems  mediaItems:MPMediaItemCollection) -> Void
+    //    {
+    //        let aMediaItem = mediaItems.items[0] as MPMediaItem
+    //        self.mediaItem = aMediaItem;
+    //        if mediaItem?.title != nil && mediaItem?.artist != nil
+    //        {
+    //            musicLabel.text = "\(mediaItem!.artist!) - \(mediaItem!.title!)"
+    //            print("mediaItem.title = \(mediaItem!.title)")
+    //        }
+    //        else
+    //        {
+    //            if mediaItem?.artist == nil
+    //            {
+    //                musicLabel.text = "\(mediaItem!.title!)"
+    //            }
+    //
+    //            if mediaItem?.title == nil
+    //            {
+    //                musicLabel.text = "Unknown"
+    //            }
+    //        }
+    //
+    //        musicLabel.textColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
+    //        self.dismissViewControllerAnimated(true, completion: {UIApplication.sharedApplication().statusBarStyle = .LightContent});
+    //    }
+    //
+    //    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController)
+    //    {
+    //        self.dismissViewControllerAnimated(true, completion: {UIApplication.sharedApplication().statusBarStyle = .LightContent});
+    //    }
     
     func playMedia()
     {
