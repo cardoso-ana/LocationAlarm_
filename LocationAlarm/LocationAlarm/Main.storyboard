@@ -85,7 +85,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O7L-FA-kvn">
                                 <rect key="frame" x="9" y="442" width="56" height="56"/>
-                                <state key="normal" image="botao sons"/>
+                                <state key="normal" image="botao music"/>
                                 <connections>
                                     <action selector="chooseSound:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZU1-1B-xaa"/>
                                 </connections>
@@ -226,10 +226,10 @@
             </objects>
             <point key="canvasLocation" x="1000" y="337"/>
         </scene>
-        <!--Choose Song View Controller-->
+        <!--Choose a sound-->
         <scene sceneID="zMV-Xt-aQ6">
             <objects>
-                <viewController id="MS2-GQ-hY5" customClass="ChooseSongViewController" customModule="LocationAlarm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Choose a sound" id="MS2-GQ-hY5" customClass="ChooseSongViewController" customModule="LocationAlarm" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kdF-Cm-Quu"/>
                         <viewControllerLayoutGuide type="bottom" id="900-yA-1hE"/>
@@ -353,8 +353,8 @@
     </scenes>
     <resources>
         <image name="botao mi" width="38" height="38"/>
+        <image name="botao music" width="38" height="38"/>
         <image name="botao setting" width="36" height="36"/>
-        <image name="botao sons" width="38" height="38"/>
         <image name="botaoUserLocation" width="36" height="36"/>
     </resources>
 </document>
