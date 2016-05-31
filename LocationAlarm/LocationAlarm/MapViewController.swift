@@ -538,6 +538,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    @IBAction func chooseDistanceUnit(sender: AnyObject) {
+        
+        
+        
+    }
+    
+    
     
     //    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems  mediaItems:MPMediaItemCollection) -> Void
     //    {

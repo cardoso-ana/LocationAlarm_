@@ -103,6 +103,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IaF-wf-88N">
                                 <rect key="frame" x="8" y="456" width="38" height="38"/>
                                 <state key="normal" image="botao mi"/>
+                                <connections>
+                                    <action selector="chooseDistanceUnit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZHm-Ju-UU3"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="72D-Ni-DTh">
                                 <rect key="frame" x="8" y="456" width="38" height="38"/>
@@ -347,6 +350,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kks-ZI-wPh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="245" y="337"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="xPX-7g-rbd">
+            <objects>
+                <viewController id="t4Y-5o-QIn" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="igE-Fr-N6o"/>
+                        <viewControllerLayoutGuide type="bottom" id="oZI-9F-j4e"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vqW-64-6iM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9a-8Z-rW5">
+                                <rect key="frame" x="534" y="550" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Next"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rvg-5V-d9b">
+                                <rect key="frame" x="20" y="550" width="46" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Skip"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CmF-1I-KqA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="245" y="1080"/>
         </scene>
     </scenes>
     <resources>
