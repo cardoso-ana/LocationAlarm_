@@ -587,6 +587,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    
+    @IBAction func testaTutorial(sender: AnyObject) {
+    }
+    
     @IBAction func chooseDistanceUnit(sender: AnyObject)
     {
         if distanceInMeters
