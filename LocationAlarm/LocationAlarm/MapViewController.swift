@@ -55,6 +55,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var resultSearchController:UISearchController? = nil
     let map = Map()
     var alarmeAtivado = false
+    var distanceInMeters = true
     var locationManager = CLLocationManager()
     var locationCoord: CLLocationCoordinate2D?
     
@@ -369,6 +370,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
         var distanciaParaRegiao = distanciaParaCentro! - currentAlarmQA!.radius
         
+        
         if distanciaParaRegiao > 0
         {
             
@@ -380,14 +382,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             alarmeAtivado = true
             changeDisplayActivated()
             
-            if distanciaParaRegiao < 1000
+            if distanceInMeters
             {
-                labelDistancia.text = "distance of \(Int(distanciaParaRegiao))m"
+                if distanciaParaRegiao < 1000
+                {
+                    labelDistancia.text = "distance of \(Int(distanciaParaRegiao))m"
+                }
+                else
+                {
+                    distanciaParaRegiao /= 1000
+                    labelDistancia.text = "distance of \(distanciaParaRegiao.roundToPlaces(2))km"
+                }
             }
             else
             {
-                distanciaParaRegiao /= 1000
-                labelDistancia.text = "distance of \(distanciaParaRegiao.roundToPlaces(2))km"
+                distanciaParaRegiao = distanciaParaRegiao / 1.609344
+                if distanciaParaRegiao < 0.1
+                {
+                    distanciaParaRegiao = distanciaParaRegiao * 5280
+                    labelDistancia.text = "distance of \(Int(distanciaParaRegiao))ft"
+                }
+                else
+                {
+                    labelDistancia.text = "distance of \(distanciaParaRegiao.roundToPlaces(1))mi."
+                }
             }
             
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
@@ -398,6 +416,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         {
             showSimpleAlertWithTitle("", message: "You are already \(Int(currentAlarmQA.radius))m away from your destination!", viewController: self)
         }
+    
     }
     
     
