@@ -59,7 +59,7 @@
                                         <color key="textColor" red="0.14117647058823529" green="0.20000000000000001" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="highlightedColor" red="0.14117647058823529" green="0.20000000000000001" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="500" minValue="50" maxValue="5000" translatesAutoresizingMaskIntoConstraints="NO" id="pr5-wT-uGm">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="50" maxValue="5000" translatesAutoresizingMaskIntoConstraints="NO" id="pr5-wT-uGm">
                                         <rect key="frame" x="68" y="7" width="526" height="31"/>
                                         <color key="tintColor" red="0.14117647059999999" green="0.20000000000000001" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -102,7 +102,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IaF-wf-88N">
                                 <rect key="frame" x="8" y="456" width="38" height="38"/>
-                                <state key="normal" image="botao mi"/>
+                                <state key="normal" image="botaoMi"/>
                                 <connections>
                                     <action selector="chooseDistanceUnit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZHm-Ju-UU3"/>
                                 </connections>
@@ -384,8 +384,8 @@
     </scenes>
     <resources>
         <image name="botao location now" width="36" height="36"/>
-        <image name="botao mi" width="38" height="38"/>
         <image name="botao music" width="38" height="38"/>
         <image name="botao setting" width="36" height="36"/>
+        <image name="botaoMi" width="38" height="38"/>
     </resources>
 </document>

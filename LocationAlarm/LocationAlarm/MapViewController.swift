@@ -40,7 +40,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     var viewSlider: UIVisualEffectView? = nil
-    var step: Float = 10
+    var step: Float = 50
+    var distanciaRaio:CLLocationDistance = 500
     var mediaItem: MPMediaItem?
     var musicPlayer = MPMusicPlayerController.applicationMusicPlayer()
     var quickActionCheck = false
@@ -51,11 +52,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var raioAlarme: MKCircle?
     var pinAlarm = false
     var alarme: [Alarm] = []
-    var distanciaRaio:CLLocationDistance = 500
     var resultSearchController:UISearchController? = nil
     let map = Map()
     var alarmeAtivado = false
-    var distanceInMeters = true
+    var distanceInMeters = false
     var locationManager = CLLocationManager()
     var locationCoord: CLLocationCoordinate2D?
     
@@ -119,6 +119,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         viewSlider = UIVisualEffectView(effect: blur)
         viewSlider!.frame = viewS.bounds
         self.viewS.insertSubview(viewSlider!, atIndex: 0)
+        setSlider()
         
         //Esconde botoes de som e conversao de unidade de medidas
         soundChooserButton.hidden = true
@@ -159,17 +160,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             let lugarDois = CLLocation(latitude: (raioAlarme?.coordinate.latitude)!, longitude: (raioAlarme?.coordinate.longitude)!)
             let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
-            var distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
+            let distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
             
-            if distanciaParaRegiao < 1000
-            {
-                labelDistancia.text = "\(Int(distanciaParaRegiao))m"
-            }
-            else
-            {
-                distanciaParaRegiao /= 1000
-                labelDistancia.text = "\(distanciaParaRegiao.roundToPlaces(2))km"
-            }
+            labelDistancia.text = formataDistânciaParaRegião(distanciaParaRegiao)
         }
     }
     
@@ -274,7 +267,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
                 let lugarDois = CLLocation(latitude: (raioAlarme?.coordinate.latitude)!, longitude: (raioAlarme?.coordinate.longitude)!)
                 let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
-                var distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
+                let distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
                 
                 
                 if distanciaParaRegiao > 0
@@ -299,15 +292,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     startMonitoringGeotification(alarmeAtual)
                     alarmeAtivado = true
                     
-                    if distanciaParaRegiao < 1000
-                    {
-                        labelDistancia.text = "\(Int(distanciaParaRegiao))m"
-                    }
-                    else
-                    {
-                        distanciaParaRegiao /= 1000
-                        labelDistancia.text = "\(distanciaParaRegiao.roundToPlaces(2))km"
-                    }
+                    labelDistancia.text = formataDistânciaParaRegião(distanciaParaRegiao)
                     
                     self.navigationController?.setNavigationBarHidden(true, animated: true)
                     
@@ -315,7 +300,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 }
                 else
                 {
-                    showSimpleAlertWithTitle("", message: "You are already \(Int(raioAlarme!.radius))m away from your destination!", viewController: self)
+                    showSimpleAlertWithTitle("", message: "You are already \(MeterToMile(raioAlarme!.radius)) mi away from your destination!", viewController: self)
                 }
                 
             }
@@ -368,7 +353,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let lugarDois = CLLocation(latitude: (currentAlarmQA!.coordinate.latitude), longitude: (currentAlarmQA!.coordinate.longitude))
         
         let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
-        var distanciaParaRegiao = distanciaParaCentro! - currentAlarmQA!.radius
+        let distanciaParaRegiao = distanciaParaCentro! - currentAlarmQA!.radius
         
         
         if distanciaParaRegiao > 0
@@ -381,32 +366,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             startMonitoringGeotification(currentAlarmQA!)
             alarmeAtivado = true
             changeDisplayActivated()
-            
-            if distanceInMeters
-            {
-                if distanciaParaRegiao < 1000
-                {
-                    labelDistancia.text = "distance of \(Int(distanciaParaRegiao))m"
-                }
-                else
-                {
-                    distanciaParaRegiao /= 1000
-                    labelDistancia.text = "distance of \(distanciaParaRegiao.roundToPlaces(2))km"
-                }
-            }
-            else
-            {
-                distanciaParaRegiao = distanciaParaRegiao / 1.609344
-                if distanciaParaRegiao < 0.1
-                {
-                    distanciaParaRegiao = distanciaParaRegiao * 5280
-                    labelDistancia.text = "distance of \(Int(distanciaParaRegiao))ft"
-                }
-                else
-                {
-                    labelDistancia.text = "distance of \(distanciaParaRegiao.roundToPlaces(1))mi."
-                }
-            }
+ 
+            labelDistancia.text = formataDistânciaParaRegião(distanciaParaRegiao)
             
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
             let region = MKCoordinateRegionMake(annotation.coordinate, span)
@@ -414,7 +375,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         else
         {
-            showSimpleAlertWithTitle("", message: "You are already \(Int(currentAlarmQA.radius))m away from your destination!", viewController: self)
+            showSimpleAlertWithTitle("", message: "You are already \(MeterToMile(currentAlarmQA.radius)) mi away from your destination!", viewController: self)
         }
     
     }
@@ -458,25 +419,63 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.stopMonitoringForRegion(geotification.alarmeRegion!)
     }
     
-    @IBAction func sliderRaioChanged(sender: UISlider)
+    func setSlider()
     {
-        if sender.value < 1000
+        if distanceInMeters
         {
-            step = 50
-            let roundedValue = round(sender.value / step) * step
-            sender.value = roundedValue
-            radiusLabel.text = "\(Int(sender.value))m"
+            sliderRaio.minimumValue = 50
+            sliderRaio.maximumValue = 5000
+            sliderRaio.value = 500
+            radiusLabel.text = "500 m"
         }
         else
         {
-            step = 100
-            let roundedValue = round(sender.value / step) * step
-            sender.value = roundedValue
-            radiusLabel.text = "\((sender.value) / 1000)km"
+            sliderRaio.minimumValue = 528
+            sliderRaio.maximumValue = 15840
+            sliderRaio.value = 1584
+            radiusLabel.text = "0.3 mi"
+        }
+    }
+    
+    @IBAction func sliderRaioChanged(sender: UISlider)
+    {
+        if distanceInMeters
+        {
+            if sender.value < 1000
+            {
+                step = 50
+                let roundedValue = round(sender.value / step) * step
+                sender.value = roundedValue
+                radiusLabel.text = "\(Int(sender.value)) m"
+            }
+            else
+            {
+                step = 100
+                let roundedValue = round(sender.value / step) * step
+                sender.value = roundedValue
+                radiusLabel.text = "\((sender.value) / 1000) km"
             
+            }
+        }
+        else
+        {
+            if sender.value > 5280
+            {
+                step = 1056
+                let roundedValue = round(sender.value / step) * step
+                sender.value = roundedValue
+                radiusLabel.text = "\(Int(sender.value / 5280)) mi"
+            }
+            if sender.value > 528
+            {
+                step = 528
+                let roundedValue = round(sender.value / step) * step
+                sender.value = roundedValue
+                radiusLabel.text = "\(sender.value / 5280) mi"
+            }
         }
         
-        distanciaRaio = Double(sender.value)
+        distanciaRaio = Double(sender.value * 0.3048)
         if pinAlarm
         {
             self.mapView.removeOverlays(self.mapView.overlays)
@@ -522,6 +521,36 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         activeButton.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
     }
     
+    func formataDistânciaParaRegião(distancia: Double) -> String
+    {
+        var dist = distancia
+        if distanceInMeters
+        {
+            if dist < 1000
+            {
+                return "\(Int(dist)) m"
+            }
+            else
+            {
+                dist /= 1000
+                return "\(dist.roundToPlaces(2)) km"
+            }
+        }
+        else
+        {
+            dist = dist / 1609.344
+            if dist < 0.1
+            {
+                dist = dist * 5280
+                return "\(Int(dist)) ft"
+            }
+            else
+            {
+                return "\(dist.roundToPlaces(1)) mi"
+            }
+        }
+    }
+    
     @IBAction func chooseSoundAction(sender: AnyObject) //tem que mudar o nome dessa action
     {
         soundChooserButton.hidden = false
@@ -551,19 +580,34 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
-    @IBAction func chooseSound(sender: AnyObject) {
+    @IBAction func chooseSound(sender: AnyObject)
+    {
         
         performSegueWithIdentifier("goToChooseSong", sender: self)
         
     }
     
-    @IBAction func chooseDistanceUnit(sender: AnyObject) {
-        
-        
+    @IBAction func chooseDistanceUnit(sender: AnyObject)
+    {
+        if distanceInMeters
+        {
+            //measureUnitButton.imageView?.image = UIImage(named: "botaoKm")
+            distanceInMeters = false
+            //TODO: mudar imagem p/ mi.
+        }
+        else
+        {
+            //measureUnitButton.imageView?.image = UIImage(named: "botaoMi")
+            distanceInMeters = true
+            //TODO: mudar imagem p/ km
+        }
         
     }
     
-    
+    func MeterToMile (distance: Double) -> Double
+    {
+        return (distance / 1609.344).roundToPlaces(1)
+    }
     
     //    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems  mediaItems:MPMediaItemCollection) -> Void
     //    {
