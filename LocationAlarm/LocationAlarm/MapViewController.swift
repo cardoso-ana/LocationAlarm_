@@ -30,13 +30,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet weak var tutorialLabel: UILabel!
     
+    @IBOutlet weak var fundoDim: UIView!
     @IBOutlet weak var activeButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var labelDistancia: UILabel!
-    @IBOutlet weak var imageDim: UIImageView!
     @IBOutlet weak var radiusLabel: UILabel!
     @IBOutlet weak var sliderRaio: UISlider!
     @IBOutlet weak var navBar: UIView!
+    
     
     var viewSlider: UIVisualEffectView? = nil
     var step: Float = 10
@@ -126,6 +127,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.radiusLabel.hidden = true
         self.sliderRaio.hidden = true
         
+        //Faz o fundo com blur de quando alarme tá ativado
+        let blur2 = UIBlurEffect(style: .Light)
+        let fundoBlur = UIVisualEffectView(effect: blur2)
+        fundoBlur.frame = fundoDim.bounds
+        self.fundoDim.insertSubview(fundoBlur, atIndex: 0)
+        fundoDim.hidden = true
         
         UIDevice.currentDevice().setValue(UIInterfaceOrientation.Portrait.rawValue, forKey: "orientation")
     }
@@ -171,7 +178,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!),    animated: true)
             
-            mapView.setUserTrackingMode(MKUserTrackingMode.FollowWithHeading, animated: true)
         }
         
     }
@@ -376,12 +382,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             if distanciaParaRegiao < 1000
             {
-                labelDistancia.text = "\(Int(distanciaParaRegiao))m"
+                labelDistancia.text = "distance of \(Int(distanciaParaRegiao))m"
             }
             else
             {
                 distanciaParaRegiao /= 1000
-                labelDistancia.text = "\(distanciaParaRegiao.roundToPlaces(2))km"
+                labelDistancia.text = "distance of \(distanciaParaRegiao.roundToPlaces(2))km"
             }
             
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
@@ -463,11 +469,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func changeDisplayActivated()
     {
-        imageDim.image = UIImage(named: "fundoDim")
-        self.mapView.bringSubviewToFront(imageDim)
-        imageDim.bringSubviewToFront(labelDistancia)
+        
+        fundoDim.hidden = false
         sliderRaio.hidden = true
         viewSlider!.hidden = false
+        settingsButton.hidden = true
+        measureUnitButton.hidden = true
+        soundChooserButton.hidden = true
+        
+        
+        radiusLabel.hidden = true
+        tutorialLabel.text = "radius of \(radiusLabel.text!)"
+        tutorialLabel.hidden = false
         
         activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
         activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
@@ -475,11 +488,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func changeDisplayDeactivated()
     {
+        fundoDim.hidden = true
         sliderRaio.hidden = false
         viewSlider!.hidden = false
+        settingsButton.hidden = false
+        tutorialLabel.hidden = true
+        radiusLabel.hidden = false
+        
         labelDistancia.text = ""
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        imageDim.image = nil
+        
         
         activeButton.setTitle("ACTIVATE", forState: UIControlState.Normal)
         activeButton.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
