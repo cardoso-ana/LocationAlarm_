@@ -589,7 +589,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     @IBAction func testaTutorial(sender: AnyObject) {
+        
+        performSegueWithIdentifier("goToTutorial", sender: self)
+        
     }
+    
     
     @IBAction func chooseDistanceUnit(sender: AnyObject)
     {

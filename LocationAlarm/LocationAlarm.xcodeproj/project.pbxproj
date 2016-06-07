@@ -22,6 +22,10 @@
 		EF155CFF1CAB5C4800DD6437 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */; };
 		EF59956A1CDBD11B00B5F471 /* ChooseSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5995691CDBD11B00B5F471 /* ChooseSongViewController.swift */; };
 		EF59956C1CDBD17400B5F471 /* ChooseSongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59956B1CDBD17400B5F471 /* ChooseSongTableViewCell.swift */; };
+		EFF1023A1D06F6FE009C0858 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF102391D06F6FE009C0858 /* TutorialViewController.swift */; };
+		EFF1023C1D06F71C009C0858 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF1023B1D06F71C009C0858 /* ContentViewController.swift */; };
+		EFF103911D071152009C0858 /* video1PertoTry.mov in Resources */ = {isa = PBXBuildFile; fileRef = EFF103901D071152009C0858 /* video1PertoTry.mov */; };
+		EFF103931D07115D009C0858 /* video2PertoTry.mov in Resources */ = {isa = PBXBuildFile; fileRef = EFF103921D07115D009C0858 /* video2PertoTry.mov */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +46,10 @@
 		EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		EF5995691CDBD11B00B5F471 /* ChooseSongViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseSongViewController.swift; sourceTree = "<group>"; };
 		EF59956B1CDBD17400B5F471 /* ChooseSongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseSongTableViewCell.swift; sourceTree = "<group>"; };
+		EFF102391D06F6FE009C0858 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		EFF1023B1D06F71C009C0858 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		EFF103901D071152009C0858 /* video1PertoTry.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = video1PertoTry.mov; sourceTree = "<group>"; };
+		EFF103921D07115D009C0858 /* video2PertoTry.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = video2PertoTry.mov; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +88,8 @@
 		E15E10C01CAB434900A344BD /* LocationAlarm */ = {
 			isa = PBXGroup;
 			children = (
+				EFF103901D071152009C0858 /* video1PertoTry.mov */,
+				EFF103921D07115D009C0858 /* video2PertoTry.mov */,
 				E15E10C11CAB434900A344BD /* AppDelegate.swift */,
 				E15E10D31CAB435D00A344BD /* Model */,
 				E15E10D51CAB437700A344BD /* Controller */,
@@ -116,6 +126,8 @@
 				E18754301CB1B06900DF0DEC /* MapViewController.swift */,
 				EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */,
 				EF5995691CDBD11B00B5F471 /* ChooseSongViewController.swift */,
+				EFF102391D06F6FE009C0858 /* TutorialViewController.swift */,
+				EFF1023B1D06F71C009C0858 /* ContentViewController.swift */,
 				EF59956B1CDBD17400B5F471 /* ChooseSongTableViewCell.swift */,
 			);
 			name = Controller;
@@ -181,8 +193,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E18754331CB1B08700DF0DEC /* Main.storyboard in Resources */,
+				EFF103931D07115D009C0858 /* video2PertoTry.mov in Resources */,
 				E15E10CC1CAB434900A344BD /* LaunchScreen.storyboard in Resources */,
 				E15E10C91CAB434900A344BD /* Assets.xcassets in Resources */,
+				EFF103911D071152009C0858 /* video1PertoTry.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,11 +209,13 @@
 			files = (
 				E10200031CDBE0FB0078E0F6 /* Model.swift in Sources */,
 				E15E10E51CAC28EA00A344BD /* Alert.swift in Sources */,
+				EFF1023A1D06F6FE009C0858 /* TutorialViewController.swift in Sources */,
 				E18754311CB1B06900DF0DEC /* MapViewController.swift in Sources */,
 				E15E10D71CAB43E400A344BD /* Map.swift in Sources */,
 				EF59956C1CDBD17400B5F471 /* ChooseSongTableViewCell.swift in Sources */,
 				E15E10E31CAC1E7C00A344BD /* Alarm.swift in Sources */,
 				E15E10C21CAB434900A344BD /* AppDelegate.swift in Sources */,
+				EFF1023C1D06F71C009C0858 /* ContentViewController.swift in Sources */,
 				EF59956A1CDBD11B00B5F471 /* ChooseSongViewController.swift in Sources */,
 				EF155CFF1CAB5C4800DD6437 /* LocationSearchTable.swift in Sources */,
 			);

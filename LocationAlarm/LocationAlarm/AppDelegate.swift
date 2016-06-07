@@ -24,6 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         
+        let pageController = UIPageControl.appearance()
+        pageController.pageIndicatorTintColor = UIColor.lightGrayColor()
+        pageController.currentPageIndicatorTintColor = UIColor.blackColor()
+        pageController.backgroundColor = UIColor.whiteColor()
+        
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
         UIApplication.sharedApplication().cancelAllLocalNotifications()
         
