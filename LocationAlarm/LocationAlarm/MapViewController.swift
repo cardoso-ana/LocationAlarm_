@@ -277,7 +277,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     
                     print(":::::::::UNIQUE IDENTIFIER::::::: \(uniqueIdentifier)")
                     
-                    let alarmeAtual = Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier:  uniqueIdentifier, note: "You are \(Int(raioAlarme!.radius))m from your destination!")
+                    //MARK: Texto desatualizado do alarme fica aqui.
+                    let alarmeAtual = Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier:  uniqueIdentifier, note: "You are \(MeterToMile(raioAlarme!.radius)) mi from your destination!")
                     
                     alarme.insert(alarmeAtual, atIndex: 0)
                     
