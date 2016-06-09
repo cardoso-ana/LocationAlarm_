@@ -13,10 +13,12 @@ import AVKit
 class ContentViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var viewDoVideo: UIView!
     
     var pageIndex: Int!
     var titleText: String!
+    var captionText: String!
     var videoName: String!
     
     let playerLayer = AVPlayerLayer()
@@ -29,6 +31,8 @@ class ContentViewController: UIViewController {
         super.viewDidLoad()
         
         self.titleLabel.text = self.titleText
+        self.captionLabel.text = self.captionText
+
         print(#function)
         
         

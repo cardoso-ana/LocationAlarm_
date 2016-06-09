@@ -501,7 +501,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         tutorialLabel.hidden = false
         
         activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
-        activeButton.backgroundColor = UIColor(red: 160 / 255, green: 60 / 255, blue: 55 / 255, alpha: 1)
+        activeButton.backgroundColor = UIColor(red: 209 / 255, green: 55 / 255, blue: 53 / 255, alpha: 1)
     }
     
     func changeDisplayDeactivated()
@@ -590,7 +590,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBAction func testaTutorial(sender: AnyObject) {
         
-        performSegueWithIdentifier("goToTutorial", sender: self)
+        performSegueWithIdentifier("goToIntro", sender: self)
         
     }
     

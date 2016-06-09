@@ -13,12 +13,14 @@ import AVFoundation
 class TutorialViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     var pageViewController: UIPageViewController!
-    var pageTitles = ["Select your destination on the map.\nDon't forget to set the radius of your alarm.","Pertô won't let you miss your destination!"]
+    var pageTitles = ["First, tell us where you’re going.","You’re one step away!"]
+    var pageCaptions = ["Tap on the map to set an alarm.\nUse the slider to adjust its radius.","Tap to activate the alarm.\nWe will let you know once you arrive."]
     var pageVideos = ["video1PertoTry","video2PertoTry"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBarHidden = true
         
         self.pageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageViewController") as! UIPageViewController
         self.pageViewController.dataSource = self
@@ -28,7 +30,7 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         
         self.pageViewController.setViewControllers([firstPage], direction: .Forward, animated: true, completion: nil)
         
-        self.pageViewController.view.frame = CGRectMake(0, 10, self.view.frame.width, self.view.frame.size.height - 60)
+        self.pageViewController.view.frame = CGRectMake(0, 10, self.view.frame.width, self.view.frame.size.height - 80)
         
         
         self.addChildViewController(self.pageViewController)
@@ -65,6 +67,7 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         
         vc.videoName = self.pageVideos[index]
         vc.titleText = self.pageTitles[index]
+        vc.captionText = self.pageCaptions[index]
         vc.pageIndex = index
         
         return vc

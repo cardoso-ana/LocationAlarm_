@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Artboard 3" translatesAutoresizingMaskIntoConstraints="NO" id="fvE-wf-cH3">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PertoIcon" translatesAutoresizingMaskIntoConstraints="NO" id="fvE-wf-cH3">
                                 <rect key="frame" x="183" y="208" width="235" height="184"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="235" id="TLD-L8-pob"/>
@@ -39,6 +39,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Artboard 3" width="330" height="136"/>
+        <image name="PertoIcon" width="200" height="232"/>
     </resources>
 </document>
