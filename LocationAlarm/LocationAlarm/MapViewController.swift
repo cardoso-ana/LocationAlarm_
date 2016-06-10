@@ -425,14 +425,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if distanceInMeters
         {
             sliderRaio.minimumValue = 50
-            sliderRaio.maximumValue = 5000
+            sliderRaio.maximumValue = 3000
             sliderRaio.value = 500
             radiusLabel.text = "500 m"
         }
         else
         {
-            sliderRaio.minimumValue = 528
-            sliderRaio.maximumValue = 15840
+            sliderRaio.minimumValue = 528 //0.1 mi
+            sliderRaio.maximumValue = 10560 //2 mi
             sliderRaio.value = 1584
             radiusLabel.text = "0.3 mi"
         }
