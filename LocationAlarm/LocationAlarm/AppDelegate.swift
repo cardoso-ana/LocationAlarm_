@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             // Otherwise present a local notification
             let notification = UILocalNotification()
             notification.alertBody = region.identifier
-            notification.soundName = "Default";
+            notification.soundName = "notify_drone.caf"
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
         }
         

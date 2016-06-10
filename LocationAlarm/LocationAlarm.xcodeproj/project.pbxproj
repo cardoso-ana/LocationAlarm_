@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E10200031CDBE0FB0078E0F6 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10200021CDBE0FA0078E0F6 /* Model.swift */; };
+		E13F89F81D0B306800920D43 /* notify_drone.caf in Resources */ = {isa = PBXBuildFile; fileRef = E13F89F71D0B225A00920D43 /* notify_drone.caf */; };
 		E15E10C21CAB434900A344BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10C11CAB434900A344BD /* AppDelegate.swift */; };
 		E15E10C91CAB434900A344BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E15E10C81CAB434900A344BD /* Assets.xcassets */; };
 		E15E10CC1CAB434900A344BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E15E10CA1CAB434900A344BD /* LaunchScreen.storyboard */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		E10200021CDBE0FA0078E0F6 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		E13F89F71D0B225A00920D43 /* notify_drone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = notify_drone.caf; path = LocationAlarm/notify_drone.caf; sourceTree = SOURCE_ROOT; };
 		E15E10BE1CAB434900A344BD /* LocationAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E15E10C11CAB434900A344BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E15E10C81CAB434900A344BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				EFF103901D071152009C0858 /* video1PertoTry.mov */,
+				E13F89F71D0B225A00920D43 /* notify_drone.caf */,
 				EFF103921D07115D009C0858 /* video2PertoTry.mov */,
 				E15E10C11CAB434900A344BD /* AppDelegate.swift */,
 				E15E10D31CAB435D00A344BD /* Model */,
@@ -168,7 +171,7 @@
 				TargetAttributes = {
 					E15E10BD1CAB434900A344BD = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 4BPZR4X6FJ;
+						DevelopmentTeam = A3556U9ESZ;
 					};
 				};
 			};
@@ -195,6 +198,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E13F89F81D0B306800920D43 /* notify_drone.caf in Resources */,
 				E18754331CB1B08700DF0DEC /* Main.storyboard in Resources */,
 				EFF103931D07115D009C0858 /* video2PertoTry.mov in Resources */,
 				E15E10CC1CAB434900A344BD /* LaunchScreen.storyboard in Resources */,
