@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		E10200031CDBE0FB0078E0F6 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10200021CDBE0FA0078E0F6 /* Model.swift */; };
 		E13F89F81D0B306800920D43 /* notify_drone.caf in Resources */ = {isa = PBXBuildFile; fileRef = E13F89F71D0B225A00920D43 /* notify_drone.caf */; };
+		E13F8A031D0B3F9E00920D43 /* notify_error.caf in Resources */ = {isa = PBXBuildFile; fileRef = E13F89FA1D0B3F9100920D43 /* notify_error.caf */; };
+		E13F8A051D0B3F9E00920D43 /* ringtone_goodnight.caf in Resources */ = {isa = PBXBuildFile; fileRef = E13F89FC1D0B3F9100920D43 /* ringtone_goodnight.caf */; };
+		E13F8A061D0B3F9E00920D43 /* ringtone_ringnroll.caf in Resources */ = {isa = PBXBuildFile; fileRef = E13F89FD1D0B3F9100920D43 /* ringtone_ringnroll.caf */; };
+		E13F8A071D0B3F9E00920D43 /* ringtone_simple02.caf in Resources */ = {isa = PBXBuildFile; fileRef = E13F89FE1D0B3F9100920D43 /* ringtone_simple02.caf */; };
+		E13F8A081D0B3F9E00920D43 /* ringtone_squirrels.caf in Resources */ = {isa = PBXBuildFile; fileRef = E13F89FF1D0B3F9100920D43 /* ringtone_squirrels.caf */; };
+		E13F8A091D0B3F9E00920D43 /* ringtone_supertux.caf in Resources */ = {isa = PBXBuildFile; fileRef = E13F8A001D0B3F9100920D43 /* ringtone_supertux.caf */; };
+		E13F8A0A1D0B3F9E00920D43 /* ringtone_thereisnophone.caf in Resources */ = {isa = PBXBuildFile; fileRef = E13F8A011D0B3F9100920D43 /* ringtone_thereisnophone.caf */; };
+		E13F8A0B1D0B3F9E00920D43 /* ringtone_bosscalling.caf in Resources */ = {isa = PBXBuildFile; fileRef = E13F8A021D0B3F9100920D43 /* ringtone_bosscalling.caf */; };
 		E15E10C21CAB434900A344BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10C11CAB434900A344BD /* AppDelegate.swift */; };
 		E15E10C91CAB434900A344BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E15E10C81CAB434900A344BD /* Assets.xcassets */; };
 		E15E10CC1CAB434900A344BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E15E10CA1CAB434900A344BD /* LaunchScreen.storyboard */; };
@@ -33,6 +41,14 @@
 /* Begin PBXFileReference section */
 		E10200021CDBE0FA0078E0F6 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		E13F89F71D0B225A00920D43 /* notify_drone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = notify_drone.caf; path = LocationAlarm/notify_drone.caf; sourceTree = SOURCE_ROOT; };
+		E13F89FA1D0B3F9100920D43 /* notify_error.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = notify_error.caf; path = LocationAlarm/notify_error.caf; sourceTree = SOURCE_ROOT; };
+		E13F89FC1D0B3F9100920D43 /* ringtone_goodnight.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ringtone_goodnight.caf; path = LocationAlarm/ringtone_goodnight.caf; sourceTree = SOURCE_ROOT; };
+		E13F89FD1D0B3F9100920D43 /* ringtone_ringnroll.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ringtone_ringnroll.caf; path = LocationAlarm/ringtone_ringnroll.caf; sourceTree = SOURCE_ROOT; };
+		E13F89FE1D0B3F9100920D43 /* ringtone_simple02.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ringtone_simple02.caf; path = LocationAlarm/ringtone_simple02.caf; sourceTree = SOURCE_ROOT; };
+		E13F89FF1D0B3F9100920D43 /* ringtone_squirrels.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ringtone_squirrels.caf; path = LocationAlarm/ringtone_squirrels.caf; sourceTree = SOURCE_ROOT; };
+		E13F8A001D0B3F9100920D43 /* ringtone_supertux.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ringtone_supertux.caf; path = LocationAlarm/ringtone_supertux.caf; sourceTree = SOURCE_ROOT; };
+		E13F8A011D0B3F9100920D43 /* ringtone_thereisnophone.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ringtone_thereisnophone.caf; path = LocationAlarm/ringtone_thereisnophone.caf; sourceTree = SOURCE_ROOT; };
+		E13F8A021D0B3F9100920D43 /* ringtone_bosscalling.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ringtone_bosscalling.caf; path = LocationAlarm/ringtone_bosscalling.caf; sourceTree = SOURCE_ROOT; };
 		E15E10BE1CAB434900A344BD /* LocationAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E15E10C11CAB434900A344BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E15E10C81CAB434900A344BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -70,6 +86,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E13F89F91D0B377A00920D43 /* Ringtones */ = {
+			isa = PBXGroup;
+			children = (
+				E13F89FA1D0B3F9100920D43 /* notify_error.caf */,
+				E13F89FC1D0B3F9100920D43 /* ringtone_goodnight.caf */,
+				E13F89FD1D0B3F9100920D43 /* ringtone_ringnroll.caf */,
+				E13F89FE1D0B3F9100920D43 /* ringtone_simple02.caf */,
+				E13F89FF1D0B3F9100920D43 /* ringtone_squirrels.caf */,
+				E13F8A001D0B3F9100920D43 /* ringtone_supertux.caf */,
+				E13F8A011D0B3F9100920D43 /* ringtone_thereisnophone.caf */,
+				E13F8A021D0B3F9100920D43 /* ringtone_bosscalling.caf */,
+				E13F89F71D0B225A00920D43 /* notify_drone.caf */,
+			);
+			name = Ringtones;
+			sourceTree = "<group>";
+		};
 		E15E10B51CAB434900A344BD = {
 			isa = PBXGroup;
 			children = (
@@ -93,7 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				EFF103901D071152009C0858 /* video1PertoTry.mov */,
-				E13F89F71D0B225A00920D43 /* notify_drone.caf */,
+				E13F89F91D0B377A00920D43 /* Ringtones */,
 				EFF103921D07115D009C0858 /* video2PertoTry.mov */,
 				E15E10C11CAB434900A344BD /* AppDelegate.swift */,
 				E15E10D31CAB435D00A344BD /* Model */,
@@ -199,10 +231,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				E13F89F81D0B306800920D43 /* notify_drone.caf in Resources */,
+				E13F8A091D0B3F9E00920D43 /* ringtone_supertux.caf in Resources */,
 				E18754331CB1B08700DF0DEC /* Main.storyboard in Resources */,
 				EFF103931D07115D009C0858 /* video2PertoTry.mov in Resources */,
+				E13F8A051D0B3F9E00920D43 /* ringtone_goodnight.caf in Resources */,
 				E15E10CC1CAB434900A344BD /* LaunchScreen.storyboard in Resources */,
+				E13F8A081D0B3F9E00920D43 /* ringtone_squirrels.caf in Resources */,
+				E13F8A0A1D0B3F9E00920D43 /* ringtone_thereisnophone.caf in Resources */,
 				E15E10C91CAB434900A344BD /* Assets.xcassets in Resources */,
+				E13F8A031D0B3F9E00920D43 /* notify_error.caf in Resources */,
+				E13F8A071D0B3F9E00920D43 /* ringtone_simple02.caf in Resources */,
+				E13F8A0B1D0B3F9E00920D43 /* ringtone_bosscalling.caf in Resources */,
+				E13F8A061D0B3F9E00920D43 /* ringtone_ringnroll.caf in Resources */,
 				EFF103911D071152009C0858 /* video1PertoTry.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
