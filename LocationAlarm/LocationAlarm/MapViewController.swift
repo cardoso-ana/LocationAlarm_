@@ -574,7 +574,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    @IBAction func chooseSoundAction(sender: AnyObject) //tem que mudar o nome dessa action
+    @IBAction func settingsAction(sender: AnyObject) //tem que mudar o nome dessa action
     {
         soundChooserButton.hidden = false
         measureUnitButton.hidden = false
@@ -628,12 +628,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         {
             //measureUnitButton.imageView?.image = UIImage(named: "botaoKm")
             distanceInMeters = false
+            setSlider()
             //TODO: mudar imagem p/ mi.
         }
         else
         {
             //measureUnitButton.imageView?.image = UIImage(named: "botaoMi")
             distanceInMeters = true
+            setSlider()
             //TODO: mudar imagem p/ km
         }
         
@@ -643,37 +645,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         return (distance / 1609.344).roundToPlaces(1)
     }
-    
-    //    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems  mediaItems:MPMediaItemCollection) -> Void
-    //    {
-    //        let aMediaItem = mediaItems.items[0] as MPMediaItem
-    //        self.mediaItem = aMediaItem;
-    //        if mediaItem?.title != nil && mediaItem?.artist != nil
-    //        {
-    //            musicLabel.text = "\(mediaItem!.artist!) - \(mediaItem!.title!)"
-    //            print("mediaItem.title = \(mediaItem!.title)")
-    //        }
-    //        else
-    //        {
-    //            if mediaItem?.artist == nil
-    //            {
-    //                musicLabel.text = "\(mediaItem!.title!)"
-    //            }
-    //
-    //            if mediaItem?.title == nil
-    //            {
-    //                musicLabel.text = "Unknown"
-    //            }
-    //        }
-    //
-    //        musicLabel.textColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
-    //        self.dismissViewControllerAnimated(true, completion: {UIApplication.sharedApplication().statusBarStyle = .LightContent});
-    //    }
-    //
-    //    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController)
-    //    {
-    //        self.dismissViewControllerAnimated(true, completion: {UIApplication.sharedApplication().statusBarStyle = .LightContent});
-    //    }
     
     func playMedia()
     {
