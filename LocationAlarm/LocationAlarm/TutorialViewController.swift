@@ -14,8 +14,11 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
     
     var pageViewController: UIPageViewController!
     var pageTitles = ["First, tell us where you’re going.","You’re one step away!"]
-    var pageCaptions = ["Tap on the map to set an alarm.\nUse the slider to adjust its radius.","Tap to activate the alarm.\nWe will let you know once you arrive."]
-    var pageVideos = ["video1PertoTry","video2PertoTry"]
+    var pageCaptions = ["Tap on the map to set an alarm.\nUse the slider to adjust its radius.","Tap to activate the alarm.\nWe'll let you know once you arrive."]
+    var pageVideos = ["PertoFirstVideoDoneOK","PertoSecondVideoDoneOK"]
+    
+    @IBOutlet weak var botaoGotIt: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,17 +49,27 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func restartAction(sender: AnyObject) {
-        
-        let startVC = self.viewControllerAtIndex(0)
-        let viewControllers = NSArray(object: startVC)
-        
-        self.pageViewController.setViewControllers(viewControllers as? [UIViewController], direction: .Forward, animated: true, completion: nil)
-        
-    }
+//    @IBAction func restartAction(sender: AnyObject) {
+//        
+//        let startVC = self.viewControllerAtIndex(0)
+//        let viewControllers = NSArray(object: startVC)
+//        
+//        self.pageViewController.setViewControllers(viewControllers as? [UIViewController], direction: .Forward, animated: true, completion: nil)
+//        
+//    }
     
     func viewControllerAtIndex(index:Int) -> ContentViewController{
         
+        
+        if index != self.pageTitles.count - 1 {
+            
+            self.botaoGotIt.hidden = true
+            
+        } else {
+            
+            self.botaoGotIt.hidden = false
+            
+        }
         
         if self.pageTitles.count == 0 || index >= self.pageTitles.count {
             

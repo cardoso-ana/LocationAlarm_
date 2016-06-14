@@ -30,6 +30,8 @@
 		E18754331CB1B08700DF0DEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E18754321CB1B08700DF0DEC /* Main.storyboard */; };
 		EF155CFF1CAB5C4800DD6437 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */; };
 		EF33B1D21D0A056B00525AFA /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF33B1D11D0A056B00525AFA /* IntroViewController.swift */; };
+		EF33B1D41D1083E900525AFA /* PertoFirstVideoDoneOK.mov in Resources */ = {isa = PBXBuildFile; fileRef = EF33B1D31D1083E900525AFA /* PertoFirstVideoDoneOK.mov */; };
+		EF33B1D61D1083F400525AFA /* PertoSecondVideoDoneOK.mov in Resources */ = {isa = PBXBuildFile; fileRef = EF33B1D51D1083F400525AFA /* PertoSecondVideoDoneOK.mov */; };
 		EF59956A1CDBD11B00B5F471 /* ChooseSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5995691CDBD11B00B5F471 /* ChooseSongViewController.swift */; };
 		EF59956C1CDBD17400B5F471 /* ChooseSongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59956B1CDBD17400B5F471 /* ChooseSongTableViewCell.swift */; };
 		EFF1023A1D06F6FE009C0858 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF102391D06F6FE009C0858 /* TutorialViewController.swift */; };
@@ -64,6 +66,8 @@
 		E18754321CB1B08700DF0DEC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		EF33B1D11D0A056B00525AFA /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		EF33B1D31D1083E900525AFA /* PertoFirstVideoDoneOK.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = PertoFirstVideoDoneOK.mov; sourceTree = "<group>"; };
+		EF33B1D51D1083F400525AFA /* PertoSecondVideoDoneOK.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = PertoSecondVideoDoneOK.mov; sourceTree = "<group>"; };
 		EF5995691CDBD11B00B5F471 /* ChooseSongViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseSongViewController.swift; sourceTree = "<group>"; };
 		EF59956B1CDBD17400B5F471 /* ChooseSongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseSongTableViewCell.swift; sourceTree = "<group>"; };
 		EFF102391D06F6FE009C0858 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +131,8 @@
 				EFF103901D071152009C0858 /* video1PertoTry.mov */,
 				E13F89F91D0B377A00920D43 /* Ringtones */,
 				EFF103921D07115D009C0858 /* video2PertoTry.mov */,
+				EF33B1D31D1083E900525AFA /* PertoFirstVideoDoneOK.mov */,
+				EF33B1D51D1083F400525AFA /* PertoSecondVideoDoneOK.mov */,
 				E15E10C11CAB434900A344BD /* AppDelegate.swift */,
 				E15E10D31CAB435D00A344BD /* Model */,
 				E15E10D51CAB437700A344BD /* Controller */,
@@ -203,7 +209,7 @@
 				TargetAttributes = {
 					E15E10BD1CAB434900A344BD = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = A3556U9ESZ;
+						DevelopmentTeam = 4BPZR4X6FJ;
 					};
 				};
 			};
@@ -233,9 +239,11 @@
 				E13F89F81D0B306800920D43 /* notify_drone.caf in Resources */,
 				E13F8A091D0B3F9E00920D43 /* ringtone_supertux.caf in Resources */,
 				E18754331CB1B08700DF0DEC /* Main.storyboard in Resources */,
+				EF33B1D41D1083E900525AFA /* PertoFirstVideoDoneOK.mov in Resources */,
 				EFF103931D07115D009C0858 /* video2PertoTry.mov in Resources */,
 				E13F8A051D0B3F9E00920D43 /* ringtone_goodnight.caf in Resources */,
 				E15E10CC1CAB434900A344BD /* LaunchScreen.storyboard in Resources */,
+				EF33B1D61D1083F400525AFA /* PertoSecondVideoDoneOK.mov in Resources */,
 				E13F8A081D0B3F9E00920D43 /* ringtone_squirrels.caf in Resources */,
 				E13F8A0A1D0B3F9E00920D43 /* ringtone_thereisnophone.caf in Resources */,
 				E15E10C91CAB434900A344BD /* Assets.xcassets in Resources */,

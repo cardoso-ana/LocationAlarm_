@@ -27,6 +27,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var measureUnitButton: UIButton!
     @IBOutlet weak var soundChooserButton: UIButton!
+    @IBOutlet weak var helpButton: UIButton!
+    
     
     @IBOutlet weak var tutorialLabel: UILabel!
     
@@ -91,6 +93,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             alarme = NSKeyedUnarchiver.unarchiveObjectWithData(savedAlarms) as! [Alarm]
         }
         
+        // checa se é ou nao primeira vez de abertura do app
+        
+        
+        print(":: is First Launch testou")
+        
+        print(defaults.stringForKey("isFirstLaunch"))
+
+        if defaults.stringForKey("isFirstLaunch") != "NO" {
+
+            print(":::::: entrou no teste do isFirstLaunch")
+            defaults.setValue("NO", forKey: "isFirstLaunch")
+            print(defaults.stringForKey("isFirstLaunch"))
+            performSegueWithIdentifier("goToIntro", sender: self)
+
+        }
+        
         mapView.delegate = self
         locationManager.delegate = self
         mapView.showsUserLocation = true
@@ -105,6 +123,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         searchBar.placeholder = "Search for a location"
         searchBar.setValue("Cancel", forKey: "_cancelButtonText")
         navigationItem.titleView = resultSearchController?.searchBar
+        
+        self.navigationController?.navigationBarHidden = false
+        self.navigationItem.setHidesBackButton(true, animated: false)
         
         resultSearchController?.hidesNavigationBarDuringPresentation = false
         resultSearchController?.dimsBackgroundDuringPresentation = true
@@ -495,6 +516,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         settingsButton.hidden = true
         measureUnitButton.hidden = true
         soundChooserButton.hidden = true
+        helpButton.hidden = true
         
         
         radiusLabel.hidden = true
@@ -556,6 +578,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         soundChooserButton.hidden = false
         measureUnitButton.hidden = false
+        helpButton.hidden = false
         
         UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseInOut, animations: {
             
@@ -563,11 +586,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
                 self.soundChooserButton.center.x += 50
                 self.measureUnitButton.center.x += 100
+                self.helpButton.center.x += 150
                 
             } else{
                 
                 self.soundChooserButton.center.x -= 50
                 self.measureUnitButton.center.x -= 100
+                self.helpButton.center.x -= 150
                 
             }
             
@@ -576,6 +601,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 if self.soundChooserButton.center.x == self.measureUnitButton.center.x {
                     self.soundChooserButton.hidden = true
                     self.measureUnitButton.hidden = true
+                    self.helpButton.hidden = true
                 }
             })
     }
@@ -589,7 +615,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
-    @IBAction func testaTutorial(sender: AnyObject) {
+    @IBAction func tappedHelpButton(sender: AnyObject) {
         
         performSegueWithIdentifier("goToIntro", sender: self)
         

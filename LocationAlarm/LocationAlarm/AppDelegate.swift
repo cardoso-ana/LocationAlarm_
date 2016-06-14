@@ -34,6 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         UIApplication.sharedApplication().statusBarStyle = .Default
         
+        
         print("vai entrar no if\n")
         //Check for ShortCutItem
         if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem
