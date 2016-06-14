@@ -621,6 +621,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "goToIntro" {
+            
+            // pra solucionar bug do search bar se tornando irresponsivo depois do tutorial
+            self.definesPresentationContext = false
+            
+        }
+        
+    }
+    
     
     @IBAction func chooseDistanceUnit(sender: AnyObject)
     {
