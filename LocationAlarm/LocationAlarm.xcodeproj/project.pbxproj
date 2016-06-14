@@ -36,8 +36,6 @@
 		EF59956C1CDBD17400B5F471 /* ChooseSongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59956B1CDBD17400B5F471 /* ChooseSongTableViewCell.swift */; };
 		EFF1023A1D06F6FE009C0858 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF102391D06F6FE009C0858 /* TutorialViewController.swift */; };
 		EFF1023C1D06F71C009C0858 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF1023B1D06F71C009C0858 /* ContentViewController.swift */; };
-		EFF103911D071152009C0858 /* video1PertoTry.mov in Resources */ = {isa = PBXBuildFile; fileRef = EFF103901D071152009C0858 /* video1PertoTry.mov */; };
-		EFF103931D07115D009C0858 /* video2PertoTry.mov in Resources */ = {isa = PBXBuildFile; fileRef = EFF103921D07115D009C0858 /* video2PertoTry.mov */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,8 +70,6 @@
 		EF59956B1CDBD17400B5F471 /* ChooseSongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseSongTableViewCell.swift; sourceTree = "<group>"; };
 		EFF102391D06F6FE009C0858 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		EFF1023B1D06F71C009C0858 /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
-		EFF103901D071152009C0858 /* video1PertoTry.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = video1PertoTry.mov; sourceTree = "<group>"; };
-		EFF103921D07115D009C0858 /* video2PertoTry.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = video2PertoTry.mov; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,9 +124,7 @@
 		E15E10C01CAB434900A344BD /* LocationAlarm */ = {
 			isa = PBXGroup;
 			children = (
-				EFF103901D071152009C0858 /* video1PertoTry.mov */,
 				E13F89F91D0B377A00920D43 /* Ringtones */,
-				EFF103921D07115D009C0858 /* video2PertoTry.mov */,
 				EF33B1D31D1083E900525AFA /* PertoFirstVideoDoneOK.mov */,
 				EF33B1D51D1083F400525AFA /* PertoSecondVideoDoneOK.mov */,
 				E15E10C11CAB434900A344BD /* AppDelegate.swift */,
@@ -209,7 +203,7 @@
 				TargetAttributes = {
 					E15E10BD1CAB434900A344BD = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = A3556U9ESZ;
+						DevelopmentTeam = 4BPZR4X6FJ;
 					};
 				};
 			};
@@ -240,7 +234,6 @@
 				E13F8A091D0B3F9E00920D43 /* ringtone_supertux.caf in Resources */,
 				E18754331CB1B08700DF0DEC /* Main.storyboard in Resources */,
 				EF33B1D41D1083E900525AFA /* PertoFirstVideoDoneOK.mov in Resources */,
-				EFF103931D07115D009C0858 /* video2PertoTry.mov in Resources */,
 				E13F8A051D0B3F9E00920D43 /* ringtone_goodnight.caf in Resources */,
 				E15E10CC1CAB434900A344BD /* LaunchScreen.storyboard in Resources */,
 				EF33B1D61D1083F400525AFA /* PertoSecondVideoDoneOK.mov in Resources */,
@@ -251,7 +244,6 @@
 				E13F8A071D0B3F9E00920D43 /* ringtone_simple02.caf in Resources */,
 				E13F8A0B1D0B3F9E00920D43 /* ringtone_bosscalling.caf in Resources */,
 				E13F8A061D0B3F9E00920D43 /* ringtone_ringnroll.caf in Resources */,
-				EFF103911D071152009C0858 /* video1PertoTry.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

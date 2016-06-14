@@ -456,6 +456,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             sliderRaio.maximumValue = 10560 //2 mi
             sliderRaio.value = 1584
             radiusLabel.text = "0.3 mi"
+
+
         }
     }
     
@@ -637,17 +639,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         if distanceInMeters
         {
-            //measureUnitButton.imageView?.image = UIImage(named: "botaoKm")
+
             distanceInMeters = false
             setSlider()
-            //TODO: mudar imagem p/ mi.
+            
+            self.measureUnitButton.setImage(UIImage(named: "botaoKmNew"), forState: .Normal)
+
+            
         }
         else
         {
-            //measureUnitButton.imageView?.image = UIImage(named: "botaoMi")
             distanceInMeters = true
             setSlider()
-            //TODO: mudar imagem p/ km
+            
+            self.measureUnitButton.setImage(UIImage(named: "botaoMiNew"), forState: .Normal)
+
         }
         
     }
