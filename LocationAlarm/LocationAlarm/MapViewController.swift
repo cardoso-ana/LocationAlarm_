@@ -11,6 +11,7 @@ import Foundation
 import MapKit
 import CoreLocation
 import MediaPlayer
+import WatchConnectivity
 
 protocol HandleMapSearch
 {
@@ -19,7 +20,7 @@ protocol HandleMapSearch
 
 //Coordenadas PUC -22.97976, -43.23282
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, MPMediaPickerControllerDelegate
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, MPMediaPickerControllerDelegate, WCSessionDelegate
 {
     
     @IBOutlet weak var viewS: UIView!
@@ -157,6 +158,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         fundoDim.hidden = true
         
         UIDevice.currentDevice().setValue(UIInterfaceOrientation.Portrait.rawValue, forKey: "orientation")
+        
+        if WCSession.isSupported() {
+            
+            let wcsession = WCSession.defaultSession()
+            wcsession.delegate = self
+            wcsession.activateSession()
+            
+        }
     }
     
     
@@ -183,6 +192,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
             
             labelDistancia.text = formataDistânciaParaRegião(distanciaParaRegiao)
+            
+            //MARK: aqui deve atualizar label do watch
+            
+            if WCSession.isSupported() {
+                
+                let wcsession = WCSession.defaultSession()
+                wcsession.sendMessage(["distancia":labelDistancia.text!], replyHandler: nil, errorHandler: nil)
+                
+                
+                
+            }
         }
     }
     

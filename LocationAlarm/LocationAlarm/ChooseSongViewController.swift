@@ -15,6 +15,9 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
     
     var soundFiles : [NSURL] = []
     
+    let defaults = NSUserDefaults.standardUserDefaults()
+
+    
     let soundNames = ["Boss calling", "Drone", "Error", "Goodnight", "Ring n roll", "Simple", "Squirrels", "Supertux", "There is no phone"]
     
     var lastSelectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
@@ -32,8 +35,22 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
     {
         super.viewDidLoad()
         
+        
+        
         soundFiles = NSBundle.mainBundle().URLsForResourcesWithExtension("caf", subdirectory: nil)! as [NSURL]
         print(soundFiles)
+        
+        for (index, file) in soundFiles.enumerate(){
+            
+            if file.lastPathComponent == defaults.stringForKey("currentSound") {
+                
+                lastSelectedIndexPath = NSIndexPath(forRow: index, inSection: 0)
+                
+            }
+            
+        }
+        
+        
 //        for directory in rootSoundDirectories
 //        {
 //            directories.append(directory)
@@ -176,6 +193,21 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
     }
 
 
+    
+    override func viewWillDisappear(animated: Bool) {
+        
+        
+        
+        print("___::::____ALLALALALLALALALA_____::::::_______")
+        
+        print(soundFiles[lastSelectedIndexPath.row].lastPathComponent)
+        
+        defaults.setValue(soundFiles[lastSelectedIndexPath.row].lastPathComponent, forKey: "currentSound")
+        
+        print(defaults.objectForKey("currentSound") as! String!)
+        
+    }
+    
     /*
     // MARK: - Navigation
 

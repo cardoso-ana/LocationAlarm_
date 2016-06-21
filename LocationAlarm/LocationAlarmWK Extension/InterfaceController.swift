@@ -8,12 +8,28 @@
 
 import WatchKit
 import Foundation
+import WatchConnectivity
 
 
-class InterfaceController: WKInterfaceController {
+class InterfaceController: WKInterfaceController, WCSessionDelegate {
+    
+    
+    @IBOutlet var distanceLabel: WKInterfaceLabel!
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
+        
+        if WCSession.isSupported() {
+            
+            let session = WCSession.defaultSession()
+            session.delegate = self
+            session.activateSession()
+            
+        } else {
+            
+            presentAlertControllerWithTitle("Error", message: "oh no", preferredStyle: .Alert, actions: [])
+            
+        }
         
         // Configure interface objects here.
     }
@@ -21,6 +37,13 @@ class InterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+    }
+    
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
+        
+        let distanciaText = message["distancia"] as! String
+        distanceLabel.setText(distanciaText)
+        
     }
 
     override func didDeactivate() {
