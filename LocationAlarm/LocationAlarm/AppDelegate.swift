@@ -76,6 +76,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func handleRegionEvent(region: CLRegion)
     {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
         // Show an alert if application is active
         if UIApplication.sharedApplication().applicationState == .Active
         {
@@ -92,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             // Otherwise present a local notification
             let notification = UILocalNotification()
             notification.alertBody = region.identifier
-            notification.soundName = (window?.rootViewController!.childViewControllers.first as! MapViewController).alarmSound
+            notification.soundName = defaults.stringForKey("currentSound")
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
         }
         
