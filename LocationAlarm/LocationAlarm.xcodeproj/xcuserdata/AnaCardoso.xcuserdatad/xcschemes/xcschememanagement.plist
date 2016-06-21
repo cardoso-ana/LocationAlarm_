@@ -9,10 +9,20 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>LocationAlarmWK.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>E15E10BD1CAB434900A344BD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EF33B2621D19934800525AFA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -13,11 +13,11 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
 
     let model = Model.sharedInstance()
     
-    let soundFiles = NSBundle.mainBundle().URLsForResourcesWithExtension("caf", subdirectory: "Ringtones")! as [NSURL]
+    var soundFiles : [NSURL] = []
     
     let soundNames = ["Boss calling", "Drone", "Error", "Goodnight", "Ring n roll", "Simple", "Squirrels", "Supertux", "There is no phone"]
     
-    var lastSelectedIndexPath: NSIndexPath?
+    var lastSelectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
     
 //    ///The directories where sound files are located.
 //    let rootSoundDirectories: [String] = ["/Library/Ringtones", "/System/Library/Audio/UISounds/New"]
@@ -31,6 +31,9 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        soundFiles = NSBundle.mainBundle().URLsForResourcesWithExtension("caf", subdirectory: nil)! as [NSURL]
+        print(soundFiles)
 //        for directory in rootSoundDirectories
 //        {
 //            directories.append(directory)
@@ -125,7 +128,7 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("songCell", forIndexPath:  indexPath) as! ChooseSongTableViewCell
-        cell.accessoryType = (lastSelectedIndexPath!.row == indexPath.row) ? .Checkmark : .None
+        cell.accessoryType = .None
         
         //let directory: String = soundFiles[indexPath.section].directory
         //let fileName: String = String(soundFiles[indexPath.row].lastPathComponent)
@@ -133,25 +136,35 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
         print(filePath)
         
         cell.songName.text = soundNames[indexPath.row]
+        
+        print(indexPath)
+        print(lastSelectedIndexPath)
+        
+        if indexPath == lastSelectedIndexPath {
+            
+            cell.accessoryType = .Checkmark
+            print("entrou no trequetaaaaaoooo ___")
+            print(indexPath.row)
+            print(lastSelectedIndexPath)
+        }
+        
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        if indexPath.row != lastSelectedIndexPath!.row
-        {
-            if let lastSelectedIndexPath = lastSelectedIndexPath
-            {
-                let oldCell = tableView.cellForRowAtIndexPath(lastSelectedIndexPath)
-                oldCell?.accessoryType = .None
-            }
-            
-            let newCell = tableView.cellForRowAtIndexPath(indexPath)
-            newCell?.accessoryType = .Checkmark
-            
+
+            tableView.cellForRowAtIndexPath(lastSelectedIndexPath)?.accessoryType = .None
+            tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = .Checkmark
+
+            print(lastSelectedIndexPath)
+        
             lastSelectedIndexPath = indexPath
+            
+
+            print(lastSelectedIndexPath)
     
-        }
+        
         //Play the sound
         let filePath = soundFiles[indexPath.row]
         do {

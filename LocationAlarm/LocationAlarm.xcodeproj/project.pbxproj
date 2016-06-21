@@ -165,7 +165,8 @@
 				E13F89F71D0B225A00920D43 /* notify_drone.caf */,
 			);
 			name = Ringtones;
-			sourceTree = "<group>";
+			path = LocationAlarm;
+			sourceTree = SOURCE_ROOT;
 		};
 		E15E10B51CAB434900A344BD = {
 			isa = PBXGroup;
