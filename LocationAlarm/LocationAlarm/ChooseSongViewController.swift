@@ -196,11 +196,9 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
 
 
     
-    override func viewWillDisappear(animated: Bool) {
-        
-        
-        
-        print("___::::____ALLALALALLALALALA_____::::::_______")
+    override func viewWillDisappear(animated: Bool)
+    {
+        model.audioPlayer.stop()
         
         print(soundFiles[lastSelectedIndexPath.row].lastPathComponent)
         

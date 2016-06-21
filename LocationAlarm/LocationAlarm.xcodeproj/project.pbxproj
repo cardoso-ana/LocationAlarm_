@@ -330,11 +330,11 @@
 				TargetAttributes = {
 					E15E10BD1CAB434900A344BD = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 4BPZR4X6FJ;
+						DevelopmentTeam = A3556U9ESZ;
 					};
 					EF33B2621D19934800525AFA = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 4BPZR4X6FJ;
+						DevelopmentTeam = A3556U9ESZ;
 					};
 					EF33B26E1D19934900525AFA = {
 						CreatedOnToolsVersion = 7.3;

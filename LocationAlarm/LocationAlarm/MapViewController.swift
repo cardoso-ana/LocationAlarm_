@@ -44,7 +44,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var viewSlider: UIVisualEffectView? = nil
     var step: Float = 50
-    var distanciaRaio:CLLocationDistance = 500
+    var distanciaRaio:CLLocationDistance = 650
     var alarmSound = "Default"
     var quickActionCheck = false
     var selectedPin:MKPlacemark? = nil
@@ -316,7 +316,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     print(":::::::::UNIQUE IDENTIFIER::::::: \(uniqueIdentifier)")
                     
                     //MARK: Texto desatualizado do alarme fica aqui.
-                    let alarmeAtual = Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier:  uniqueIdentifier, note: "You are \(MeterToMile(raioAlarme!.radius)) mi from your destination!")
+                    let alarmeAtual = Alarm(coordinate: raioAlarme!.coordinate, radius: raioAlarme!.radius, identifier:  uniqueIdentifier, note: "You are \(formataDistânciaParaRegião(raioAlarme!.radius)) from your destination!")
                     
                     alarme.insert(alarmeAtual, atIndex: 0)
                     
@@ -348,7 +348,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 }
                 else
                 {
-                    showSimpleAlertWithTitle("", message: "You are already \(MeterToMile(raioAlarme!.radius)) mi away from your destination!", viewController: self)
+                    showSimpleAlertWithTitle("", message: "You are already \(formataDistânciaParaRegião(raioAlarme!.radius)) away from your destination!", viewController: self)
                 }
                 
             }
@@ -426,7 +426,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         else
         {
-            showSimpleAlertWithTitle("", message: "You are already \(MeterToMile(currentAlarmQA.radius)) mi away from your destination!", viewController: self)
+            showSimpleAlertWithTitle("", message: "You are already \(formataDistânciaParaRegião(currentAlarmQA!.radius)) away from your destination!", viewController: self)
         }
     
     }
@@ -474,19 +474,26 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         if distanceInMeters
         {
-            sliderRaio.minimumValue = 50
+            sliderRaio.minimumValue = 650
             sliderRaio.maximumValue = 3000
-            sliderRaio.value = 500
-            radiusLabel.text = "500 m"
+            sliderRaio.value = 1000
+            radiusLabel.text = "1 km"
+            distanciaRaio = Double(sliderRaio.value)
         }
         else
         {
-            sliderRaio.minimumValue = 528 //0.1 mi
+            sliderRaio.minimumValue = 2112 //0.4 mi
             sliderRaio.maximumValue = 10560 //2 mi
-            sliderRaio.value = 1584
-            radiusLabel.text = "0.3 mi"
-
-
+            sliderRaio.value = 3168
+            radiusLabel.text = "0.6 mi"
+            distanciaRaio = Double(sliderRaio.value * 0.3048)
+        }
+        
+        if pinAlarm
+        {
+            self.mapView.removeOverlays(self.mapView.overlays)
+            raioAlarme = MKCircle(centerCoordinate: locationCoord!, radius: distanciaRaio)
+            self.mapView.addOverlay(raioAlarme!)
         }
     }
     
@@ -509,7 +516,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 radiusLabel.text = "\((sender.value) / 1000) km"
             
             }
+            
+            distanciaRaio = Double(sender.value)
         }
+            
         else
         {
             if sender.value > 5280
@@ -519,28 +529,28 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 sender.value = roundedValue
                 radiusLabel.text = "\(Int(sender.value / 5280)) mi"
             }
-            if sender.value > 528
+            else
             {
                 step = 528
                 let roundedValue = round(sender.value / step) * step
                 sender.value = roundedValue
                 radiusLabel.text = "\(sender.value / 5280) mi"
             }
+            
+            distanciaRaio = Double(sender.value * 0.3048)
         }
         
-        distanciaRaio = Double(sender.value * 0.3048)
         if pinAlarm
         {
             self.mapView.removeOverlays(self.mapView.overlays)
             raioAlarme = MKCircle(centerCoordinate: locationCoord!, radius: distanciaRaio)
             self.mapView.addOverlay(raioAlarme!)
-            
         }
     }
     
     func changeDisplayActivated()
     {
-        
+        print("muda")
         fundoDim.hidden = false
         sliderRaio.hidden = true
         viewSlider!.hidden = false
@@ -551,7 +561,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         radiusLabel.hidden = true
-        tutorialLabel.text = "radius of \(radiusLabel.text!)"
+        tutorialLabel.text = "radius of \(radiusLabel.text!))"
         tutorialLabel.hidden = false
         
         activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
@@ -706,6 +716,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         return (distance / 1609.344).roundToPlaces(1)
     }
+
     
     
     func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError)
