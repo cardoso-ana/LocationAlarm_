@@ -10,20 +10,25 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="LocationAlarmWK" customModuleProvider="target">
                     <items>
-                        <label width="136" alignment="left" text="Label" textAlignment="center" id="6jF-Lm-D02">
-                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        <label width="136" alignment="left" text=" " textAlignment="center" id="6jF-Lm-D02">
+                            <fontDescription key="font" type="system" pointSize="35"/>
                         </label>
-                        <label width="136" alignment="left" text="distance to alarm" textAlignment="center" id="eh1-3S-dr1"/>
+                        <label width="136" alignment="left" text="Alarm Deactivated" textAlignment="center" id="eh1-3S-dr1"/>
                         <button width="1" alignment="left" title="Deactivate" id="hE0-a8-knN">
                             <color key="titleColor" red="0.97960360738255037" green="0.086068582214765099" blue="0.14641883389261745" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="tappedActionButton" destination="AgC-eL-Hgc" id="aqx-LV-aXa"/>
+                            </connections>
                         </button>
                     </items>
                     <connections>
+                        <outlet property="actionButton" destination="hE0-a8-knN" id="eRP-2T-FDr"/>
+                        <outlet property="captionLabel" destination="eh1-3S-dr1" id="49R-oZ-ebK"/>
                         <outlet property="distanceLabel" destination="6jF-Lm-D02" id="Ex7-hx-DAS"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="245" y="323.25"/>
+            <point key="canvasLocation" x="245" y="323"/>
         </scene>
     </scenes>
 </document>

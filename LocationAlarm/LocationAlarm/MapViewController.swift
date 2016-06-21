@@ -200,8 +200,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 let wcsession = WCSession.defaultSession()
                 wcsession.sendMessage(["distancia":labelDistancia.text!], replyHandler: nil, errorHandler: nil)
                 
-                
-                
             }
         }
     }
@@ -293,7 +291,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     //MARK: Função de ativar/desativar alarme
-    @IBAction func ativarAction(sender: UIButton)
+    @IBAction func ativarAction(sender: AnyObject)
     {
         if pinAlarm
         {
@@ -335,6 +333,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     
                     labelDistancia.text = formataDistânciaParaRegião(distanciaParaRegiao)
                     
+                    //MARK: ALTERAR BAGULHO DO WATCH AQUI TBMMM
+                    
+                    if WCSession.isSupported() {
+                        
+                        let wcsession = WCSession.defaultSession()
+                        wcsession.sendMessage(["distancia":labelDistancia.text!], replyHandler: nil, errorHandler: nil)
+                        
+                    }
+                    
                     self.navigationController?.setNavigationBarHidden(true, animated: true)
                     
                     changeDisplayActivated()
@@ -361,6 +368,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             }
         }
     }
+    
+    
+ 
     
     //MARK: Ativando alarme por quick action
     
@@ -546,6 +556,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
         activeButton.backgroundColor = UIColor(red: 209 / 255, green: 55 / 255, blue: 53 / 255, alpha: 1)
+        
+        if WCSession.isSupported() {
+            
+            let wcsession = WCSession.defaultSession()
+            wcsession.sendMessage(["isAlarmActivated":true], replyHandler: nil, errorHandler: nil)
+            
+        }
+        
     }
     
     func changeDisplayDeactivated()
@@ -563,6 +581,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         activeButton.setTitle("ACTIVATE", forState: UIControlState.Normal)
         activeButton.backgroundColor = UIColor(red: 48 / 255, green: 68 / 255, blue: 91 / 255, alpha: 1)
+        
+        if WCSession.isSupported() {
+            
+            let wcsession = WCSession.defaultSession()
+            wcsession.sendMessage(["isAlarmActivated":false], replyHandler: nil, errorHandler: nil)
+            
+        }
     }
     
     func formataDistânciaParaRegião(distancia: Double) -> String
@@ -698,6 +723,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.didReceiveMemoryWarning()
         
     }
+    
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
+        
+        dispatch_async(dispatch_get_main_queue()){
+        if message["tappedWCButton"] != nil {
+            
+            print("Tocou no button do watch")
+
+            self.ativarAction(self)
+            
+            }
+        }
+        
+    }
+    
 }
 
 extension MapViewController: HandleMapSearch
