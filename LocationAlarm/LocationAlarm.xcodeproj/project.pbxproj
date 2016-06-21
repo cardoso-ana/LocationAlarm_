@@ -32,11 +32,60 @@
 		EF33B1D21D0A056B00525AFA /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF33B1D11D0A056B00525AFA /* IntroViewController.swift */; };
 		EF33B1D41D1083E900525AFA /* PertoFirstVideoDoneOK.mov in Resources */ = {isa = PBXBuildFile; fileRef = EF33B1D31D1083E900525AFA /* PertoFirstVideoDoneOK.mov */; };
 		EF33B1D61D1083F400525AFA /* PertoSecondVideoDoneOK.mov in Resources */ = {isa = PBXBuildFile; fileRef = EF33B1D51D1083F400525AFA /* PertoSecondVideoDoneOK.mov */; };
+		EF33B2671D19934800525AFA /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF33B2651D19934800525AFA /* Interface.storyboard */; };
+		EF33B2691D19934800525AFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF33B2681D19934800525AFA /* Assets.xcassets */; };
+		EF33B2701D19934900525AFA /* LocationAlarmWK Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EF33B26F1D19934900525AFA /* LocationAlarmWK Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EF33B2751D19934900525AFA /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF33B2741D19934900525AFA /* InterfaceController.swift */; };
+		EF33B2771D19934900525AFA /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF33B2761D19934900525AFA /* ExtensionDelegate.swift */; };
+		EF33B2791D19934900525AFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF33B2781D19934900525AFA /* Assets.xcassets */; };
+		EF33B27D1D19934900525AFA /* LocationAlarmWK.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EF33B2631D19934800525AFA /* LocationAlarmWK.app */; };
 		EF59956A1CDBD11B00B5F471 /* ChooseSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5995691CDBD11B00B5F471 /* ChooseSongViewController.swift */; };
 		EF59956C1CDBD17400B5F471 /* ChooseSongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF59956B1CDBD17400B5F471 /* ChooseSongTableViewCell.swift */; };
 		EFF1023A1D06F6FE009C0858 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF102391D06F6FE009C0858 /* TutorialViewController.swift */; };
 		EFF1023C1D06F71C009C0858 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF1023B1D06F71C009C0858 /* ContentViewController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EF33B2711D19934900525AFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E15E10B61CAB434900A344BD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF33B26E1D19934900525AFA;
+			remoteInfo = "LocationAlarmWK Extension";
+		};
+		EF33B27B1D19934900525AFA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E15E10B61CAB434900A344BD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF33B2621D19934800525AFA;
+			remoteInfo = LocationAlarmWK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EF33B2831D19934900525AFA /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EF33B2701D19934900525AFA /* LocationAlarmWK Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF33B2851D19934900525AFA /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				EF33B27D1D19934900525AFA /* LocationAlarmWK.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		E10200021CDBE0FA0078E0F6 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -66,6 +115,15 @@
 		EF33B1D11D0A056B00525AFA /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		EF33B1D31D1083E900525AFA /* PertoFirstVideoDoneOK.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = PertoFirstVideoDoneOK.mov; sourceTree = "<group>"; };
 		EF33B1D51D1083F400525AFA /* PertoSecondVideoDoneOK.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = PertoSecondVideoDoneOK.mov; sourceTree = "<group>"; };
+		EF33B2631D19934800525AFA /* LocationAlarmWK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationAlarmWK.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF33B2661D19934800525AFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		EF33B2681D19934800525AFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EF33B26A1D19934800525AFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF33B26F1D19934900525AFA /* LocationAlarmWK Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "LocationAlarmWK Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF33B2741D19934900525AFA /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		EF33B2761D19934900525AFA /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		EF33B2781D19934900525AFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EF33B27A1D19934900525AFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF5995691CDBD11B00B5F471 /* ChooseSongViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseSongViewController.swift; sourceTree = "<group>"; };
 		EF59956B1CDBD17400B5F471 /* ChooseSongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseSongTableViewCell.swift; sourceTree = "<group>"; };
 		EFF102391D06F6FE009C0858 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +138,13 @@
 				E187542F1CAF032D00DF0DEC /* MediaPlayer.framework in Frameworks */,
 				E187542D1CAF032400DF0DEC /* CoreLocation.framework in Frameworks */,
 				E187542B1CAF031A00DF0DEC /* MapKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF33B26C1D19934900525AFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +174,8 @@
 				E187542C1CAF032400DF0DEC /* CoreLocation.framework */,
 				E187542A1CAF031A00DF0DEC /* MapKit.framework */,
 				E15E10C01CAB434900A344BD /* LocationAlarm */,
+				EF33B2641D19934800525AFA /* LocationAlarmWK */,
+				EF33B2731D19934900525AFA /* LocationAlarmWK Extension */,
 				E15E10BF1CAB434900A344BD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -117,6 +184,8 @@
 			isa = PBXGroup;
 			children = (
 				E15E10BE1CAB434900A344BD /* LocationAlarm.app */,
+				EF33B2631D19934800525AFA /* LocationAlarmWK.app */,
+				EF33B26F1D19934900525AFA /* LocationAlarmWK Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,6 +240,27 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		EF33B2641D19934800525AFA /* LocationAlarmWK */ = {
+			isa = PBXGroup;
+			children = (
+				EF33B2651D19934800525AFA /* Interface.storyboard */,
+				EF33B2681D19934800525AFA /* Assets.xcassets */,
+				EF33B26A1D19934800525AFA /* Info.plist */,
+			);
+			path = LocationAlarmWK;
+			sourceTree = "<group>";
+		};
+		EF33B2731D19934900525AFA /* LocationAlarmWK Extension */ = {
+			isa = PBXGroup;
+			children = (
+				EF33B2741D19934900525AFA /* InterfaceController.swift */,
+				EF33B2761D19934900525AFA /* ExtensionDelegate.swift */,
+				EF33B2781D19934900525AFA /* Assets.xcassets */,
+				EF33B27A1D19934900525AFA /* Info.plist */,
+			);
+			path = "LocationAlarmWK Extension";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -181,15 +271,51 @@
 				E15E10BA1CAB434900A344BD /* Sources */,
 				E15E10BB1CAB434900A344BD /* Frameworks */,
 				E15E10BC1CAB434900A344BD /* Resources */,
+				EF33B2851D19934900525AFA /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EF33B27C1D19934900525AFA /* PBXTargetDependency */,
 			);
 			name = LocationAlarm;
 			productName = LocationAlarm;
 			productReference = E15E10BE1CAB434900A344BD /* LocationAlarm.app */;
 			productType = "com.apple.product-type.application";
+		};
+		EF33B2621D19934800525AFA /* LocationAlarmWK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF33B2841D19934900525AFA /* Build configuration list for PBXNativeTarget "LocationAlarmWK" */;
+			buildPhases = (
+				EF33B2611D19934800525AFA /* Resources */,
+				EF33B2831D19934900525AFA /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF33B2721D19934900525AFA /* PBXTargetDependency */,
+			);
+			name = LocationAlarmWK;
+			productName = LocationAlarmWK;
+			productReference = EF33B2631D19934800525AFA /* LocationAlarmWK.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		EF33B26E1D19934900525AFA /* LocationAlarmWK Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF33B2821D19934900525AFA /* Build configuration list for PBXNativeTarget "LocationAlarmWK Extension" */;
+			buildPhases = (
+				EF33B26B1D19934900525AFA /* Sources */,
+				EF33B26C1D19934900525AFA /* Frameworks */,
+				EF33B26D1D19934900525AFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "LocationAlarmWK Extension";
+			productName = "LocationAlarmWK Extension";
+			productReference = EF33B26F1D19934900525AFA /* LocationAlarmWK Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -204,6 +330,13 @@
 					E15E10BD1CAB434900A344BD = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = A3556U9ESZ;
+					};
+					EF33B2621D19934800525AFA = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = A3556U9ESZ;
+					};
+					EF33B26E1D19934900525AFA = {
+						CreatedOnToolsVersion = 7.3;
 					};
 				};
 			};
@@ -221,6 +354,8 @@
 			projectRoot = "";
 			targets = (
 				E15E10BD1CAB434900A344BD /* LocationAlarm */,
+				EF33B2621D19934800525AFA /* LocationAlarmWK */,
+				EF33B26E1D19934900525AFA /* LocationAlarmWK Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -247,6 +382,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EF33B2611D19934800525AFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF33B2691D19934800525AFA /* Assets.xcassets in Resources */,
+				EF33B2671D19934800525AFA /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF33B26D1D19934900525AFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF33B2791D19934900525AFA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -269,7 +421,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EF33B26B1D19934900525AFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF33B2771D19934900525AFA /* ExtensionDelegate.swift in Sources */,
+				EF33B2751D19934900525AFA /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EF33B2721D19934900525AFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF33B26E1D19934900525AFA /* LocationAlarmWK Extension */;
+			targetProxy = EF33B2711D19934900525AFA /* PBXContainerItemProxy */;
+		};
+		EF33B27C1D19934900525AFA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF33B2621D19934800525AFA /* LocationAlarmWK */;
+			targetProxy = EF33B27B1D19934900525AFA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E15E10CA1CAB434900A344BD /* LaunchScreen.storyboard */ = {
@@ -278,6 +452,14 @@
 				E15E10CB1CAB434900A344BD /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		EF33B2651D19934800525AFA /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF33B2661D19934800525AFA /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -396,6 +578,70 @@
 			};
 			name = Release;
 		};
+		EF33B27E1D19934900525AFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = LocationAlarmWK_Extension;
+				INFOPLIST_FILE = LocationAlarmWK/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = group.LocationAlarm.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		EF33B27F1D19934900525AFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = LocationAlarmWK_Extension;
+				INFOPLIST_FILE = LocationAlarmWK/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = group.LocationAlarm.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+		EF33B2801D19934900525AFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "LocationAlarmWK Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = group.LocationAlarm.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		EF33B2811D19934900525AFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "LocationAlarmWK Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = group.LocationAlarm.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -416,6 +662,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		EF33B2821D19934900525AFA /* Build configuration list for PBXNativeTarget "LocationAlarmWK Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF33B2801D19934900525AFA /* Debug */,
+				EF33B2811D19934900525AFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EF33B2841D19934900525AFA /* Build configuration list for PBXNativeTarget "LocationAlarmWK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF33B27E1D19934900525AFA /* Debug */,
+				EF33B27F1D19934900525AFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
