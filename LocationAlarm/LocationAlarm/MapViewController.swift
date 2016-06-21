@@ -44,8 +44,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var viewSlider: UIVisualEffectView? = nil
     var step: Float = 50
     var distanciaRaio:CLLocationDistance = 500
-    var mediaItem: MPMediaItem?
-    var musicPlayer = MPMusicPlayerController.applicationMusicPlayer()
+    var alarmSound = "Default"
     var quickActionCheck = false
     var selectedPin:MKPlacemark? = nil
     var currentAlarmQA: Alarm!
@@ -661,18 +660,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func MeterToMile (distance: Double) -> Double
     {
         return (distance / 1609.344).roundToPlaces(1)
-    }
-    
-    func playMedia()
-    {
-        if (mediaItem != nil)
-        {
-            let array = [mediaItem!]
-            let collection = MPMediaItemCollection(items: array)
-            
-            musicPlayer.setQueueWithItemCollection(collection)
-            musicPlayer.play();
-        }
     }
     
     

@@ -13,90 +13,96 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
 
     let model = Model.sharedInstance()
     
-    ///The directories where sound files are located.
-    let rootSoundDirectories: [String] = ["/Library/Ringtones", "/System/Library/Audio/UISounds/New"]
+    let soundFiles = NSBundle.mainBundle().URLsForResourcesWithExtension("caf", subdirectory: "Ringtones")! as [NSURL]
     
-    ///Array to hold directories when we find them.
-    var directories: [String] = []
+    let soundNames = ["Boss calling", "Drone", "Error", "Goodnight", "Ring n roll", "Simple", "Squirrels", "Supertux", "There is no phone"]
     
-    ///Tuple to hold directories and an array of file names within.
-    var soundFiles: [NSURL] = []
+    var lastSelectedIndexPath: NSIndexPath?
+    
+//    ///The directories where sound files are located.
+//    let rootSoundDirectories: [String] = ["/Library/Ringtones", "/System/Library/Audio/UISounds/New"]
+//    
+//    ///Array to hold directories when we find them.
+//    var directories: [String] = []
+//    
+//    ///Tuple to hold directories and an array of file names within.
+//    var soundFiles: [NSURL] = []
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        for directory in rootSoundDirectories
-        {
-            directories.append(directory)
-        
-        }
-        getDirectories()
-        loadSoundFiles()
+//        for directory in rootSoundDirectories
+//        {
+//            directories.append(directory)
+//        
+//        }
+//        getDirectories()
+//        loadSoundFiles()
 
     }
     
     // URLs: All of the contents of the directory (files and sub-directories).
-    func getDirectories()
-    {
-        let fileManager: NSFileManager = NSFileManager()
-        for directory in rootSoundDirectories
-        {
-            let directoryURL: NSURL = NSURL(fileURLWithPath: "\(directory)", isDirectory: true)
-            
-            do {
-                if let URLs: [NSURL] = try fileManager.contentsOfDirectoryAtURL(directoryURL, includingPropertiesForKeys: [NSURLIsDirectoryKey], options: NSDirectoryEnumerationOptions()) {
-                    var urlIsaDirectory: ObjCBool = ObjCBool(false)
-                    for url in URLs {
-                        if fileManager.fileExistsAtPath(url.path!, isDirectory: &urlIsaDirectory)
-                        {
-                            if urlIsaDirectory
-                            {
-                                let directory: String = "\(url.relativePath!)"
-                                //let files: [String] = []
-                                //let newSoundFile: (directory: String, files: [String]) = (directory, files)
-                                directories.append("\(directory)")
-                                //soundFiles.append(newSoundFile)
-                            }
-                        }
-                    }
-                }
-            }
-            catch
-            {
-                debugPrint("\(error)")
-            }
-        }
-    }
-    
-    func loadSoundFiles()
-    {
-        for i in 0...directories.count-1
-        {
-            let fileManager: NSFileManager = NSFileManager()
-            let directoryURL: NSURL = NSURL(fileURLWithPath: directories[i], isDirectory: true)
-            
-            do {
-                if let URLs: [NSURL] = try fileManager.contentsOfDirectoryAtURL(directoryURL, includingPropertiesForKeys: [NSURLIsDirectoryKey], options: NSDirectoryEnumerationOptions())
-                {
-                    var urlIsaDirectory: ObjCBool = ObjCBool(false)
-                    for url in URLs
-                    {
-                        if fileManager.fileExistsAtPath(url.path!, isDirectory: &urlIsaDirectory)
-                        {
-                            if !urlIsaDirectory
-                            {
-                                soundFiles.append(url.filePathURL!)
-                            }
-                        }
-                    }
-                }
-            }
-            catch
-            {
-                debugPrint("\(error)")
-            }
-        }
-    }
+//    func getDirectories()
+//    {
+//        let fileManager: NSFileManager = NSFileManager()
+//        for directory in rootSoundDirectories
+//        {
+//            let directoryURL: NSURL = NSURL(fileURLWithPath: "\(directory)", isDirectory: true)
+//            
+//            do {
+//                if let URLs: [NSURL] = try fileManager.contentsOfDirectoryAtURL(directoryURL, includingPropertiesForKeys: [NSURLIsDirectoryKey], options: NSDirectoryEnumerationOptions()) {
+//                    var urlIsaDirectory: ObjCBool = ObjCBool(false)
+//                    for url in URLs {
+//                        if fileManager.fileExistsAtPath(url.path!, isDirectory: &urlIsaDirectory)
+//                        {
+//                            if urlIsaDirectory
+//                            {
+//                                let directory: String = "\(url.relativePath!)"
+//                                //let files: [String] = []
+//                                //let newSoundFile: (directory: String, files: [String]) = (directory, files)
+//                                directories.append("\(directory)")
+//                                //soundFiles.append(newSoundFile)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            catch
+//            {
+//                debugPrint("\(error)")
+//            }
+//        }
+//    }
+//    
+//    func loadSoundFiles()
+//    {
+//        for i in 0...directories.count-1
+//        {
+//            let fileManager: NSFileManager = NSFileManager()
+//            let directoryURL: NSURL = NSURL(fileURLWithPath: directories[i], isDirectory: true)
+//            
+//            do {
+//                if let URLs: [NSURL] = try fileManager.contentsOfDirectoryAtURL(directoryURL, includingPropertiesForKeys: [NSURLIsDirectoryKey], options: NSDirectoryEnumerationOptions())
+//                {
+//                    var urlIsaDirectory: ObjCBool = ObjCBool(false)
+//                    for url in URLs
+//                    {
+//                        if fileManager.fileExistsAtPath(url.path!, isDirectory: &urlIsaDirectory)
+//                        {
+//                            if !urlIsaDirectory
+//                            {
+//                                soundFiles.append(url.filePathURL!)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            catch
+//            {
+//                debugPrint("\(error)")
+//            }
+//        }
+//    }
     
     override func viewWillAppear(animated: Bool)
     {
@@ -119,20 +125,33 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("songCell", forIndexPath:  indexPath) as! ChooseSongTableViewCell
+        cell.accessoryType = (lastSelectedIndexPath!.row == indexPath.row) ? .Checkmark : .None
         
         //let directory: String = soundFiles[indexPath.section].directory
-        let fileName: String = String(soundFiles[indexPath.row].lastPathComponent!)
+        //let fileName: String = String(soundFiles[indexPath.row].lastPathComponent)
         let filePath = soundFiles[indexPath.row]
         print(filePath)
         
-        var labelText = fileName.substringToIndex(fileName.endIndex.advancedBy(-4))
-        labelText = labelText.stringByReplacingOccurrencesOfString("_", withString: " ", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        cell.songName.text = "\(labelText)"
+        cell.songName.text = soundNames[indexPath.row]
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
+        if indexPath.row != lastSelectedIndexPath!.row
+        {
+            if let lastSelectedIndexPath = lastSelectedIndexPath
+            {
+                let oldCell = tableView.cellForRowAtIndexPath(lastSelectedIndexPath)
+                oldCell?.accessoryType = .None
+            }
+            
+            let newCell = tableView.cellForRowAtIndexPath(indexPath)
+            newCell?.accessoryType = .Checkmark
+            
+            lastSelectedIndexPath = indexPath
+    
+        }
         //Play the sound
         let filePath = soundFiles[indexPath.row]
         do {

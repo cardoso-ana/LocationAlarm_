@@ -114,6 +114,6 @@ class Alarm: NSObject, NSCoding, MKAnnotation
         coder.encodeDouble(radius, forKey: kGeotificationRadiusKey)
         coder.encodeObject(identifier, forKey: kGeotificationIdentifierKey)
         coder.encodeObject(note, forKey: kGeotificationNoteKey)
-    }
+    }   
 }
 

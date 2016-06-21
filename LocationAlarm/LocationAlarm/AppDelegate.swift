@@ -83,7 +83,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             
             if let viewController = window?.rootViewController
             {
-                ((window?.rootViewController?.childViewControllers.first) as! MapViewController).playMedia()
                 showSimpleAlertWithTitle(nil, message: message, viewController: viewController)
             }
             
@@ -93,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             // Otherwise present a local notification
             let notification = UILocalNotification()
             notification.alertBody = region.identifier
-            notification.soundName = "notify_drone.caf"
+            notification.soundName = (window?.rootViewController!.childViewControllers.first as! MapViewController).alarmSound
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
         }
         
@@ -123,12 +122,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func alertOkHandler(alert: UIAlertAction!)
     {
-        (window?.rootViewController!.childViewControllers.first as! MapViewController).musicPlayer.stop()
+        //(window?.rootViewController!.childViewControllers.first as! MapViewController).musicPlayer.stop()
     }
     
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void)
     {
-        (window?.rootViewController!.childViewControllers.first as! MapViewController).musicPlayer.stop()
+        //(window?.rootViewController!.childViewControllers.first as! MapViewController).musicPlayer.stop()
         completionHandler()
     }
     
