@@ -42,6 +42,24 @@
             </objects>
             <point key="canvasLocation" x="245" y="326"/>
         </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="Lc7-x2-lGF">
+            <objects>
+                <notificationController contentMode="scaleAspectFit" id="Sna-22-QkQ">
+                    <items>
+                        <label width="126" height="57.5" alignment="center" text="You are 1.6 mi from your destination!" textAlignment="center" numberOfLines="3" id="EtC-uc-UHg">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </label>
+                    </items>
+                    <notificationCategory key="notificationCategory" id="I1M-bJ-J3e"/>
+                    <color key="backgroundColor" red="0.21960784310000001" green="0.4549019608" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="EtC-uc-UHg" id="WbR-yq-fpC"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="611" y="378"/>
+        </scene>
         <!--Interface Controller-->
         <scene sceneID="fgW-HX-UCc">
             <objects>
