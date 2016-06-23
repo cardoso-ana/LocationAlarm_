@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreLocation
+import AVFoundation
 
 var didEnterFromQA = false
 var tipoCoisado = ""
@@ -15,7 +16,7 @@ var tipoCoisado = ""
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 {
-    
+    let model = Model.sharedInstance()
     var window: UIWindow?
     let locationManager = CLLocationManager()
     
@@ -34,12 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         UIApplication.sharedApplication().statusBarStyle = .Default
         
-        
         print("vai entrar no if\n")
         //Check for ShortCutItem
         if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem
         {
-            
             didEnterFromQA = true
             tipoCoisado = shortcutItem.type
             
@@ -78,6 +77,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func handleRegionEvent(region: CLRegion)
     {
         let defaults = NSUserDefaults.standardUserDefaults()
+        let soundName = defaults.stringForKey("currentSound")
+        print(soundName)
         
         // Show an alert if application is active
         if UIApplication.sharedApplication().applicationState == .Active
@@ -86,7 +87,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             
             if let viewController = window?.rootViewController
             {
-                showSimpleAlertWithTitle(nil, message: message, viewController: viewController)
+                let soundfile = NSBundle.mainBundle().URLForResource(soundName?.substringToIndex((soundName?.endIndex.advancedBy(-4))!), withExtension: "caf")
+                showSimpleAlertWithTitle(nil, message: message, sound: soundfile!, viewController: viewController)
             }
             
         }
@@ -95,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             // Otherwise present a local notification
             let notification = UILocalNotification()
             notification.alertBody = region.identifier
-            notification.soundName = defaults.stringForKey("currentSound")
+            notification.soundName = soundName
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
         }
         
@@ -114,18 +116,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
     }
     
-    func showSimpleAlertWithTitle(title: String!, message: String, viewController: UIViewController)
+    func showSimpleAlertWithTitle(title: String!, message: String, sound: NSURL, viewController: UIViewController)
     {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         let action = UIAlertAction(title: "OK", style: .Cancel, handler: alertOkHandler)
         alert.addAction(action)
+        
+        do {
+            model.audioPlayer = try AVAudioPlayer(contentsOfURL: sound)
+            model.audioPlayer.play()
+        }
+        catch {
+            debugPrint("\(error)")
+        }
         
         viewController.presentViewController(alert, animated: true, completion: nil)
     }
     
     func alertOkHandler(alert: UIAlertAction!)
     {
-        //(window?.rootViewController!.childViewControllers.first as! MapViewController).musicPlayer.stop()
+        model.audioPlayer.stop()
     }
     
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void)

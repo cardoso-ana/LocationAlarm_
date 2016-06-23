@@ -8,9 +8,11 @@
 
 import UIKit
 
-class IntroViewController: UIViewController {
+class IntroViewController: UIViewController
+{
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         self.navigationController?.navigationBarHidden = true
@@ -18,16 +20,17 @@ class IntroViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     
-    @IBAction func tappedIAmReady(sender: AnyObject) {
+    @IBAction func tappedIAmReady(sender: AnyObject)
+    {
         
         performSegueWithIdentifier("goToTutorial", sender: self)
-        
     }
     
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
@@ -10,16 +10,28 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="LocationAlarmWK" customModuleProvider="target">
                     <items>
-                        <label width="136" alignment="left" text=" " textAlignment="center" id="6jF-Lm-D02">
-                            <fontDescription key="font" type="system" pointSize="35"/>
-                        </label>
-                        <label width="136" alignment="left" text="Alarm Deactivated" textAlignment="center" id="eh1-3S-dr1"/>
-                        <button width="1" alignment="left" title="Deactivate" id="hE0-a8-knN">
-                            <color key="titleColor" red="0.97960360738255037" green="0.086068582214765099" blue="0.14641883389261745" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="tappedActionButton" destination="AgC-eL-Hgc" id="aqx-LV-aXa"/>
-                            </connections>
-                        </button>
+                        <group width="1" height="92.5" alignment="center" verticalAlignment="bottom" layout="vertical" spacing="0.0" id="Oh1-Do-Q4S">
+                            <items>
+                                <label width="136" height="35.5" alignment="center" text="3 mi" textAlignment="center" id="6jF-Lm-D02">
+                                    <fontDescription key="font" type="system" pointSize="35"/>
+                                </label>
+                                <label height="21.5" alignment="center" text="distance to alarm" textAlignment="center" id="eh1-3S-dr1"/>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                        <group width="1" alignment="center" verticalAlignment="bottom" id="rPS-2M-WVa">
+                            <items>
+                                <button width="1" alignment="left" title="DEACTIVATE" id="hE0-a8-knN">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="0.81960784313725488" green="0.21568627450980393" blue="0.20784313725490194" alpha="0.96999999999999997" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="15"/>
+                                    <connections>
+                                        <action selector="tappedActionButton" destination="AgC-eL-Hgc" id="aqx-LV-aXa"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
                     </items>
                     <connections>
                         <outlet property="actionButton" destination="hE0-a8-knN" id="eRP-2T-FDr"/>
@@ -28,7 +40,85 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="245" y="323"/>
+            <point key="canvasLocation" x="245" y="326"/>
+        </scene>
+        <!--Interface Controller-->
+        <scene sceneID="fgW-HX-UCc">
+            <objects>
+                <controller id="hH4-Ge-JJN">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" id="OEM-4i-oUy">
+                            <items>
+                                <label alignment="left" text="Recent alarms" id="5ar-V7-uTm">
+                                    <color key="textColor" red="0.34992147453653266" green="0.73043012998655032" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <label alignment="left" text="Tap to activate" id="Gyc-mT-CmW">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" height="201" alignment="left" spacing="1" id="7md-gJ-4I5">
+                            <items>
+                                <table alignment="left" id="XNE-kB-Ibe">
+                                    <items>
+                                        <tableRow id="XG7-MK-obW">
+                                            <group key="rootItem" width="1" height="44.5" alignment="left" layout="vertical" id="sp3-Dg-69H">
+                                                <items>
+                                                    <label alignment="left" text="Rua Barão da Torre, 85" id="BqA-wX-RlI">
+                                                        <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                    </label>
+                                                    <label alignment="left" text="0.4 mi" id="S0a-Ci-8Z0">
+                                                        <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                                    </label>
+                                                </items>
+                                            </group>
+                                        </tableRow>
+                                        <tableRow id="Czw-1T-Kjz">
+                                            <group key="rootItem" width="1" height="44.5" alignment="left" layout="vertical" id="wPd-hL-udz">
+                                                <items>
+                                                    <label alignment="left" text="Rua Marquês de São Vicente" id="Gkb-K6-65A">
+                                                        <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                    </label>
+                                                    <label alignment="left" text="1 mi" id="M1l-bx-vGE">
+                                                        <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                                    </label>
+                                                </items>
+                                            </group>
+                                        </tableRow>
+                                        <tableRow id="t1A-7G-gUA">
+                                            <group key="rootItem" width="1" height="44.5" alignment="left" layout="vertical" id="FTe-Sq-Cpu">
+                                                <items>
+                                                    <label alignment="left" text="Av. das Américas" id="lL4-Ks-Icz">
+                                                        <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                    </label>
+                                                    <label alignment="left" text="1.2 mi" id="m6E-xR-aUC">
+                                                        <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                                    </label>
+                                                </items>
+                                            </group>
+                                        </tableRow>
+                                        <tableRow id="jI5-Bo-28g">
+                                            <group key="rootItem" width="1" height="44.5" alignment="left" layout="vertical" id="P7D-5G-Eln">
+                                                <items>
+                                                    <label alignment="left" text="Est. dos Três Rios" id="zZw-CA-1kC">
+                                                        <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                    </label>
+                                                    <label alignment="left" text="0.8 mi" id="IIc-pb-bij">
+                                                        <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                                    </label>
+                                                </items>
+                                            </group>
+                                        </tableRow>
+                                    </items>
+                                </table>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="7" bottom="0.0"/>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="245" y="692.5"/>
         </scene>
     </scenes>
 </document>

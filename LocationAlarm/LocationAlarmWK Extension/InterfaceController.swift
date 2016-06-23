@@ -31,8 +31,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         super.willActivate()
         
         
-        if WCSession.isSupported() {
-            
+        if WCSession.isSupported()
+        {
             session = WCSession.defaultSession()
             session.delegate = self
             session.activateSession()
@@ -45,6 +45,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
 
         
     }
+    
+    //TODO: Label distancia nao atualiza se location estiver parada.
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
         
@@ -61,14 +63,20 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             
             var distanciaText = " "
             
+            print("message distancia é \(message["distancia"])")
             if message["distancia"] != nil{
             distanciaText = message["distancia"] as! String
+            print(" ___ distanciaText é \(distanciaText)")
+                
             }
             
             distanceLabel.setText(distanciaText)
 
             captionLabel.setText("distance to alarm")
             actionButton.setEnabled(true)
+            
+            print(" ___ distanciaText é lele \(distanciaText)")
+
             
         } else {
             

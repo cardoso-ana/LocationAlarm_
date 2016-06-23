@@ -10,8 +10,8 @@ import UIKit
 import AVFoundation
 import AVKit
 
-class ContentViewController: UIViewController {
-    
+class ContentViewController: UIViewController
+{
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var viewDoVideo: UIView!
@@ -24,10 +24,8 @@ class ContentViewController: UIViewController {
     let playerLayer = AVPlayerLayer()
     var player = AVPlayer()
     
-    
-    
-    
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         self.titleLabel.text = self.titleText
@@ -44,18 +42,14 @@ class ContentViewController: UIViewController {
         let fileUrl = NSURL(fileURLWithPath: filePath!)
         player = AVPlayer(URL: fileUrl)
         
-        
-        
         playerLayer.player = player
         viewDoVideo.layer.addSublayer(playerLayer)
         
         player.play()
-        
-        
     }
     
-    override func viewWillAppear(animated: Bool) {
-        
+    override func viewWillAppear(animated: Bool)
+    {
         print(#function)
         
         player.seekToTime(kCMTimeZero)
@@ -63,21 +57,19 @@ class ContentViewController: UIViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
-        
+    override func viewDidAppear(animated: Bool)
+    {
         print(#function)
-        
     }
     
     
-    override func viewDidLayoutSubviews() {
-        
+    override func viewDidLayoutSubviews()
+    {
         playerLayer.frame = viewDoVideo.bounds
-        
-        
     }
     
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

@@ -10,7 +10,8 @@ import UIKit
 import AVKit
 import AVFoundation
 
-class TutorialViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class TutorialViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate
+{
     
     var pageViewController: UIPageViewController!
     var pageTitles = ["First, tell us where you’re going.","You’re one step away!"]
@@ -20,7 +21,8 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
     @IBOutlet weak var botaoGotIt: UIButton!
     
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         self.navigationController?.navigationBarHidden = true
@@ -44,7 +46,8 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         
     }
     
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -58,21 +61,20 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
 //        
 //    }
     
-    func viewControllerAtIndex(index:Int) -> ContentViewController{
-        
-        
-        if index != self.pageTitles.count - 1 {
-            
+    func viewControllerAtIndex(index:Int) -> ContentViewController
+    {
+        if index != self.pageTitles.count - 1
+        {
             self.botaoGotIt.hidden = true
             
-        } else {
-            
+        }
+        else
+        {
             self.botaoGotIt.hidden = false
-            
         }
         
-        if self.pageTitles.count == 0 || index >= self.pageTitles.count {
-            
+        if self.pageTitles.count == 0 || index >= self.pageTitles.count
+        {
             return ContentViewController()
         }
         
@@ -89,12 +91,13 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
     
     //MARK: Page View Controller Data Source
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        
+    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController?
+    {
         let vc = viewController as! ContentViewController
         var index = vc.pageIndex as Int
         
-        if index == 0 || index==NSNotFound{
+        if index == 0 || index==NSNotFound
+        {
             
             return nil
         }
@@ -103,23 +106,22 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         return self.viewControllerAtIndex(index)
     }
     
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController?
+    {
         
         let vc = viewController as! ContentViewController
         var index = vc.pageIndex as Int
         
-        if index == NSNotFound{
-            
+        if index == NSNotFound
+        {
             return nil
-            
         }
         
         index += 1
         
-        if index == self.pageTitles.count{
-            
+        if index == self.pageTitles.count
+        {
             return nil
-            
         }
         
         return self.viewControllerAtIndex(index)
@@ -127,38 +129,38 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
     }
     
     
-    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController]) {
+    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController])
+    {
         
         print("chamou a funcao da transicao")
         
-        
-        
-        
     }
     
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool)
+    {
         
         print("did finish animating")
         
-        
-        
     }
     
     
-    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int
+    {
         
         return self.pageTitles.count
         
     }
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
+    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int
+    {
         
         return 0
         
     }
     
     
-    @IBAction func exitTutorial(sender: AnyObject) {
+    @IBAction func exitTutorial(sender: AnyObject)
+    {
         
         performSegueWithIdentifier("goToMainApp", sender: self)
     }

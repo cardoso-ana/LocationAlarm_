@@ -99,14 +99,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         print(":: is First Launch testou")
         
         print(defaults.stringForKey("isFirstLaunch"))
-
-        if defaults.stringForKey("isFirstLaunch") != "NO" {
-
+        
+        if defaults.stringForKey("isFirstLaunch") != "NO"
+        {
+            
             print(":::::: entrou no teste do isFirstLaunch")
             defaults.setValue("NO", forKey: "isFirstLaunch")
             print(defaults.stringForKey("isFirstLaunch"))
             performSegueWithIdentifier("goToIntro", sender: self)
-
+            
         }
         
         mapView.delegate = self
@@ -159,7 +160,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         UIDevice.currentDevice().setValue(UIInterfaceOrientation.Portrait.rawValue, forKey: "orientation")
         
-        if WCSession.isSupported() {
+        if WCSession.isSupported()
+        {
             
             let wcsession = WCSession.defaultSession()
             wcsession.delegate = self
@@ -214,7 +216,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
-    func setaDisplaySemTutorial() {
+    func setaDisplaySemTutorial()
+    {
         
         self.tutorialLabel.hidden = true
         self.sliderRaio.hidden = false
@@ -335,9 +338,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     
                     //MARK: ALTERAR BAGULHO DO WATCH AQUI TBMMM
                     
+                    print("watch está \(WCSession.isSupported())")
+                    
                     if WCSession.isSupported() {
                         
                         let wcsession = WCSession.defaultSession()
+                        print("_____ distancia no momento é \(labelDistancia.text)")
                         wcsession.sendMessage(["distancia":labelDistancia.text!], replyHandler: nil, errorHandler: nil)
                         
                     }
@@ -370,7 +376,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
- 
+    
     
     //MARK: Ativando alarme por quick action
     
@@ -417,7 +423,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             startMonitoringGeotification(currentAlarmQA!)
             alarmeAtivado = true
             changeDisplayActivated()
- 
+            
             labelDistancia.text = formataDistânciaParaRegião(distanciaParaRegiao)
             
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
@@ -428,7 +434,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         {
             showSimpleAlertWithTitle("", message: "You are already \(formataDistânciaParaRegião(currentAlarmQA!.radius)) away from your destination!", viewController: self)
         }
-    
+        
     }
     
     
@@ -514,7 +520,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 let roundedValue = round(sender.value / step) * step
                 sender.value = roundedValue
                 radiusLabel.text = "\((sender.value) / 1000) km"
-            
+                
             }
             
             distanciaRaio = Double(sender.value)
@@ -561,7 +567,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         radiusLabel.hidden = true
-        tutorialLabel.text = "radius of \(radiusLabel.text!))"
+        tutorialLabel.text = "radius of \(radiusLabel.text!)"
         tutorialLabel.hidden = false
         
         activeButton.setTitle("DEACTIVATE", forState: UIControlState.Normal)
@@ -653,13 +659,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             }
             
             }, completion: { _ in
-            
+                
                 if self.soundChooserButton.center.x == self.measureUnitButton.center.x {
                     self.soundChooserButton.hidden = true
                     self.measureUnitButton.hidden = true
                     self.helpButton.hidden = true
                 }
-            })
+        })
     }
     
     
@@ -693,12 +699,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         if distanceInMeters
         {
-
+            
             distanceInMeters = false
             setSlider()
             
             self.measureUnitButton.setImage(UIImage(named: "botaoKmNew"), forState: .Normal)
-
+            
             
         }
         else
@@ -707,7 +713,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             setSlider()
             
             self.measureUnitButton.setImage(UIImage(named: "botaoMiNew"), forState: .Normal)
-
+            
         }
         
     }
@@ -716,7 +722,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         return (distance / 1609.344).roundToPlaces(1)
     }
-
+    
     
     
     func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError)
@@ -738,12 +744,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
         
         dispatch_async(dispatch_get_main_queue()){
-        if message["tappedWCButton"] != nil {
-            
-            print("Tocou no button do watch")
-
-            self.ativarAction(self)
-            
+            if message["tappedWCButton"] != nil {
+                
+                print("Tocou no button do watch")
+                
+                self.ativarAction(self)
+                
             }
         }
         

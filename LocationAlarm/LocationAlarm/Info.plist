@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentSound</key>
-	<string>ringtone_bosscalling</string>
+	<string>bosscalling</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>isFirstLaunch</key>
