@@ -28,7 +28,6 @@
 		E187542F1CAF032D00DF0DEC /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E187542E1CAF032D00DF0DEC /* MediaPlayer.framework */; };
 		E18754311CB1B06900DF0DEC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18754301CB1B06900DF0DEC /* MapViewController.swift */; };
 		E18754331CB1B08700DF0DEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E18754321CB1B08700DF0DEC /* Main.storyboard */; };
-		E1A2E52E1D1C8F9A00906715 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A2E52D1D1C8F9A00906715 /* Manager.swift */; };
 		EF155CFF1CAB5C4800DD6437 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */; };
 		EF33B1D21D0A056B00525AFA /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF33B1D11D0A056B00525AFA /* IntroViewController.swift */; };
 		EF33B1D41D1083E900525AFA /* PertoFirstVideoDoneOK.mov in Resources */ = {isa = PBXBuildFile; fileRef = EF33B1D31D1083E900525AFA /* PertoFirstVideoDoneOK.mov */; };
@@ -112,7 +111,6 @@
 		E187542E1CAF032D00DF0DEC /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		E18754301CB1B06900DF0DEC /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		E18754321CB1B08700DF0DEC /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		E1A2E52D1D1C8F9A00906715 /* Manager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		EF155CFE1CAB5C4800DD6437 /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		EF33B1D11D0A056B00525AFA /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		EF33B1D31D1083E900525AFA /* PertoFirstVideoDoneOK.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = PertoFirstVideoDoneOK.mov; sourceTree = "<group>"; };
@@ -213,7 +211,6 @@
 			isa = PBXGroup;
 			children = (
 				E15E10D61CAB43E400A344BD /* Map.swift */,
-				E1A2E52D1D1C8F9A00906715 /* Manager.swift */,
 				E10200021CDBE0FA0078E0F6 /* Model.swift */,
 				E15E10E21CAC1E7C00A344BD /* Alarm.swift */,
 				E15E10E41CAC28EA00A344BD /* Alert.swift */,
@@ -410,7 +407,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1A2E52E1D1C8F9A00906715 /* Manager.swift in Sources */,
 				E10200031CDBE0FB0078E0F6 /* Model.swift in Sources */,
 				E15E10E51CAC28EA00A344BD /* Alert.swift in Sources */,
 				EFF1023A1D06F6FE009C0858 /* TutorialViewController.swift in Sources */,
