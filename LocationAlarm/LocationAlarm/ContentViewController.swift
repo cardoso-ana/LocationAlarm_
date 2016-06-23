@@ -46,6 +46,7 @@ class ContentViewController: UIViewController
         viewDoVideo.layer.addSublayer(playerLayer)
         
         player.play()
+        player.rate = 2.0
     }
     
     override func viewWillAppear(animated: Bool)
