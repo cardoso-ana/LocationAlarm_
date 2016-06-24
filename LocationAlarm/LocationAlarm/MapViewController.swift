@@ -94,6 +94,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
       
       if let yesOrNo = defaults.stringForKey("distanceInMeters") {
         distanceInMeters = yesOrNo
+        if distanceInMeters == "YES"{
+         self.measureUnitButton.imageView?.image = UIImage(named: "botaoMiNew")
+        } else {
+          self.measureUnitButton.imageView?.image = UIImage(named: "botaoKmNew")
+        }
       }
       
         // checa se é ou nao primeira vez de abertura do app
@@ -672,7 +677,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
             
             }, completion: { _ in
                 
-                if self.soundChooserButton.center.x == self.measureUnitButton.center.x {
+                if self.soundChooserButton.center.x == self.measureUnitButton.center.x && self.measureUnitButton.center.x == self.helpButton.center.x {
                     self.soundChooserButton.hidden = true
                     self.measureUnitButton.hidden = true
                     self.helpButton.hidden = true
