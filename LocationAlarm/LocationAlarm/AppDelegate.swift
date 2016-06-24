@@ -222,33 +222,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             if let savedAlarms = defaults.objectForKey("alarmes") as? NSData
             {
                 alarmes = NSKeyedUnarchiver.unarchiveObjectWithData(savedAlarms) as! [Alarm]
-            }
-            
-            
-            let alarmeAtual = alarmes[0]
-            
-            let lugarDois = CLLocation(latitude: alarmeAtual.coordinate.latitude, longitude: alarmeAtual.coordinate.longitude)
-            let distanciaParaCentro = LocationService.sharedInstance.locationManager!.location?.distanceFromLocation(lugarDois)
-            let distanciaParaRegiao = distanciaParaCentro! - alarmeAtual.radius
-            
-            if let yesOrNo = defaults.stringForKey("distanceInMeters") {
-                distanceInMeters = yesOrNo
-            }
-            print("IS IT IN METERS IN PLIST \(defaults.stringForKey("distanceInMeters"))")
-            
-            let textoDistancia = formataDistânciaParaRegião(distanciaParaRegiao)
-            print("texto distancia ____ \(textoDistancia)")
-
-            
-            if wcsession.reachable{
                 
                 
-                wcsession.sendMessage(["distancia":textoDistancia], replyHandler: nil, errorHandler: nil)
-            } else {
-                do{
-                    try wcsession.updateApplicationContext(["distancia":textoDistancia])
-                } catch {
-                    print("error updating application context")
+                let alarmeAtual = alarmes[0]
+                
+                let lugarDois = CLLocation(latitude: alarmeAtual.coordinate.latitude, longitude: alarmeAtual.coordinate.longitude)
+                let distanciaParaCentro = LocationService.sharedInstance.locationManager!.location?.distanceFromLocation(lugarDois)
+                let distanciaParaRegiao = distanciaParaCentro! - alarmeAtual.radius
+                
+                if let yesOrNo = defaults.stringForKey("distanceInMeters") {
+                    distanceInMeters = yesOrNo
+                }
+                print("IS IT IN METERS IN PLIST \(defaults.stringForKey("distanceInMeters"))")
+                
+                let textoDistancia = formataDistânciaParaRegião(distanciaParaRegiao)
+                print("texto distancia ____ \(textoDistancia)")
+                
+                
+                if wcsession.reachable{
+                    
+                    
+                    wcsession.sendMessage(["distancia":textoDistancia], replyHandler: nil, errorHandler: nil)
+                }
+                else
+                {
+                    do{
+                        try wcsession.updateApplicationContext(["distancia":textoDistancia])
+                    }
+                    catch {
+                        print("error updating application context")
+                    }
                 }
             }
         }

@@ -330,15 +330,15 @@
 				TargetAttributes = {
 					E15E10BD1CAB434900A344BD = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 4BPZR4X6FJ;
+						DevelopmentTeam = A3556U9ESZ;
 					};
 					EF33B2621D19934800525AFA = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 4BPZR4X6FJ;
+						DevelopmentTeam = A3556U9ESZ;
 					};
 					EF33B26E1D19934900525AFA = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 4BPZR4X6FJ;
+						DevelopmentTeam = A3556U9ESZ;
 					};
 				};
 			};
@@ -559,7 +559,7 @@
 				INFOPLIST_FILE = LocationAlarm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = group.LocationAlarm;
+				PRODUCT_BUNDLE_IDENTIFIER = bepid.locationalarm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -574,7 +574,7 @@
 				INFOPLIST_FILE = LocationAlarm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = group.LocationAlarm;
+				PRODUCT_BUNDLE_IDENTIFIER = bepid.locationalarm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -590,7 +590,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = LocationAlarmWK_Extension;
 				INFOPLIST_FILE = LocationAlarmWK/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = group.LocationAlarm.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = bepid.locationalarm.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -610,7 +610,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = LocationAlarmWK_Extension;
 				INFOPLIST_FILE = LocationAlarmWK/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = group.LocationAlarm.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = bepid.locationalarm.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -627,7 +627,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "LocationAlarmWK Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = group.LocationAlarm.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = bepid.locationalarm.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
@@ -644,7 +644,7 @@
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "LocationAlarmWK Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = group.LocationAlarm.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = bepid.locationalarm.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
