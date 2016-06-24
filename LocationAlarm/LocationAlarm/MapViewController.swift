@@ -91,16 +91,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
         {
             alarme = NSKeyedUnarchiver.unarchiveObjectWithData(savedAlarms) as! [Alarm]
         }
-      
-      if let yesOrNo = defaults.stringForKey("distanceInMeters") {
-        distanceInMeters = yesOrNo
-        if distanceInMeters == "YES"{
-         self.measureUnitButton.imageView?.image = UIImage(named: "botaoMiNew")
-        } else {
-          self.measureUnitButton.imageView?.image = UIImage(named: "botaoKmNew")
+        
+        if let yesOrNo = defaults.stringForKey("distanceInMeters") {
+            distanceInMeters = yesOrNo
+            if distanceInMeters == "YES"{
+                self.measureUnitButton.imageView?.image = UIImage(named: "botaoMiNew")
+            } else {
+                self.measureUnitButton.imageView?.image = UIImage(named: "botaoKmNew")
+            }
         }
-      }
-      
+        
         // checa se é ou nao primeira vez de abertura do app
         
         
@@ -210,9 +210,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
             if WCSession.isSupported() {
                 
                 let wcsession = WCSession.defaultSession()
-              if wcsession.reachable{
-                wcsession.sendMessage(["distancia":labelDistancia.text!], replyHandler: nil, errorHandler: nil)
-              }
+                if wcsession.reachable{
+                    wcsession.sendMessage(["distancia":labelDistancia.text!], replyHandler: nil, errorHandler: nil)
+                } else {
+                    do{
+                        try wcsession.updateApplicationContext(["distancia":labelDistancia.text!])
+                    } catch {
+                        print("error updating application context")
+                    }
+                }
             }
         }
     }
@@ -357,9 +363,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
                         
                         let wcsession = WCSession.defaultSession()
                         print("_____ distancia no momento é \(labelDistancia.text)")
-                      if wcsession.reachable{
-                        wcsession.sendMessage(["distancia":labelDistancia.text!], replyHandler: nil, errorHandler: nil)
-                      }
+                        if wcsession.reachable{
+                            wcsession.sendMessage(["distancia":labelDistancia.text!], replyHandler: nil, errorHandler: nil)
+                        } else {
+                            do{
+                                try wcsession.updateApplicationContext(["distancia":labelDistancia.text!])
+                            } catch {
+                                print("error updating application context")
+                            }
+                        }
                     }
                     
                     self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -385,6 +397,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
                 
                 alarmeAtivado = false
                 changeDisplayDeactivated()
+                
             }
         }
     }
@@ -589,11 +602,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
         activeButton.backgroundColor = UIColor(red: 209 / 255, green: 55 / 255, blue: 53 / 255, alpha: 1)
         
         if WCSession.isSupported() {
-          
+            
             let wcsession = WCSession.defaultSession()
-          if wcsession.reachable{
-            wcsession.sendMessage(["isAlarmActivated":true], replyHandler: nil, errorHandler: nil)
-          }
+            if wcsession.reachable{
+                wcsession.sendMessage(["isAlarmActivated":true], replyHandler: nil, errorHandler: nil)
+            } else {
+                do{
+                    try wcsession.updateApplicationContext(["isAlarmActivated":true])
+                } catch {
+                    print("error updating application context")
+                }
+            }
         }
         
     }
@@ -617,9 +636,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
         if WCSession.isSupported() {
             
             let wcsession = WCSession.defaultSession()
-          if wcsession.reachable{
-            wcsession.sendMessage(["isAlarmActivated":false], replyHandler: nil, errorHandler: nil)
-          }
+            if wcsession.reachable{
+                wcsession.sendMessage(["isAlarmActivated":false], replyHandler: nil, errorHandler: nil)
+            } else {
+                do{
+                    try wcsession.updateApplicationContext(["isAlarmActivated":false])
+                } catch {
+                    print("error updating application context")
+                }
+            }
         }
     }
     
@@ -655,6 +680,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
     
     @IBAction func settingsAction(sender: AnyObject) //tem que mudar o nome dessa action
     {
+        print("settings action")
+        
         soundChooserButton.hidden = false
         measureUnitButton.hidden = false
         helpButton.hidden = false
@@ -714,14 +741,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
     
     @IBAction func chooseDistanceUnit(sender: AnyObject)
     {
-      let defaults = NSUserDefaults.standardUserDefaults()
-
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
         if distanceInMeters == "YES"
         {
             
             distanceInMeters = "NO"
             defaults.setObject("NO", forKey: "distanceInMeters")
-
+            
             setSlider()
             
             self.measureUnitButton.setImage(UIImage(named: "botaoKmNew"), forState: .Normal)
@@ -745,17 +772,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
         return (distance / 1609.344).roundToPlaces(1)
     }
     
-//    
-//    
-//    func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError)
-//    {
-//        print("Monitoring failed for region with identifier: \(region!.identifier)")
-//    }
-//    
-//    func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
-//    {
-//        print("Location Manager failed with the following error: \(error)")
-//    }
+    //
+    //
+    //    func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError)
+    //    {
+    //        print("Monitoring failed for region with identifier: \(region!.identifier)")
+    //    }
+    //
+    //    func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
+    //    {
+    //        print("Location Manager failed with the following error: \(error)")
+    //    }
     
     override func didReceiveMemoryWarning()
     {

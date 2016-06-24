@@ -97,6 +97,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let soundName = defaults.stringForKey("currentSound")
         print(soundName)
         
+        let wcsession = WCSession.defaultSession()
+        
+        if wcsession.reachable{
+            
+            wcsession.sendMessage(["arrived":"didArrive"], replyHandler: nil, errorHandler: nil)
+        } else {
+            do{
+                try wcsession.updateApplicationContext(["arrived":"didArrive"])
+            } catch {
+                print("error updating application context")
+            }
+        }
+        
         // Show an alert if application is active
         if UIApplication.sharedApplication().applicationState == .Active
         {
@@ -163,6 +176,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification)
     {
         //TODO: fazer tela do watch mudar quando tá aberto e chega no lugar!!!
+        
+        
     }
     
     func formataDistânciaParaRegião(distancia: Double) -> String
@@ -203,29 +218,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             print("session supported")
             
             let wcsession = WCSession.defaultSession()
+            
+            if let savedAlarms = defaults.objectForKey("alarmes") as? NSData
+            {
+                alarmes = NSKeyedUnarchiver.unarchiveObjectWithData(savedAlarms) as! [Alarm]
+            }
+            
+            
+            let alarmeAtual = alarmes[0]
+            
+            let lugarDois = CLLocation(latitude: alarmeAtual.coordinate.latitude, longitude: alarmeAtual.coordinate.longitude)
+            let distanciaParaCentro = LocationService.sharedInstance.locationManager!.location?.distanceFromLocation(lugarDois)
+            let distanciaParaRegiao = distanciaParaCentro! - alarmeAtual.radius
+            
+            if let yesOrNo = defaults.stringForKey("distanceInMeters") {
+                distanceInMeters = yesOrNo
+            }
+            print("IS IT IN METERS IN PLIST \(defaults.stringForKey("distanceInMeters"))")
+            
+            let textoDistancia = formataDistânciaParaRegião(distanciaParaRegiao)
+            print("texto distancia ____ \(textoDistancia)")
+
+            
             if wcsession.reachable{
                 
-                if let savedAlarms = defaults.objectForKey("alarmes") as? NSData
-                {
-                    alarmes = NSKeyedUnarchiver.unarchiveObjectWithData(savedAlarms) as! [Alarm]
-                }
-                
-                
-                let alarmeAtual = alarmes[0]
-              
-                let lugarDois = CLLocation(latitude: alarmeAtual.coordinate.latitude, longitude: alarmeAtual.coordinate.longitude)
-                let distanciaParaCentro = LocationService.sharedInstance.locationManager!.location?.distanceFromLocation(lugarDois)
-                let distanciaParaRegiao = distanciaParaCentro! - alarmeAtual.radius
-                
-                if let yesOrNo = defaults.stringForKey("distanceInMeters") {
-                    distanceInMeters = yesOrNo
-                }
-                print("IS IT IN METERS IN PLIST \(defaults.stringForKey("distanceInMeters"))")
-                
-                let textoDistancia = formataDistânciaParaRegião(distanciaParaRegiao)
-                print("texto distancia ____ \(textoDistancia)")
                 
                 wcsession.sendMessage(["distancia":textoDistancia], replyHandler: nil, errorHandler: nil)
+            } else {
+                do{
+                    try wcsession.updateApplicationContext(["distancia":textoDistancia])
+                } catch {
+                    print("error updating application context")
+                }
             }
         }
     }

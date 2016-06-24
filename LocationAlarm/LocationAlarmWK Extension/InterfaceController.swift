@@ -50,13 +50,24 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject]) {
         
-        if message["tappedWKButton"] != nil{
-            print("NAO TO ACREDITANDOOOO")
-        }
         
         if message["isAlarmActivated"] != nil{
         alarmIsActivated = ((message["isAlarmActivated"] as? Bool))!
         }
+        
+        if message["arrived"] != nil{
+
+            presentAlertControllerWithTitle("You arrived!", message: nil, preferredStyle: WKAlertControllerStyle.Alert, actions: [WKAlertAction(title: "OK", style: .Cancel, handler: { _ in
+                
+                print("foda-se")
+                
+            })])
+                
+            return
+            
+        }
+        
+        // ARRIVD
 
         
         if self.alarmIsActivated == true {
@@ -77,6 +88,56 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             
             print(" ___ distanciaText é lele \(distanciaText)")
 
+            
+        } else {
+            
+            distanceLabel.setText(" ")
+            captionLabel.setText("Alarm deactivated")
+            actionButton.setHidden(true)
+            
+        }
+        
+    }
+    
+    func session(session: WCSession, didReceiveApplicationContext applicationContext: [String : AnyObject]) {
+        
+
+        
+        if applicationContext["isAlarmActivated"] != nil{
+            alarmIsActivated = ((applicationContext["isAlarmActivated"] as? Bool))!
+        }
+        
+        if applicationContext["arrived"] != nil{
+            
+            presentAlertControllerWithTitle("You arrived!", message: nil, preferredStyle: WKAlertControllerStyle.Alert, actions: [WKAlertAction(title: "OK", style: .Cancel, handler: { _ in
+                
+                print("foda-se")
+                
+            })])
+            
+            return
+            
+        }
+        
+        
+        if self.alarmIsActivated == true {
+            
+            var distanciaText = " "
+            
+            print("application context distancia é \(applicationContext["distancia"])")
+            if applicationContext["distancia"] != nil{
+                distanciaText = applicationContext["distancia"] as! String
+                print(" ___ distanciaText é \(distanciaText)")
+                
+            }
+            
+            distanceLabel.setText(distanciaText)
+            
+            captionLabel.setText("distance to alarm")
+            actionButton.setHidden(false)
+            
+            print(" ___ distanciaText é lele \(distanciaText)")
+            
             
         } else {
             
