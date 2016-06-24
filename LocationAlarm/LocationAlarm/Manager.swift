@@ -50,9 +50,7 @@ class LocationService: NSObject, CLLocationManagerDelegate
         
         if CLLocationManager.authorizationStatus() == .NotDetermined
         {
-            // you have 2 choice
-            // 1. requestAlwaysAuthorization
-            // 2. requestWhenInUseAuthorization
+
             locationManager.requestAlwaysAuthorization()
         }
         
@@ -77,7 +75,8 @@ class LocationService: NSObject, CLLocationManagerDelegate
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         
-        guard let location = locations.last else {
+        guard let location = locations.last else
+        {
             return
         }
         
@@ -86,6 +85,10 @@ class LocationService: NSObject, CLLocationManagerDelegate
         
         // use for real time update location
         updateLocation(location)
+        
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.chamaWatch()
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
@@ -93,6 +96,7 @@ class LocationService: NSObject, CLLocationManagerDelegate
         
         // do on error
         updateLocationDidFailWithError(error)
+        
     }
     
     func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion)

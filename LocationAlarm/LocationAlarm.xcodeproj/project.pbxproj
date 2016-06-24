@@ -20,7 +20,6 @@
 		E15E10C21CAB434900A344BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10C11CAB434900A344BD /* AppDelegate.swift */; };
 		E15E10C91CAB434900A344BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E15E10C81CAB434900A344BD /* Assets.xcassets */; };
 		E15E10CC1CAB434900A344BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E15E10CA1CAB434900A344BD /* LaunchScreen.storyboard */; };
-		E15E10D71CAB43E400A344BD /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10D61CAB43E400A344BD /* Map.swift */; };
 		E15E10E31CAC1E7C00A344BD /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10E21CAC1E7C00A344BD /* Alarm.swift */; };
 		E15E10E51CAC28EA00A344BD /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15E10E41CAC28EA00A344BD /* Alert.swift */; };
 		E187542B1CAF031A00DF0DEC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E187542A1CAF031A00DF0DEC /* MapKit.framework */; };
@@ -104,7 +103,6 @@
 		E15E10C81CAB434900A344BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E15E10CB1CAB434900A344BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E15E10CD1CAB434900A344BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E15E10D61CAB43E400A344BD /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		E15E10E21CAC1E7C00A344BD /* Alarm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		E15E10E41CAC28EA00A344BD /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		E187542A1CAF031A00DF0DEC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -212,7 +210,6 @@
 		E15E10D31CAB435D00A344BD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E15E10D61CAB43E400A344BD /* Map.swift */,
 				E18ED11A1D1CA77400D25DA4 /* Manager.swift */,
 				E10200021CDBE0FA0078E0F6 /* Model.swift */,
 				E15E10E21CAC1E7C00A344BD /* Alarm.swift */,
@@ -415,7 +412,6 @@
 				EFF1023A1D06F6FE009C0858 /* TutorialViewController.swift in Sources */,
 				EF33B1D21D0A056B00525AFA /* IntroViewController.swift in Sources */,
 				E18754311CB1B06900DF0DEC /* MapViewController.swift in Sources */,
-				E15E10D71CAB43E400A344BD /* Map.swift in Sources */,
 				EF59956C1CDBD17400B5F471 /* ChooseSongTableViewCell.swift in Sources */,
 				E18ED11B1D1CA77400D25DA4 /* Manager.swift in Sources */,
 				E15E10E31CAC1E7C00A344BD /* Alarm.swift in Sources */,

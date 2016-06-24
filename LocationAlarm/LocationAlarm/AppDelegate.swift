@@ -18,10 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 {
     let model = Model.sharedInstance()
     var window: UIWindow?
-    //let locationManager = CLLocationManager()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
+
         LocationService.sharedInstance.locationManager!.requestAlwaysAuthorization()
         
         let pageController = UIPageControl.appearance()
@@ -106,15 +106,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
     }
     
-    func locationManager(manager: CLLocationManager, didEnterRegion region: CLRegion)
-    {
-        print("entrou")
-        if region is CLCircularRegion
-        {
-            handleRegionEvent(region)
-        }
-    }
-    
     func showSimpleAlertWithTitle(title: String!, message: String, sound: NSURL, viewController: UIViewController)
     {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
@@ -155,6 +146,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         print("______Terminou o performActionForShortcutItem")
         
     }
-  
+    
+    func chamaWatch()
+    {
+       print("oi")
+    }
 }
 

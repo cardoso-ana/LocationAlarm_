@@ -55,7 +55,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
     var pinAlarm = false
     var alarme: [Alarm] = []
     var resultSearchController:UISearchController? = nil
-    let map = Map()
     var alarmeAtivado = false
     var distanceInMeters = false
     //var locationManager = CLLocationManager()
@@ -449,7 +448,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
         // 1
         if !CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion)
         {
-            showSimpleAlertWithTitle("Error", message: "Geofencing is not supported on this device!",     viewController: self)
+            showSimpleAlertWithTitle("Error", message: "Geofencing is not supported on this device!", viewController: self)
             return
         }
         // 2
