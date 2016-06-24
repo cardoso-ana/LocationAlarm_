@@ -120,6 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     LocationService.sharedInstance.locationManager!.stopMonitoringForRegion(region)
     let viewController = window?.rootViewController?.childViewControllers.first as! MapViewController
+    viewController.alarmeAtivado = false
     viewController.changeDisplayDeactivated()
     
   }

@@ -73,7 +73,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             distanceLabel.setText(distanciaText)
 
             captionLabel.setText("distance to alarm")
-            actionButton.setEnabled(true)
+            actionButton.setHidden(false)
             
             print(" ___ distanciaText é lele \(distanciaText)")
 
@@ -81,8 +81,8 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         } else {
             
             distanceLabel.setText(" ")
-            captionLabel.setText("Alarm Deactivated")
-            actionButton.setEnabled(false)
+            captionLabel.setText("Alarm deactivated")
+            actionButton.setHidden(true)
             
         }
         
