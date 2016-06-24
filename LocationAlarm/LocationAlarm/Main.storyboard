@@ -153,7 +153,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbu-6t-6Tc">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="105"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qjl-PI-cw6">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qjl-PI-cw6">
                                         <rect key="frame" x="234" y="33" width="132" height="69"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22km" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="36" translatesAutoresizingMaskIntoConstraints="NO" id="3oc-FI-U0l">
@@ -161,27 +161,16 @@
                                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="40"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="distance to alarm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSm-yE-MKl">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="distance to alarm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSm-yE-MKl">
                                                 <rect key="frame" x="0.0" y="48" width="132" height="21"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="21" id="XAz-vp-npx"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="rSm-yE-MKl" secondAttribute="trailing" id="JJh-97-j0N"/>
-                                            <constraint firstItem="rSm-yE-MKl" firstAttribute="top" secondItem="3oc-FI-U0l" secondAttribute="bottom" id="aBe-gW-srL"/>
-                                            <constraint firstItem="rSm-yE-MKl" firstAttribute="leading" secondItem="qjl-PI-cw6" secondAttribute="leading" id="ciW-Yx-0MS"/>
-                                            <constraint firstAttribute="bottom" secondItem="rSm-yE-MKl" secondAttribute="bottom" id="hhX-92-KaZ"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="JJh-97-j0N"/>
-                                                <exclude reference="aBe-gW-srL"/>
-                                                <exclude reference="ciW-Yx-0MS"/>
-                                                <exclude reference="hhX-92-KaZ"/>
-                                            </mask>
-                                        </variation>
                                     </stackView>
                                 </subviews>
                                 <constraints>
