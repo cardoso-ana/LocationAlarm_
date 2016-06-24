@@ -56,7 +56,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
     var alarme: [Alarm] = []
     var resultSearchController:UISearchController? = nil
     var alarmeAtivado = false
-    var distanceInMeters = false
+    var distanceInMeters = "NO"
     //var locationManager = CLLocationManager()
     var locationCoord: CLLocationCoordinate2D?
     
@@ -91,7 +91,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
         {
             alarme = NSKeyedUnarchiver.unarchiveObjectWithData(savedAlarms) as! [Alarm]
         }
-        
+      
+      if let yesOrNo = defaults.stringForKey("distanceInMeters") {
+        distanceInMeters = yesOrNo
+      }
+      
         // checa se é ou nao primeira vez de abertura do app
         
         
@@ -201,8 +205,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
             if WCSession.isSupported() {
                 
                 let wcsession = WCSession.defaultSession()
+              if wcsession.reachable{
                 wcsession.sendMessage(["distancia":labelDistancia.text!], replyHandler: nil, errorHandler: nil)
-                
+              }
             }
         }
     }
@@ -347,8 +352,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
                         
                         let wcsession = WCSession.defaultSession()
                         print("_____ distancia no momento é \(labelDistancia.text)")
+                      if wcsession.reachable{
                         wcsession.sendMessage(["distancia":labelDistancia.text!], replyHandler: nil, errorHandler: nil)
-                        
+                      }
                     }
                     
                     self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -482,7 +488,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
     
     func setSlider()
     {
-        if distanceInMeters
+        if distanceInMeters == "YES"
         {
             sliderRaio.minimumValue = 650
             sliderRaio.maximumValue = 3000
@@ -509,7 +515,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
     
     @IBAction func sliderRaioChanged(sender: UISlider)
     {
-        if distanceInMeters
+        if distanceInMeters == "YES"
         {
             if sender.value < 1000
             {
@@ -578,10 +584,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
         activeButton.backgroundColor = UIColor(red: 209 / 255, green: 55 / 255, blue: 53 / 255, alpha: 1)
         
         if WCSession.isSupported() {
-            
+          
             let wcsession = WCSession.defaultSession()
+          if wcsession.reachable{
             wcsession.sendMessage(["isAlarmActivated":true], replyHandler: nil, errorHandler: nil)
-            
+          }
         }
         
     }
@@ -605,15 +612,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
         if WCSession.isSupported() {
             
             let wcsession = WCSession.defaultSession()
+          if wcsession.reachable{
             wcsession.sendMessage(["isAlarmActivated":false], replyHandler: nil, errorHandler: nil)
-            
+          }
         }
     }
     
     func formataDistânciaParaRegião(distancia: Double) -> String
     {
         var dist = distancia
-        if distanceInMeters
+        if distanceInMeters == "YES"
         {
             if dist < 1000
             {
@@ -701,10 +709,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
     
     @IBAction func chooseDistanceUnit(sender: AnyObject)
     {
-        if distanceInMeters
+      let defaults = NSUserDefaults.standardUserDefaults()
+
+        if distanceInMeters == "YES"
         {
             
-            distanceInMeters = false
+            distanceInMeters = "NO"
+            defaults.setObject("NO", forKey: "distanceInMeters")
+
             setSlider()
             
             self.measureUnitButton.setImage(UIImage(named: "botaoKmNew"), forState: .Normal)
@@ -713,7 +725,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
         }
         else
         {
-            distanceInMeters = true
+            distanceInMeters = "YES"
+            defaults.setObject("YES", forKey: "distanceInMeters")
             setSlider()
             
             self.measureUnitButton.setImage(UIImage(named: "botaoMiNew"), forState: .Normal)
