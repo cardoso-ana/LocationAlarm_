@@ -18,12 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 {
     let model = Model.sharedInstance()
     var window: UIWindow?
-    let locationManager = CLLocationManager()
+    //let locationManager = CLLocationManager()
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
+        LocationService.sharedInstance.locationManager!.requestAlwaysAuthorization()
         
         let pageController = UIPageControl.appearance()
         pageController.pageIndicatorTintColor = UIColor.lightGrayColor()
@@ -101,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
         }
         
-        locationManager.stopMonitoringForRegion(region)
+        LocationService.sharedInstance.locationManager!.stopMonitoringForRegion(region)
         let viewController = window?.rootViewController?.childViewControllers.first as! MapViewController
         viewController.changeDisplayDeactivated()
         

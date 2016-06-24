@@ -20,7 +20,7 @@ protocol HandleMapSearch
 
 //Coordenadas PUC -22.97976, -43.23282
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, MPMediaPickerControllerDelegate, WCSessionDelegate
+class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDelegate, MPMediaPickerControllerDelegate, WCSessionDelegate
 {
     
     @IBOutlet weak var viewS: UIView!
@@ -58,7 +58,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let map = Map()
     var alarmeAtivado = false
     var distanceInMeters = false
-    var locationManager = CLLocationManager()
+    //var locationManager = CLLocationManager()
     var locationCoord: CLLocationCoordinate2D?
     
     let tapGestureRecognizer = UITapGestureRecognizer()
@@ -70,7 +70,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidAppear(animated: Bool)
     {
         super.viewDidAppear(true)
-        map.locationManagerInit()
+        LocationService.sharedInstance.startUpdatingLocation()
     }
     
     override func viewDidLoad()
@@ -111,7 +111,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
         mapView.delegate = self
-        locationManager.delegate = self
+        LocationService.sharedInstance.delegate = self
         mapView.showsUserLocation = true
         
         let locationSearchTable = storyboard!.instantiateViewControllerWithIdentifier("LocationSearchTable") as! LocationSearchTable
@@ -175,7 +175,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     {
         if firstTime == true
         {
-            self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!),    animated: true)
+            let center = CLLocationCoordinate2D(latitude: LocationService.sharedInstance.locationManager!.location!.coordinate.latitude, longitude: LocationService.sharedInstance.locationManager!.location!.coordinate.longitude)
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            self.mapView.setRegion(region, animated: true)
             firstTime = false
         }
         
@@ -190,7 +192,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         {
             
             let lugarDois = CLLocation(latitude: (raioAlarme?.coordinate.latitude)!, longitude: (raioAlarme?.coordinate.longitude)!)
-            let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
+            let distanciaParaCentro = LocationService.sharedInstance.locationManager!.location?.distanceFromLocation(lugarDois)
             let distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
             
             labelDistancia.text = formataDistânciaParaRegião(distanciaParaRegiao)
@@ -208,9 +210,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBAction func setRegionToUserLocation(sender: AnyObject)
     {
-        if locationManager.location != nil{
+        if LocationService.sharedInstance.locationManager!.location != nil{
             
-            self.mapView.setRegion(map.userLocation(locationManager, location: locationManager.location!),    animated: true)
+            let center = CLLocationCoordinate2D(latitude: LocationService.sharedInstance.locationManager!.location!.coordinate.latitude, longitude: LocationService.sharedInstance.locationManager!.location!.coordinate.longitude)
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            self.mapView.setRegion(region, animated: true)
             
         }
         
@@ -307,7 +311,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             {
                 
                 let lugarDois = CLLocation(latitude: (raioAlarme?.coordinate.latitude)!, longitude: (raioAlarme?.coordinate.longitude)!)
-                let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
+                let distanciaParaCentro = LocationService.sharedInstance.locationManager!.location?.distanceFromLocation(lugarDois)
                 let distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
                 
                 
@@ -409,7 +413,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         let lugarDois = CLLocation(latitude: (currentAlarmQA!.coordinate.latitude), longitude: (currentAlarmQA!.coordinate.longitude))
         
-        let distanciaParaCentro = locationManager.location?.distanceFromLocation(lugarDois)
+        let distanciaParaCentro = LocationService.sharedInstance.locationManager!.location?.distanceFromLocation(lugarDois)
         let distanciaParaRegiao = distanciaParaCentro! - currentAlarmQA!.radius
         
         
@@ -441,7 +445,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     //MARK: Monitoramento da região
     func startMonitoringGeotification(geotification: Alarm)
     {
-        print("::: Começou a monitorar a região")
+        
         // 1
         if !CLLocationManager.isMonitoringAvailableForClass(CLCircularRegion)
         {
@@ -454,26 +458,27 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             showSimpleAlertWithTitle("Warning", message: "Your alarm is saved but will only be activated once you grant Geotify permission to access the device location.", viewController: self)
         }
         // 3
-        print("\n::::::: QTD MONITORED REGIONS : \(locationManager.monitoredRegions.count)")
-        if locationManager.monitoredRegions.count != 0
+        print("\n::::::: QTD MONITORED REGIONS : \(LocationService.sharedInstance.locationManager!.monitoredRegions.count)")
+        if LocationService.sharedInstance.locationManager!.monitoredRegions.count != 0
         {
-            for monitoredRegion in locationManager.monitoredRegions
+            for monitoredRegion in LocationService.sharedInstance.locationManager!.monitoredRegions
             {
-                locationManager.stopMonitoringForRegion(monitoredRegion)
+                LocationService.sharedInstance.locationManager!.stopMonitoringForRegion(monitoredRegion)
             }
         }
         //print("_____TESTE__ geotification.alarmeRegion = \(geotification.alarmeRegion)")
         geotification.alarmeRegion?.notifyOnEntry = true
         geotification.alarmeRegion?.notifyOnExit = false
         
-        locationManager.startMonitoringForRegion(geotification.alarmeRegion!)
-        print("\n\nRegiões que estão sendo monitoradas: \(locationManager.monitoredRegions)\n\n")
+        LocationService.sharedInstance.locationManager!.startMonitoringForRegion(geotification.alarmeRegion!)
+        print("::: Começou a monitorar a região")
+        print("\n\nRegiões que estão sendo monitoradas: \(LocationService.sharedInstance.locationManager!.monitoredRegions)\n\n")
     }
     
     func stopMonitoringGeotification(geotification: Alarm)
     {
         print("::: Parou de monitorar a região")
-        locationManager.stopMonitoringForRegion(geotification.alarmeRegion!)
+        LocationService.sharedInstance.locationManager!.stopMonitoringForRegion(geotification.alarmeRegion!)
     }
     
     func setSlider()
@@ -723,17 +728,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return (distance / 1609.344).roundToPlaces(1)
     }
     
-    
-    
-    func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError)
-    {
-        print("Monitoring failed for region with identifier: \(region!.identifier)")
-    }
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
-    {
-        print("Location Manager failed with the following error: \(error)")
-    }
+//    
+//    
+//    func locationManager(manager: CLLocationManager, monitoringDidFailForRegion region: CLRegion?, withError error: NSError)
+//    {
+//        print("Monitoring failed for region with identifier: \(region!.identifier)")
+//    }
+//    
+//    func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
+//    {
+//        print("Location Manager failed with the following error: \(error)")
+//    }
     
     override func didReceiveMemoryWarning()
     {
@@ -753,6 +758,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             }
         }
         
+    }
+    
+    // MARK: LocationService Delegate
+    func tracingLocation(currentLocation: CLLocation)
+    {
+        let lat = currentLocation.coordinate.latitude
+        let lon = currentLocation.coordinate.longitude
+        print("\(lat) \(lon)")
+    }
+    
+    func tracingLocationDidFailWithError(error: NSError) {
+        print("tracing Location Error : \(error.description)")
     }
     
 }
