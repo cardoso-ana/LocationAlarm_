@@ -278,7 +278,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="O7L-FA-kvn" firstAttribute="height" secondItem="72D-Ni-DTh" secondAttribute="height" id="0rk-vP-RoI"/>
-                            <constraint firstItem="zLX-A7-aLB" firstAttribute="centerX" secondItem="72D-Ni-DTh" secondAttribute="centerX" id="2be-8Q-D7i"/>
+                            <constraint firstItem="zLX-A7-aLB" firstAttribute="centerX" secondItem="72D-Ni-DTh" secondAttribute="centerX" identifier="HelpButtonAlinhamentoX" id="2be-8Q-D7i" userLabel="helpButtonX"/>
                             <constraint firstItem="zLX-A7-aLB" firstAttribute="width" secondItem="72D-Ni-DTh" secondAttribute="width" id="720-qz-xUi"/>
                             <constraint firstItem="Kbu-6t-6Tc" firstAttribute="leading" secondItem="FfW-a3-Cr7" secondAttribute="leading" id="7Zf-Wi-mg7"/>
                             <constraint firstItem="ek0-BC-yNo" firstAttribute="trailing" secondItem="TUu-mA-bf2" secondAttribute="trailing" id="8Lt-9Q-8Jc"/>
@@ -287,7 +287,7 @@
                             <constraint firstItem="zLX-A7-aLB" firstAttribute="centerY" secondItem="72D-Ni-DTh" secondAttribute="centerY" id="D4y-l6-S16"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Dnt-fV-key"/>
                             <constraint firstItem="60a-tO-1eZ" firstAttribute="centerY" secondItem="ek0-BC-yNo" secondAttribute="centerY" id="Efv-fG-PZF"/>
-                            <constraint firstItem="IaF-wf-88N" firstAttribute="centerX" secondItem="72D-Ni-DTh" secondAttribute="centerX" id="FQ5-CE-wUi"/>
+                            <constraint firstItem="IaF-wf-88N" firstAttribute="centerX" secondItem="72D-Ni-DTh" secondAttribute="centerX" identifier="MeasureUnitAlinhamentoX" id="FQ5-CE-wUi" userLabel="measureUnitX"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="leading" secondItem="TUu-mA-bf2" secondAttribute="leading" id="Fh8-K4-Z4A"/>
                             <constraint firstItem="yvo-PS-Gds" firstAttribute="trailing" secondItem="TUu-mA-bf2" secondAttribute="trailing" id="G58-aN-n5b"/>
                             <constraint firstItem="ek0-BC-yNo" firstAttribute="leading" secondItem="yvo-PS-Gds" secondAttribute="leading" id="OGb-m7-dmP"/>
@@ -299,7 +299,7 @@
                             <constraint firstAttribute="trailing" secondItem="z4W-m3-lVG" secondAttribute="trailing" constant="8" id="byb-02-VDv"/>
                             <constraint firstItem="O7L-FA-kvn" firstAttribute="width" secondItem="72D-Ni-DTh" secondAttribute="width" id="cHr-6L-nHB"/>
                             <constraint firstItem="Kbu-6t-6Tc" firstAttribute="trailing" secondItem="FfW-a3-Cr7" secondAttribute="trailing" id="ciq-LS-jMx"/>
-                            <constraint firstItem="O7L-FA-kvn" firstAttribute="centerX" secondItem="72D-Ni-DTh" secondAttribute="centerX" id="fe3-ZG-uaL"/>
+                            <constraint firstItem="O7L-FA-kvn" firstAttribute="centerX" secondItem="72D-Ni-DTh" secondAttribute="centerX" identifier="shoundChooserAlinhamentoX" id="fe3-ZG-uaL" userLabel="soundChooserX"/>
                             <constraint firstItem="60a-tO-1eZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fe3-cd-OMZ"/>
                             <constraint firstItem="IaF-wf-88N" firstAttribute="leading" secondItem="72D-Ni-DTh" secondAttribute="leading" id="feI-3V-Iol"/>
                             <constraint firstItem="TUu-mA-bf2" firstAttribute="top" secondItem="ek0-BC-yNo" secondAttribute="bottom" id="gR3-Or-HPR"/>
@@ -338,6 +338,9 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="activeButton" destination="TUu-mA-bf2" id="OWl-vT-rkO"/>
+                        <outlet property="constrainHelpButtonX" destination="2be-8Q-D7i" id="E6a-f9-Np6"/>
+                        <outlet property="constrainMeasureUnitX" destination="FQ5-CE-wUi" id="c1H-Mo-Jhx"/>
+                        <outlet property="constrainSoundChooserX" destination="fe3-ZG-uaL" id="5qi-qw-2yU"/>
                         <outlet property="fundoDim" destination="Kbu-6t-6Tc" id="FrM-iT-3WB"/>
                         <outlet property="helpButton" destination="zLX-A7-aLB" id="TPb-SB-aNJ"/>
                         <outlet property="labelDistancia" destination="3oc-FI-U0l" id="rN9-NV-EZf"/>

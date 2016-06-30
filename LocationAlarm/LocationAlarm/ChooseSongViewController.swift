@@ -29,12 +29,23 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
         
         soundFiles = NSBundle.mainBundle().URLsForResourcesWithExtension("caf", subdirectory: nil)! as [NSURL]
         print(soundFiles)
-        
+      
+      do{
+       model.audioPlayer = try AVAudioPlayer(contentsOfURL: soundFiles[0])
+      } catch {
+        print("error aqui")
+      }
+      
         for (index, file) in soundFiles.enumerate()
         {
             if file.lastPathComponent == defaults.stringForKey("currentSound")
             {
+                print("________LAST SELECTED INDEX PATH___ \(lastSelectedIndexPath)")
+              
                 lastSelectedIndexPath = NSIndexPath(forRow: index, inSection: 0)
+              
+              print("________LAST SELECTED INDEX PATH___ \(lastSelectedIndexPath)")
+
             }
         }
     }
@@ -76,7 +87,8 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
             cell.accessoryType = .Checkmark
             print("entrou no trequetaaaaaoooo ___")
             print(indexPath.row)
-            print(lastSelectedIndexPath)
+            print("LAST SELECTED INDEX PATH::::: \(lastSelectedIndexPath)")
+            print(soundFiles[lastSelectedIndexPath.row].lastPathComponent)
         }
         
         return cell
@@ -110,8 +122,11 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewWillDisappear(animated: Bool)
     {
-        model.audioPlayer.stop()
-        
+
+      if model.audioPlayer.playing{
+      model.audioPlayer.stop()
+      }
+      
         print(soundFiles[lastSelectedIndexPath.row].lastPathComponent)
         
         defaults.setValue(soundFiles[lastSelectedIndexPath.row].lastPathComponent, forKey: "currentSound")
