@@ -457,6 +457,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
             
             startMonitoringGeotification(currentAlarmQA!)
             alarmeAtivado = true
+          
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+          
             changeDisplayActivated()
             
             labelDistancia.text = formataDistânciaParaRegião(distanciaParaRegiao)
