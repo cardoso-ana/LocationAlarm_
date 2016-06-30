@@ -62,7 +62,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
     var alarme: [Alarm] = []
     var resultSearchController:UISearchController? = nil
     var alarmeAtivado = false
-    var distanceInMeters = "NO"
+    var distanceInMeters = "YES"
     //var locationManager = CLLocationManager()
     var locationCoord: CLLocationCoordinate2D?
     
@@ -101,9 +101,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
         if let yesOrNo = defaults.stringForKey("distanceInMeters") {
             distanceInMeters = yesOrNo
             if distanceInMeters == "YES"{
-                self.measureUnitButton.imageView?.image = UIImage(named: "botaoMiNew")
+              self.measureUnitButton.setImage(UIImage(named: "botaoMiNew"), forState: .Normal)
+
             } else {
-                self.measureUnitButton.imageView?.image = UIImage(named: "botaoKmNew")
+              self.measureUnitButton.setImage(UIImage(named: "botaoKmNew"), forState: .Normal)
+
             }
         }
         

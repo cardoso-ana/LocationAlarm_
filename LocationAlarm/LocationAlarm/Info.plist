@@ -45,7 +45,7 @@
 	<key>currentSound</key>
 	<string>bosscalling</string>
 	<key>distanceInMeters</key>
-	<string>NO</string>
+	<string>YES</string>
 	<key>isFirstLaunch</key>
 	<string>YES</string>
 </dict>

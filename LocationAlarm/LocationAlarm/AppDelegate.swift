@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     let model = Model.sharedInstance()
     var window: UIWindow?
     var alarmes:[Alarm] = []
-    var distanceInMeters = "NO"
+    var distanceInMeters = "YES"
     let defaults = NSUserDefaults.standardUserDefaults()
     
     
@@ -35,8 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
         else
         {
-            defaults.setObject("NO", forKey: "distanceInMeters")
-            distanceInMeters = "NO"
+            defaults.setObject("YES", forKey: "distanceInMeters")
+            distanceInMeters = "YES"
         }
         
         
