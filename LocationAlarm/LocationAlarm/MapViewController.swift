@@ -40,6 +40,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
     @IBOutlet weak var radiusLabel: UILabel!
     @IBOutlet weak var sliderRaio: UISlider!
     @IBOutlet weak var navBar: UIView!
+  
+  //constrains
+  
+  @IBOutlet weak var constrainMeasureUnitX: NSLayoutConstraint!
+  @IBOutlet weak var constrainSoundChooserX: NSLayoutConstraint!
+  @IBOutlet weak var constrainHelpButtonX: NSLayoutConstraint!
     
     
     var viewSlider: UIVisualEffectView? = nil
@@ -685,20 +691,29 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
         soundChooserButton.hidden = false
         measureUnitButton.hidden = false
         helpButton.hidden = false
-        
+      
+        view.layoutIfNeeded()
+      
         UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseInOut, animations: {
             
             if self.soundChooserButton.center.x == self.measureUnitButton.center.x{
-                
-                self.soundChooserButton.center.x += 50
-                self.measureUnitButton.center.x += 100
-                self.helpButton.center.x += 150
+              
+              
+              self.constrainSoundChooserX.constant += 50
+              self.constrainMeasureUnitX.constant += 100
+              self.constrainHelpButtonX.constant += 150
+              
+              self.view.layoutIfNeeded()
+              
                 
             } else{
-                
-                self.soundChooserButton.center.x -= 50
-                self.measureUnitButton.center.x -= 100
-                self.helpButton.center.x -= 150
+              
+              self.constrainSoundChooserX.constant -= 50
+              self.constrainMeasureUnitX.constant -= 100
+              self.constrainHelpButtonX.constant -= 150
+              
+              self.view.layoutIfNeeded()
+              
                 
             }
             
