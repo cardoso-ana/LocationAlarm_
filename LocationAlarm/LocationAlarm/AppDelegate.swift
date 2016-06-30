@@ -101,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         if wcsession.reachable{
             
-            wcsession.sendMessage(["arrived":"didArrive"], replyHandler: nil, errorHandler: nil)
+            wcsession.sendMessage(["arrived":region.identifier], replyHandler: nil, errorHandler: nil)
         } else {
             do{
                 try wcsession.updateApplicationContext(["arrived":"didArrive"])

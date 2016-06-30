@@ -56,8 +56,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         }
         
         if message["arrived"] != nil{
-
-            presentAlertControllerWithTitle("You arrived!", message: nil, preferredStyle: WKAlertControllerStyle.Alert, actions: [WKAlertAction(title: "OK", style: .Cancel, handler: { _ in
+          
+          let messageText = message["arrived"] as! String
+          
+          presentAlertControllerWithTitle(nil, message: messageText, preferredStyle: WKAlertControllerStyle.Alert, actions: [WKAlertAction(title: "OK", style: .Cancel, handler: { _ in
                 
                 print("foda-se")
                 
@@ -108,8 +110,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         }
         
         if applicationContext["arrived"] != nil{
+          
+          let messageText = applicationContext["arrived"] as! String
             
-            presentAlertControllerWithTitle("You arrived!", message: nil, preferredStyle: WKAlertControllerStyle.Alert, actions: [WKAlertAction(title: "OK", style: .Cancel, handler: { _ in
+            presentAlertControllerWithTitle(nil, message: messageText, preferredStyle: WKAlertControllerStyle.Alert, actions: [WKAlertAction(title: "OK", style: .Cancel, handler: { _ in
                 
                 print("foda-se")
                 
