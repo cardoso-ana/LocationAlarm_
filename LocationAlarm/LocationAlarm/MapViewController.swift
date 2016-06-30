@@ -337,7 +337,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
                 let distanciaParaCentro = LocationService.sharedInstance.locationManager!.location?.distanceFromLocation(lugarDois)
                 let distanciaParaRegiao = distanciaParaCentro! - raioAlarme!.radius
                 
-                
+              
+              
                 if distanciaParaRegiao > 0
                 {
                     
@@ -352,10 +353,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
                     
                     //MARK: Adiciona alarme atual ao NSUserDefaults
                     
-                    let savedData = NSKeyedArchiver.archivedDataWithRootObject(alarme)
-                    let defaults = NSUserDefaults.standardUserDefaults()
-                    defaults.setObject(savedData, forKey: "alarmes")
-                    
+                    saveRecentAlarmsAtNSUserDefaults(alarme)
+                  
                     print(":::Identifier desse alarme: \(alarme.first?.identifier)")
                     
                     startMonitoringGeotification(alarmeAtual)
@@ -410,9 +409,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
         }
     }
     
+  func saveRecentAlarmsAtNSUserDefaults (listaAlarme: [Alarm]){
+    
+    let savedData = NSKeyedArchiver.archivedDataWithRootObject(alarme)
+    let defaults = NSUserDefaults.standardUserDefaults()
+    defaults.setObject(savedData, forKey: "alarmes")
     
     
-    
+  }
+  
+  
     //MARK: Ativando alarme por quick action
     
     func activateByQuickAction(quickActionType: String)
@@ -422,11 +428,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
         
         currentAlarmQA = alarme.first
         
-        for item in alarme
+        for (index, item) in alarme.enumerate()
         {
             if item.identifier == quickActionType
             {
                 currentAlarmQA = item
+                alarme.removeAtIndex(index)
+                alarme.insert(item, atIndex: 0)
+                saveRecentAlarmsAtNSUserDefaults(alarme)
                 break
             }
         }
