@@ -197,7 +197,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
     if firstTime == true
     {
       let center = CLLocationCoordinate2D(latitude: LocationService.sharedInstance.locationManager!.location!.coordinate.latitude, longitude: LocationService.sharedInstance.locationManager!.location!.coordinate.longitude)
-      let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+      let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.026, longitudeDelta: 0.026))
       self.mapView.setRegion(region, animated: true)
       firstTime = false
     }
@@ -241,7 +241,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
     if LocationService.sharedInstance.locationManager!.location != nil{
       
       let center = CLLocationCoordinate2D(latitude: LocationService.sharedInstance.locationManager!.location!.coordinate.latitude, longitude: LocationService.sharedInstance.locationManager!.location!.coordinate.longitude)
-      let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+      let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.026, longitudeDelta: 0.026))
       self.mapView.setRegion(region, animated: true)
       
     }
@@ -477,7 +477,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
       
       labelDistancia.text = formataDistânciaParaRegião(distanciaParaRegiao)
       
-      let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+      let span = MKCoordinateSpan(latitudeDelta: 0.026, longitudeDelta: 0.026)
       let region = MKCoordinateRegionMake(annotation.coordinate, span)
       self.mapView.setRegion(region, animated: true)
     }
@@ -867,7 +867,7 @@ extension MapViewController: HandleMapSearch
     
     pinAlarm = true
     setaDisplaySemTutorial()
-    let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+    let span = MKCoordinateSpan(latitudeDelta: 0.026, longitudeDelta: 0.026)
     let region = MKCoordinateRegionMake(annotation.coordinate, span)
     self.mapView.setRegion(region, animated: true)
   }
