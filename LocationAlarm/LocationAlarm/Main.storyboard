@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="PaQ-dC-ZKZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="PaQ-dC-ZKZ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -18,10 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iPhoneBig" translatesAutoresizingMaskIntoConstraints="NO" id="Eap-zG-1Bg">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="iPhoneBig" translatesAutoresizingMaskIntoConstraints="NO" id="Eap-zG-1Bg">
                                 <rect key="frame" x="39" y="176" width="523" height="424"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Pertô!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9HY-HE-pER">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Welcome to Pertô!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="9HY-HE-pER">
                                 <rect key="frame" x="139" y="48" width="322" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="aeg-eF-E9X"/>
@@ -46,7 +46,7 @@
                                     <action selector="tappedIAmReady:" destination="bp3-Uq-pTu" eventType="touchUpInside" id="rxe-fD-scR"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's get you through the basics." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMV-5M-r1G">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Let's get you through the basics." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMV-5M-r1G">
                                 <rect key="frame" x="164" y="121" width="273" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="fBS-Ph-NL0"/>
@@ -70,6 +70,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imReadyButton" destination="oVv-Iy-2vQ" id="Bgq-8j-lB9"/>
+                        <outlet property="pageCaption" destination="nMV-5M-r1G" id="nH6-xH-6lD"/>
+                        <outlet property="pageTitle" destination="9HY-HE-pER" id="AWP-pa-3Jc"/>
                         <segue destination="9jb-O1-jpH" kind="show" identifier="goToTutorial" id="cqh-CV-Ig4"/>
                     </connections>
                 </viewController>
@@ -343,6 +346,7 @@
                         <outlet property="constrainSoundChooserX" destination="fe3-ZG-uaL" id="5qi-qw-2yU"/>
                         <outlet property="fundoDim" destination="Kbu-6t-6Tc" id="FrM-iT-3WB"/>
                         <outlet property="helpButton" destination="zLX-A7-aLB" id="TPb-SB-aNJ"/>
+                        <outlet property="labelCaptionDistanceToAlarm" destination="rSm-yE-MKl" id="Llr-6x-O81"/>
                         <outlet property="labelDistancia" destination="3oc-FI-U0l" id="rN9-NV-EZf"/>
                         <outlet property="mapView" destination="yvo-PS-Gds" id="C2I-0q-UKv"/>
                         <outlet property="measureUnitButton" destination="IaF-wf-88N" id="TSB-Mt-m4A"/>
@@ -392,7 +396,7 @@
                                         <rect key="frame" x="0.0" y="1" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tVh-QJ-lOA" id="8j8-kw-vxM">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dT-0z-rwc">

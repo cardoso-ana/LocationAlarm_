@@ -1,0 +1,12 @@
+
+/* Class = "WKInterfaceLabel"; text = " "; ObjectID = "6jF-Lm-D02"; */
+"6jF-Lm-D02.text" = " ";
+
+/* Class = "WKInterfaceLabel"; text = "You are 1.6 mi from your destination!"; ObjectID = "EtC-uc-UHg"; */
+"EtC-uc-UHg.text" = "You are 1.6 mi from your destination!";
+
+/* Class = "WKInterfaceLabel"; text = "Alarm deactivated"; ObjectID = "eh1-3S-dr1"; */
+"eh1-3S-dr1.text" = "Alarm deactivated";
+
+/* Class = "WKInterfaceButton"; title = "DEACTIVATE"; ObjectID = "hE0-a8-knN"; */
+"hE0-a8-knN.title" = "DEACTIVATE";

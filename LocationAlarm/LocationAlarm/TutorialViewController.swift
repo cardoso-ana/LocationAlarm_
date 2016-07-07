@@ -14,8 +14,8 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
 {
     
     var pageViewController: UIPageViewController!
-    var pageTitles = ["First, tell us where you’re going.","You’re one step away!"]
-    var pageCaptions = ["Tap on the map to set an alarm.\nUse the slider to adjust its radius.","Tap to activate the alarm.\nWe'll let you know once you arrive."]
+    var pageTitles = ["TutorialTitlePageOne".localized,"TutorialTitlePageTwo".localized]
+    var pageCaptions = ["TutorialCaptionPageOne".localized,"TutorialCaptionPageTwo".localized]
     var pageVideos = ["PertoFirstVideoDoneOK","PertoSecondVideoDoneOK"]
     
     @IBOutlet weak var botaoGotIt: UIButton!
@@ -26,6 +26,8 @@ class TutorialViewController: UIViewController, UIPageViewControllerDataSource, 
         super.viewDidLoad()
         
         self.navigationController?.navigationBarHidden = true
+      
+        self.botaoGotIt.setTitle("Got it!".localized, forState: .Normal)
         
         self.pageViewController = self.storyboard?.instantiateViewControllerWithIdentifier("PageViewController") as! UIPageViewController
         self.pageViewController.dataSource = self

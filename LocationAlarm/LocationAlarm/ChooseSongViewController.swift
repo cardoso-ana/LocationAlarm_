@@ -26,7 +26,9 @@ class ChooseSongViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+      
+        self.title = "Choose a sound".localized
+      
         soundFiles = NSBundle.mainBundle().URLsForResourcesWithExtension("caf", subdirectory: nil)! as [NSURL]
         print(soundFiles)
       

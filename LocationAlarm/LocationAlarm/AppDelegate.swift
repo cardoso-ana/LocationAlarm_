@@ -175,8 +175,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification)
     {
-        //TODO: fazer tela do watch mudar quando tá aberto e chega no lugar!!!
-        
+      
         
     }
     

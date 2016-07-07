@@ -1,0 +1,30 @@
+/* 
+  Localizable.strings
+  LocationAlarm
+
+  Created by Gabriella Lopes on 7/6/16.
+  Copyright © 2016 Ana Carolina Nascimento. All rights reserved.
+*/
+
+"ACTIVATE" = "ACTIVATE";
+"DEACTIVATE" = "DEACTIVATE";
+"Tap on the map" = "Tap on the map to set an alarm!";
+"Search Location" = "Search for a location";
+"Cancel" = "Cancel";
+"Choose a sound" = "Choose a sound";
+"Welcome to Pertô!" = "Welcome to Pertô!";
+"Let's get you through the basics." = "Let's get you through the basics.";
+"I'm ready!" = "I'm ready!";
+"TutorialTitlePageOne" = "First, tell us where you're going.";
+"TutorialCaptionPageOne" = "Tap on the map to set an alarm.\nUse the slider to adjust its radius.";
+"TutorialTitlePageTwo" = "You're one step away!";
+"TutorialCaptionPageTwo" = "Tap to activate the alarm.\nWe'll let you know when you're arriving.";
+"Got it!" = "Got it!";
+"distance to alarm" = "distance to alarm";
+"You are already" = "You are already inside the alarm's radius.";
+"radius of " = "radius of %@";
+"You are X from your destination!" = "You are %@ from your destination!";
+
+//Apple Watch Exclusive
+
+"Alarm Deactivated" = "Alarm Deactivated";

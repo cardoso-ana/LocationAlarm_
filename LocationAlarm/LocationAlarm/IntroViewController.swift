@@ -11,11 +11,20 @@ import UIKit
 class IntroViewController: UIViewController
 {
 
+  @IBOutlet weak var pageTitle: UILabel!
+  @IBOutlet weak var pageCaption: UILabel!
+  @IBOutlet weak var imReadyButton: UIButton!
+  
+  
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         self.navigationController?.navigationBarHidden = true
+      
+        self.pageTitle.text = "Welcome to Pertô!".localized
+        self.pageCaption.text = "Let's get you through the basics.".localized
+        self.imReadyButton.setTitle("I'm ready!".localized, forState: .Normal)
 
         // Do any additional setup after loading the view.
     }

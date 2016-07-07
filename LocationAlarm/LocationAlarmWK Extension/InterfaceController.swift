@@ -24,6 +24,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         super.awakeWithContext(context)
         
         // Configure interface objects here.
+      
+      self.captionLabel.setText("Alarm Deactivated".localized)
+      self.actionButton.setTitle("DEACTIVATE".localized)
     }
 
     override func willActivate() {
@@ -85,7 +88,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             
             distanceLabel.setText(distanciaText)
 
-            captionLabel.setText("distance to alarm")
+            captionLabel.setText("distance to alarm".localized)
             actionButton.setHidden(false)
             
             print(" ___ distanciaText é lele \(distanciaText)")
@@ -171,4 +174,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         super.didDeactivate()
     }
 
+}
+
+extension String {
+  var localized: String {
+    return NSLocalizedString(self, tableName: nil, bundle: NSBundle.mainBundle(), value: "", comment: "")
+}
 }
