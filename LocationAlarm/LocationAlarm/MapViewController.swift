@@ -410,7 +410,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
         changeDisplayDeactivated()
         
       }
+    } else {
+      
+      // se não tiver alarme no mapa
+      showSimpleAlertWithTitle("There are no alarms set".localized, message: "Please tap on the map or search for a location to set an alarm.".localized, viewController: self)
+      
+      
     }
+    
+    
   }
   
   func saveRecentAlarmsAtNSUserDefaults (listaAlarme: [Alarm]){

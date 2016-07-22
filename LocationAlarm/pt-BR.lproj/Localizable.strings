@@ -24,6 +24,8 @@
 "You are already" = "Você já está dentro do raio do alarme.";
 "radius of " = "raio de %@";
 "You are X from your destination!" = "Você está a %@ de seu destino!";
+"There are no alarms set" = "Não existe nenhum alarme no mapa";
+"Please tap on the map or search for a location to set an alarm." = "Por favor toque no mapa ou pesquise por um endereço para criar um alarme.";
 
 //Apple Watch Exclusive
 

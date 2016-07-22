@@ -342,11 +342,11 @@
 					};
 					EF33B2621D19934800525AFA = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = A3556U9ESZ;
+						DevelopmentTeam = 4BPZR4X6FJ;
 					};
 					EF33B26E1D19934900525AFA = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = A3556U9ESZ;
+						DevelopmentTeam = 4BPZR4X6FJ;
 					};
 				};
 			};

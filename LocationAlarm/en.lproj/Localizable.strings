@@ -24,6 +24,8 @@
 "You are already" = "You are already inside the alarm's radius.";
 "radius of " = "radius of %@";
 "You are X from your destination!" = "You are %@ from your destination!";
+"There are no alarms set" = "There are no alarms set";
+"Please tap on the map or search for a location to set an alarm." = "Please tap on the map or search for a location to set an alarm.";
 
 //Apple Watch Exclusive
 
