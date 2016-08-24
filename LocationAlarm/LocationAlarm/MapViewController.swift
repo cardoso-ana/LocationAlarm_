@@ -49,6 +49,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
   @IBOutlet weak var constrainSoundChooserX: NSLayoutConstraint!
   @IBOutlet weak var constrainHelpButtonX: NSLayoutConstraint!
   
+    var numberFormatter: NSNumberFormatter {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = .DecimalStyle
+        return formatter
+    }
   
   var viewSlider: UIVisualEffectView? = nil
   var step: Float = 50
@@ -551,7 +556,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
       sliderRaio.minimumValue = 2112 //0.4 mi
       sliderRaio.maximumValue = 10560 //2 mi
       sliderRaio.value = 3168
-      radiusLabel.text = "0.6 mi"
+      radiusLabel.text = numberFormatter.stringFromNumber(0.6)! + " mi"
       distanciaRaio = Double(sliderRaio.value * 0.3048)
     }
     
@@ -572,14 +577,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
         step = 50
         let roundedValue = round(sender.value / step) * step
         sender.value = roundedValue
-        radiusLabel.text = "\(Int(sender.value)) m"
+        //radiusLabel.text = "\(Int(sender.value)) m"
+        radiusLabel.text = numberFormatter.stringFromNumber(Int(sender.value))! + " m"
       }
       else
       {
         step = 100
         let roundedValue = round(sender.value / step) * step
         sender.value = roundedValue
-        radiusLabel.text = "\((sender.value) / 1000) km"
+        radiusLabel.text = numberFormatter.stringFromNumber(sender.value/1000)! + " km"
         
       }
       
@@ -593,14 +599,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
         step = 1056
         let roundedValue = round(sender.value / step) * step
         sender.value = roundedValue
-        radiusLabel.text = "\(Int(sender.value / 5280)) mi"
+        radiusLabel.text = numberFormatter.stringFromNumber(Int(sender.value)/5280)! + "mi"
       }
       else
       {
         step = 528
         let roundedValue = round(sender.value / step) * step
         sender.value = roundedValue
-        radiusLabel.text = "\(sender.value / 5280) mi"
+        radiusLabel.text = numberFormatter.stringFromNumber(sender.value / 5280)! + " mi"
       }
       
       distanciaRaio = Double(sender.value * 0.3048)
@@ -688,12 +694,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
     {
       if dist < 1000
       {
-        return "\(Int(dist)) m"
+        return numberFormatter.stringFromNumber(Int(dist))! + " m"
       }
       else
       {
         dist /= 1000
-        return "\(dist.roundToPlaces(2)) km"
+        let result = dist.roundToPlaces(2)
+        return numberFormatter.stringFromNumber(result)! + " km"
       }
     }
     else
@@ -702,11 +709,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, LocationServiceDel
       if dist < 0.1
       {
         dist = dist * 5280
-        return "\(Int(dist)) ft"
+        return numberFormatter.stringFromNumber(Int(dist))! + " ft"
       }
       else
       {
-        return "\(dist.roundToPlaces(1)) mi"
+        let result = dist.roundToPlaces(1)
+        return numberFormatter.stringFromNumber(result)! + " mi"
       }
     }
   }
